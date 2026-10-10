@@ -11,7 +11,7 @@ This kit is a starting point for agent-driven development with Git and Backlog.m
 3. **Open your agent** (e.g. the Claude desktop app, Code tab) and choose that folder as the working folder.
 4. **Give the agent this prompt**, with your goal filled in:
 
-   > Set up this project using the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Project goal: *<what, for whom, what "done" looks like – 3–5 sentences>*. Work in my language.
+   > Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and guide me step by step through installing anything that is missing. What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
 5. **Answer the questions** (technology, which agents you use, GitHub yes/no). The agent checks which tools are missing (Git, Node.js, Backlog.md) and guides you through installing them step by step. You approve every install. If an installer asks for your computer password, type it yourself, never into the chat. On Windows the helper scripts need Git for Windows (includes *Git Bash*); the agent will guide you.
 6. **At the end** the agent summarizes what exists and which task comes first. Tell it to start.

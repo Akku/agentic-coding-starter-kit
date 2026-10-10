@@ -12,6 +12,12 @@ Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, Gi
 
 Pro Sitzung führt der Agent `scripts/session-start.sh` aus (kurzer Zustandsüberblick).
 
+## Start-Prompt
+
+Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
+
+> Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und führe mich Schritt für Schritt durch die Installation von allem, was fehlt. Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
+
 ## Inhalt
 
 | Datei | Zweck |

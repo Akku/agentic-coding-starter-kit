@@ -12,6 +12,12 @@ A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub
 
 At the start of each session the agent runs `scripts/session-start.sh` (short state summary).
 
+## Prompt to start
+
+Give this to the agent after opening the folder:
+
+> Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and guide me step by step through installing anything that is missing. What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
+
 ## Contents
 
 | File | Purpose |
