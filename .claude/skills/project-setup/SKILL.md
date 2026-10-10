@@ -16,12 +16,14 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
 - Create a GitHub repository now? Default: private, none yet.
 
-## 3. Check and install prerequisites
-Check: `git --version`, `node --version`, `npm --version`, `backlog --version`, optionally `gh --version`.
-For missing tools propose the install command for the user's OS and wait for approval. Backlog.md: see its README for the current install command (npm/brew); verify with `backlog --version`.
+## 3. Check and install prerequisites (assume a non-technical user)
+Check: `git --version`, `node --version`, `npm --version`, `backlog --version`, optionally `gh --version`. Detect the OS first.
+For each missing tool: say in one plain sentence what it is for, propose the install command for the user's OS (macOS: Homebrew if present; Windows: `winget`; otherwise the official installer), wait for approval, run it, verify with the version command. If an installer needs a password or admin approval, tell the user to enter it themselves, never in chat. Backlog.md: see its README for the current install command; verify with `backlog --version`.
+Windows: the scripts in `scripts/` are bash. Install Git for Windows (includes Git Bash) and run them with `bash scripts/<name>.sh`. If something cannot be installed, explain what is lost and continue where possible.
+If a tool is installed but not found, the terminal may need a restart; say so.
 
 ## 4. Git
-If this folder is not a git repository: `git init`. Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** — the repository may become public.
+If this folder is not a git repository (typical for the ZIP route): `git init -b main`; set `user.name`/`user.email` only if missing (ask the user). Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** because the repository may become public.
 
 ## 5. Initialise Backlog.md
 ```sh
@@ -41,7 +43,10 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 ## 7. First backlog
 Create 3–7 tasks from the goal with `backlog task create` (check `--help`): small, each with checkable acceptance criteria. The first task should be a walking skeleton that already runs the verification command end to end.
 
-## 8. Commit and report
+## 8. Project README, commit and report
+Replace the kit's `README.md`/`README.de.md` with a short project README (goal, how to run, verification command); keep `START_HERE.md`/`STARTE_HIER.md`/`KIT_VERSION` unless the user wants them removed.
+
+
 Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE` and tell the user in ≤10 lines: what exists, which commands to use, which task comes first.
 
 ## Later

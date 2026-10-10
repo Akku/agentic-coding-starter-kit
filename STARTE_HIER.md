@@ -1,18 +1,26 @@
 # Starte hier
 
-*English: [START_HERE.md](START_HERE.md)*
+**Version 0.1.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
-Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task.
+Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
-## So startest du
+## Standardweg: ZIP herunterladen
 
-1. Erzeuge dein Projekt aus diesem Template (GitHub: **Use this template**) oder kopiere diesen Ordner an den Zielort. Öffne ihn in deinem Agenten (Claude Code, Codex, Copilot).
-2. Gib dem Agenten diesen Prompt, mit deinem Ziel:
+1. **Lade** das Kit **herunter**: [agentic-coding-starter-kit.zip](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip) (alternativ: grüner Button **Code** → **Download ZIP** auf der GitHub-Seite).
+2. **Entpacke** es (macOS: Doppelklick; Windows: Rechtsklick → *Alle extrahieren*). Benenne den Ordner nach deinem Projekt um und lege ihn dort ab, wo du Projekte aufbewahrst.
+3. **Öffne deinen Agenten** (z. B. die Claude-Desktop-App, Tab Code) und wähle diesen Ordner als Arbeitsordner.
+4. **Gib dem Agenten diesen Prompt**, mit deinem Ziel:
 
    > Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Projektziel: *<was, für wen, woran erkennt man „fertig“ – 3–5 Sätze>*. Arbeite in meiner Sprache.
 
-3. Beantworte die Rückfragen (Technologie, welche Agenten du nutzt, GitHub-Repository ja/nein) und genehmige vorgeschlagene Installationen. Prüfe vorher, was installiert werden soll.
-4. Am Ende fasst der Agent zusammen, was angelegt wurde und welcher Task zuerst kommt. Sag ihm, dass er starten soll.
+5. **Beantworte die Rückfragen** (Technologie, welche Agenten du nutzt, GitHub ja/nein). Der Agent prüft, welche Werkzeuge fehlen (Git, Node.js, Backlog.md), und führt dich Schritt für Schritt durch die Installation. Du genehmigst jede Installation. Fragt ein Installer nach deinem Computer-Passwort, gib es selbst dort ein, niemals im Chat. Unter Windows brauchen die Hilfsskripte Git für Windows (enthält *Git Bash*); der Agent führt dich dabei.
+6. **Am Ende** fasst der Agent zusammen, was angelegt wurde und welcher Task zuerst kommt. Sag ihm, dass er starten soll.
+
+## Für technisch Versierte: über GitHub
+
+- Klicke auf der GitHub-Seite auf **Use this template** (erzeugt ein eigenes Repository), klone es, öffne es in deinem Agenten und gib den Prompt aus Schritt 4. Oder: dieses Repository mit `git clone` holen und den Ordner `.git` löschen, um mit frischer Historie zu starten.
+- `git`, `node` und `backlog` schon installiert? Der Agent erkennt das und überspringt die Installationsschritte.
+- Verbesserungen und bewährte Learnings sind als Pull Request willkommen (Skill `promote-learning`).
 
 ## Was du bekommst
 
@@ -27,6 +35,15 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 - Eine Sitzung endet mit dem Skill `handoff`; die nächste beginnt mit `docs/agent/HANDOFF.md`.
 - Nach dem ersten Meilenstein: Retro (Skill `retro`). Sie prüft auch das Harness selbst, inklusive der offenen Fragen in `docs/agent/LEARNINGS.md`.
 - Keine Zugangsdaten ins Repository.
+
+## Kit an einem echten Projekt testen: worauf achten
+
+- Hat der Agent zu Beginn nur `AGENTS.md` gelesen statt alles?
+- Sind `backlog/` und die ersten Tasks da, und ist `AGENTS.md` unversehrt?
+- Läuft die Verifikation über `scripts/run.sh`?
+- Steht `Setup status: DONE` in `AGENTS.md` und ist alles committet?
+- Macht eine zweite Sitzung über `scripts/session-start.sh` ohne Nachfragen weiter?
+- Stolperstellen oder Unklarheiten notieren (oder den Agenten als `Learning:` festhalten lassen). Sie sind die Eingabe für die erste Retro.
 
 ## Sprache
 

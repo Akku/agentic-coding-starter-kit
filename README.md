@@ -1,14 +1,14 @@
 # Agentic Coding Starter Kit
 
-*Deutsch: [README.de.md](README.de.md)*
+**Version 0.1.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
 ## Usage
 
-1. Choose **Use this template** on GitHub (or copy the folder) and open the new project locally.
-2. Give the agent the folder and the prompt from [START_HERE.md](START_HERE.md) (`project-setup` skill + your project goal).
-3. The agent checks prerequisites, sets up Git and Backlog.md, adapts the harness to your goal and creates the first tasks. Development then starts.
+**Standard path (no technical knowledge needed):** [download the ZIP](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip), unzip it, open the folder in your agent and give it the prompt from [START_HERE.md](START_HERE.md). The agent installs missing tools with you, sets up Git and Backlog.md, adapts the harness to your goal and creates the first tasks.
+
+**Technical users:** click **Use this template** on GitHub, or clone the repository, then use the same prompt.
 
 At the start of each session the agent runs `scripts/session-start.sh` (short state summary).
 
