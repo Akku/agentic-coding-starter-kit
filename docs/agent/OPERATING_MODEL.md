@@ -1,0 +1,542 @@
+# Agentic Coding Operating System
+
+## Design goal
+
+Optimize for the smallest development harness that reliably improves three outcomes:
+
+1. low manual intervention;
+2. high result quality;
+3. good token/cost efficiency.
+
+Complexity is not a goal. Add process, agents, review, telemetry, orchestration, or documentation only when the additional layer has a plausible recurring payoff.
+
+A useful default is:
+
+```text
+Task
+→ strategy / implementation plan
+→ implementation
+→ deterministic verification
+→ remaining required evidence
+→ optional risk-triggered review
+→ completion
+```
+
+The phases remain distinct even when a minor task passes through them very quickly. A separate agent is not required for each phase.
+
+## Rule lookup index
+
+<!-- RULE:R-INDEX:START -->
+Use this index to load only the sections needed for the current action. Do not read the entire operating model by default.
+
+| Rule ID | Load when |
+| --- | --- |
+| `R-LIFECYCLE` | starting or resuming implementation work |
+| `R-INSTRUCTIONS` | changing agent instructions/adapters/skills |
+| `R-STATE` | designing handoff/bootstrap/current-state storage |
+| `R-BOOTSTRAP` | starting/resuming a non-trivial session |
+| `R-BACKLOG` | interacting with task lifecycle |
+| `R-BATCHING` | grouping multiple tasks in one context |
+| `R-BATCH-CONTRACT` | starting a non-trivial task batch |
+| `R-CONTEXT-OUTPUT` | running verbose tests/CI/CLI commands |
+| `R-AGENT-TOPOLOGY` | deciding whether another agent is needed |
+| `R-DELEGATION` | delegating to subagents/skills |
+| `R-REVIEW` | deciding whether independent review is needed |
+| `R-VERIFY` | selecting or interpreting verification/evidence |
+| `R-STATE-COHERENCE` | committing, handing off, or interpreting CI |
+| `R-AUTONOMY` | defining stop/escalation conditions |
+| `R-LEARNING` | recording process observations |
+| `R-RETRO` | running a process retrospective |
+| `R-DECISION` | evaluating new harness/process infrastructure |
+
+Retrieve one rule by ID with:
+
+```sh
+ID=R-REVIEW
+sed -n "/<!-- RULE:${ID}:START -->/,/<!-- RULE:${ID}:END -->/p" docs/agent/OPERATING_MODEL.md
+```
+
+Replace `R-REVIEW` with the needed ID.
+
+Rarely needed rules (parallel agents, measurement, model routing, local workers) live in `docs/agent/ADVANCED.md` with the same ID mechanism. Load them only when the situation arises.
+<!-- RULE:R-INDEX:END -->
+
+<!-- RULE:R-LIFECYCLE:START -->
+## 1. Execution lifecycle: intent before implementation, evidence before completion
+
+Agentic speed should not collapse task definition, planning, coding, and completion into one opaque action.
+
+### 1.1 Task first
+
+Create or select the Backlog.md task before implementation unless the repository's existing workflow explicitly defines a lighter path for truly trivial work.
+
+The task is the durable unit of intent, status, acceptance, and traceability.
+
+### 1.2 Describe the strategy before coding
+
+Before changing product code, record the intended approach using the repository's existing Backlog.md mechanism, such as an Implementation Plan when available.
+
+The strategy should be proportional to the work:
+
+- a minor mechanical task may need only a few concise steps;
+- normal work should identify the likely change surface and verification approach;
+- ambiguous, broad, or high-risk work may justify deeper planning or a separate planning pass.
+
+Planning is a phase, not automatically a separate Planner agent.
+
+### 1.3 Implement against the agreed task and strategy
+
+Keep the change aligned with the task. Newly discovered work should be captured through the existing backlog workflow rather than silently expanding scope.
+
+### 1.4 Verify with the cheapest reliable mechanism
+
+Use targeted deterministic checks during the inner loop and the repository's required final verification before completion.
+
+Prefer linters, static analysis, tests, type checks, integration tests, browser checks, smoke tests, security checks, and reproducible evaluators over asking an LLM to simulate the same verification.
+
+### 1.5 Keep missing evidence visible
+
+A task is not complete merely because CI or unit tests are green if its acceptance criteria or Definition of Done require evidence those checks do not provide.
+
+Examples include real assistive-technology checks, device-specific behavior, production-like performance conditions, or another explicitly required manual observation.
+
+Missing evidence should remain clearly open with a concrete continuation point.
+
+### 1.6 Complete with evidence, not activity narration
+
+Use the repository's existing completion mechanism to record what changed and the evidence that supports completion. Prefer concise, reproducible evidence over long descriptions of everything the agent did.
+<!-- RULE:R-LIFECYCLE:END -->
+
+<!-- RULE:R-INSTRUCTIONS:START -->
+## 2. Instruction architecture: thin provider adapters, shared rules by stable ID
+
+Keep provider-specific entry files intentionally small and keep role instructions separate from provider identity.
+
+A practical shape is:
+
+```text
+AGENTS.md                         # shared core rules + Codex / AGENTS-compatible entry
+CLAUDE.md                         # Claude Code adapter (imports AGENTS.md)
+.github/copilot-instructions.md  # GitHub Copilot adapter, when used
+docs/agent/OPERATING_MODEL.md    # authoritative shared cross-provider rules
+```
+
+Additional agents may use their native instruction file or a tiny adapter that points to the same shared rules. Do not redesign the operating model for every provider.
+
+Provider adapters should contain only:
+
+- instructions required by that tool/runtime;
+- how to retrieve shared rules by stable rule ID;
+- tool-specific commands, limitations, or conventions;
+- a very small number of bootstrap details that cannot practically be deferred.
+
+Do not copy mutable cross-provider rules into several adapters.
+
+### Greppable rule contract
+
+Every shared rule in `docs/agent/OPERATING_MODEL.md` should have a stable ID and explicit boundary markers:
+
+```text
+<!-- RULE:<RULE_ID>:START -->
+...
+<!-- RULE:<RULE_ID>:END -->
+```
+
+An agent can load only that rule with a bounded command such as:
+
+```sh
+ID=R-CONTEXT-OUTPUT
+sed -n "/<!-- RULE:${ID}:START -->/,/<!-- RULE:${ID}:END -->/p" docs/agent/OPERATING_MODEL.md
+```
+
+Adapters and skills should reference the rule ID, not duplicate the rule text. Stable IDs should survive wording changes; change an ID only when the semantic meaning of the rule changes materially.
+
+The shared operating model should contain cross-provider development rules, not copies of product architecture, testing manuals, security manuals, backlog documentation, or historical task evidence.
+
+This split is primarily a consistency and maintenance optimization. It becomes a token optimization only if agents retrieve the relevant rule sections instead of reading the complete operating model every time.
+
+Role assignment is independent of provider. Claude Code, Codex, GitHub Copilot coding agent, or another capable coding agent may act as Implementer, Reviewer, Planner, or bounded subagent when the task economics justify that role.
+<!-- RULE:R-INSTRUCTIONS:END -->
+
+<!-- RULE:R-STATE:START -->
+## 3. Separate rules, current state, durable knowledge, history, and evidence
+
+These information types serve different purposes and should not be mixed into one large handoff or instruction file.
+
+### Rules
+
+Current normative behavior. Keep each mutable rule in one authoritative location.
+
+### Current working state
+
+What is allowed and expected next: active task/batch, current branch/worktree, unresolved acceptance criteria, explicit approvals, blockers, and concrete continuation point.
+
+This belongs in the current task/batch state or a compact handoff/start summary, not in permanent global rules.
+
+### Durable project knowledge and pitfalls
+
+Architecture, product behavior, testing strategy, security rules, and recurring technical pitfalls. Store these in the repository's existing durable documentation and load them progressively when relevant.
+
+### Historical record
+
+Completed workflows, previous releases, old decisions, and obsolete instructions should be archived or remain in task/commit history. Historical evidence is not automatically a current rule.
+
+### Verification evidence
+
+Test results, CI runs, commits, manual checks, and other proof should be tied to the state they actually verified.
+
+A future agent should be able to answer two questions cheaply:
+
+1. What is the next permitted action?
+2. What evidence already exists for the current code state?
+<!-- RULE:R-STATE:END -->
+
+<!-- RULE:R-BOOTSTRAP:START -->
+## 4. Session bootstrap: summarize state, do not replay history
+
+For repositories with non-trivial continuation across sessions, consider one read-only bootstrap command that presents a compact current-state summary, for example:
+
+- branch/worktree and working-tree state;
+- recent relevant commits;
+- active Backlog.md tasks and resumable work;
+- running/local instances when relevant;
+- current handoff or continuation section;
+- pointers to required sources of truth.
+
+The bootstrap should not dump entire logs, task archives, or all project documentation into context.
+
+Read stable mandatory sources at most as often as needed for the session/tool behavior. Load additional documentation by section or file only when the current task requires it.
+<!-- RULE:R-BOOTSTRAP:END -->
+
+<!-- RULE:R-BACKLOG:START -->
+## 5. Backlog.md remains authoritative
+
+Use Backlog.md and the repository's existing Backlog.md configuration, CLI, templates, classifications, and lifecycle as the source of truth for task management.
+
+This operating model should NOT redefine a parallel task schema, status model, priority system, Definition of Done, or backlog workflow.
+
+Where the existing Backlog.md setup provides concepts such as Acceptance Criteria, Implementation Plan, Implementation Notes, Definition of Done, Final Summary, Docs, or Decisions, use those native structures instead of inventing duplicates.
+
+Defaults when the project has no stricter convention (set up by the `project-setup` skill): `autoCommit` is off; code and its task changes are committed together; unfinished tasks end with a concrete continuation point; approved batches avoid repeated approval questions. Use `backlog instructions overview` at session start, the matching guide (`task-creation`, `task-execution`, `task-finalization`) before that lifecycle action, and `--help` for unknown commands.
+
+Use the Backlog.md CLI when the repository expects it. Consult detailed lifecycle documentation at the relevant lifecycle action rather than preloading every procedure at session start. For unfamiliar commands, prefer built-in help over guessing.
+
+Unfinished tasks should contain a concrete continuation point. Avoid vague states such as "still needs checking" when the missing criterion or next action can be stated precisely.
+<!-- RULE:R-BACKLOG:END -->
+
+<!-- RULE:R-BATCHING:START -->
+## 6. Tracking unit vs. context unit
+
+Do not conflate task tracking with context loading.
+
+### Tracking unit
+
+Backlog tasks remain the independent units of intent, acceptance, status, and traceability as defined by the project's Backlog.md setup.
+
+### Context cohort
+
+One agent context MAY process a batch of related tasks when reusing shared context is expected to save more cost than context growth and coordination introduce.
+
+Batching is useful when most of the following are true:
+
+- tasks touch the same subsystem or closely related files;
+- they rely on substantially the same architecture/product context;
+- the next task benefits directly from knowledge acquired in the previous one;
+- outcomes remain individually attributable and verifiable;
+- the combined diff remains understandable;
+- partial completion can still be represented cleanly in Backlog.md.
+
+Split or start a fresh context when:
+
+- the next task needs substantially different context;
+- unrelated debugging history has accumulated;
+- assumptions from earlier tasks are leaking into later decisions;
+- repeated repair loops are consuming the context;
+- the combined change becomes difficult to reason about or review;
+- one task becomes materially higher-risk than the rest.
+
+Heuristic:
+
+> Batch when shared-context savings are likely to exceed context-growth, coordination, and review cost.
+
+Do not impose a fixed number of tasks per batch unless repository evidence later supports one.
+<!-- RULE:R-BATCHING:END -->
+
+<!-- RULE:R-BATCH-CONTRACT:START -->
+## 7. Lightweight batch contract
+
+For a non-trivial batch, record only enough run information to keep the batch intentional:
+
+- included task IDs and order;
+- shared context expected to be reused;
+- expected subsystem/change surface;
+- verification approach;
+- review strategy, if any;
+- stop/split conditions.
+
+This is run metadata, not a second backlog system. Do not duplicate task descriptions or acceptance criteria already stored in Backlog.md.
+
+If the project's backlog supports pre-approved batches, use that mechanism to avoid repeated approval questions while preserving each task's individual state and evidence.
+<!-- RULE:R-BATCH-CONTRACT:END -->
+
+<!-- RULE:R-CONTEXT-OUTPUT:START -->
+## 8. Context-efficient tool output
+
+Command output is part of the context budget.
+
+Large successful test output, full CI traces, repeated file dumps, and long CLI responses should not enter the active model context when a compact result is sufficient.
+
+Prefer wrappers or commands that return a concise summary such as:
+
+```text
+status: PASS|FAIL
+exit_code: <original exit code>
+duration: <time>
+summary: <test counts / key result>
+log: <path to full log>
+```
+
+Requirements:
+
+- preserve the command's real exit status; summarization must never turn failure into apparent success;
+- retain full output outside the active context, preferably in temporary/ignored storage or the CI system rather than committed logs;
+- on failure, load only the relevant error section first and expand further only as needed;
+- avoid re-reading the same large output after it has already been summarized and persisted;
+- apply the same principle to GitHub/CI CLI output and other verbose automation.
+
+Token efficiency is therefore an information-architecture problem, not merely an instruction to "answer briefly".
+<!-- RULE:R-CONTEXT-OUTPUT:END -->
+
+<!-- RULE:R-AGENT-TOPOLOGY:START -->
+## 9. Default agent topology: one agent first; provider is interchangeable
+
+Do not treat Planner, Implementer, Reviewer, Orchestrator, and Harness Maintainer as permanently separate agents, and do not bind those roles permanently to Claude, Codex, Copilot, or any other provider.
+
+They are capabilities or modes that may be separated only when useful.
+
+Default topology:
+
+```text
+one capable implementation agent
+        ↓
+deterministic verification
+        ↓
+done or escalate
+```
+
+The implementation agent still performs the explicit planning phase before coding. A separate Planner is unnecessary unless the task is unusually ambiguous, broad, or architecturally consequential.
+
+When independent review is triggered, prefer a genuinely fresh context. Using a different provider/model can reduce correlated mistakes, but cross-provider review is an option rather than a requirement. Any supported agent may implement or review if it can access the required repository state and verification tools.
+
+A separate Orchestrator is unnecessary unless multiple independent workers/worktrees are active and coordination itself has become a real problem.
+
+A Harness Maintainer is not a resident agent. Harness improvement is a periodic retrospective activity.
+
+Multi-agent setups should therefore be the exception produced by task economics, not the default architecture.
+<!-- RULE:R-AGENT-TOPOLOGY:END -->
+
+<!-- RULE:R-DELEGATION:START -->
+## 10. Subagents and skills: narrow contracts, shared sources
+
+Subagents are most useful when they encapsulate a bounded independent question. Broad exploration can consume substantial context and tool calls without producing actionable evidence.
+
+When delegating, prefer a contract that specifies:
+
+- exact question or decision to support;
+- relevant files, lines, diff, or bounded search area;
+- evidence expected;
+- output format;
+- what is explicitly out of scope.
+
+A review subagent should normally return actionable findings with location, failure scenario/reasoning, and recommended correction rather than a long narrative.
+
+Skills should encapsulate recurring workflows and refer to authoritative shared rules instead of copying them. Tool-specific skills should document a fallback when the preferred tool is unavailable; unavailable evidence remains open rather than being silently assumed.
+
+For small mechanical changes, delegation may cost more than it saves.
+<!-- RULE:R-DELEGATION:END -->
+
+<!-- RULE:R-REVIEW:START -->
+## 11. Review should be risk-triggered, not universal
+
+Independent review has value, but it also consumes tokens, wall-clock time, and coordination effort.
+
+Use the repository's existing task classification if one exists. Do not invent a new classification solely for this operating model.
+
+### Minor / low-risk work
+
+No separate LLM reviewer by default when:
+
+- the change is narrow and locally understandable;
+- deterministic checks cover the important failure modes;
+- there are no security/data/API/migration concerns;
+- the agent encountered no substantial ambiguity;
+- the diff is small enough to inspect mechanically or during normal human merge flow.
+
+### Normal work
+
+Start with implementation plus deterministic verification. Add independent review when a review trigger is present or when a batch-level review can cheaply cover several related tasks.
+
+### High-risk work
+
+Require independent review when practical.
+
+Typical review triggers include:
+
+- authentication, authorization, capabilities, nonces, or other security-sensitive behavior;
+- migrations, destructive operations, persistence/data integrity;
+- public APIs or backward compatibility;
+- broad or cross-cutting changes;
+- weak or incomplete deterministic test coverage;
+- architecture changes;
+- repeated repair loops or unresolved uncertainty;
+- generated behavior whose correctness is materially subjective.
+
+For coherent low/medium-risk batches, one independent review at the batch boundary can be more efficient than a reviewer after every task. High-risk tasks may still require task-level review before the batch continues.
+
+The reviewer's input should be compact: task intent, relevant acceptance criteria, diff/change set, verification results, and relevant project rules. Do not forward the implementer's complete conversation history.
+<!-- RULE:R-REVIEW:END -->
+
+<!-- RULE:R-VERIFY:START -->
+## 12. Deterministic verification and explicit proof boundaries
+
+Before adding another agent, ask whether a deterministic tool can answer the same question more cheaply and reliably.
+
+Prefer tests, static analysis, linting, type checks, security checks, smoke tests, integration tests, browser checks, and reproducible evaluations over an LLM simulating those checks.
+
+The ideal project exposes a small number of well-documented verification entry points: one obvious final verification command plus targeted commands for faster inner loops.
+
+However, every verification mechanism has a proof boundary. Do not let a green result imply more than it actually tested.
+
+Examples:
+
+- unit tests do not necessarily validate framework/database behavior;
+- mocks may prove expected calls while missing real integration behavior;
+- browser/DOM automation may not prove assistive-technology announcements;
+- a fake server can drift from the real API contract;
+- fixtures can hide bugs if their load order or lifecycle differs from production;
+- performance tests are invalid if concurrent activity contaminates the measurement.
+
+Prefer realistic fixtures and integration boundaries where the failure risk justifies them. Use deterministic time, controlled responses, cleanup/isolation, characterization tests, or mutation-style checks when those techniques materially strengthen the evidence.
+
+Manual or environment-specific evidence should remain visible as an open criterion until performed.
+<!-- RULE:R-VERIFY:END -->
+
+<!-- RULE:R-STATE-COHERENCE:START -->
+## 13. Git, task state, and CI should describe the same code state
+
+For resumable agentic work, code, task status, and verification evidence must be traceable to the same repository state.
+
+Useful principles:
+
+- know which commit a CI result verifies;
+- distinguish local uncommitted changes from verified committed code;
+- keep code and closely related task-state changes coherent in commits according to project convention;
+- check the working tree before committing and before ending a session so unrelated or forgotten changes are visible;
+- do not treat "CI green" as sufficient when required manual or environment-specific evidence is still missing;
+- summarize verbose CI/GitHub output using the same compact-output discipline as local tests.
+
+Avoid automation that creates large numbers of low-information commits unless it demonstrably improves recoverability or traceability.
+<!-- RULE:R-STATE-COHERENCE:END -->
+
+<!-- RULE:R-AUTONOMY:START -->
+## 15. Bounded autonomy
+
+Agents may continue autonomously while they are making measurable progress toward an existing task or approved batch.
+
+They should stop or escalate when:
+
+- required acceptance/verification cannot be satisfied;
+- the same fundamental failure repeats;
+- a product or architectural decision is missing;
+- security or destructive behavior is ambiguous;
+- task scope is materially wrong;
+- the batch should be split;
+- a configured cost/iteration limit is reached.
+
+`BLOCKED` is a valid outcome. Autonomy does not authorize inventing missing product decisions.
+<!-- RULE:R-AUTONOMY:END -->
+
+<!-- RULE:R-LEARNING:START -->
+## 16. Capture process learning near the evidence
+
+Do not force a process note after every task.
+
+When a notable detour, repeated manual action, missing rule/check, context-cost issue, ineffective delegation, or unusually effective technique appears, record a short observation as close to the work as the repository naturally allows—for example an Implementation Note such as:
+
+```text
+Learning: <observation> → <possible process improvement or question>
+```
+
+Task-local notes preserve evidence and context. Cross-task or reusable observations may additionally be promoted into a lightweight process-improvement inbox, for example:
+
+```text
+docs/agent/PROCESS_IMPROVEMENTS.md
+```
+
+The inbox is not another policy document and is not normal implementation context. It is primarily a **project-local retrospective inbox**: concise candidates for future retrospective analysis that should be pruned after triage.
+
+Do not use raw project observations directly as universal rules for other projects. During a retro, a validated project learning may be promoted one step further into a separate cross-project pattern library maintained with the shared harness/template. That promotion should preserve the evidence and applicability limits.
+
+Recommended flow:
+
+```text
+task-local Learning:
+→ project PROCESS_IMPROVEMENTS.md
+→ project retro
+→ project-specific rule/automation OR discard/defer
+→ optional cross-project pattern after validation
+```
+
+Do not duplicate every task-local learning into the inbox. Promote only items likely to matter beyond the originating task.
+<!-- RULE:R-LEARNING:END -->
+
+<!-- RULE:R-RETRO:START -->
+## 19. Retrospective loop
+
+Run a process retrospective when there is enough evidence to make it worthwhile: for example after a meaningful milestone, a run of related tasks, or recurring friction.
+
+Inputs should remain bounded:
+
+- notable task-local `Learning:` observations;
+- `PROCESS_IMPROVEMENTS.md`, if used;
+- a representative sample of completed tasks/batches;
+- relevant commits and CI runs;
+- recurring review findings and failed checks;
+- automatically available usage/cost data, if relevant.
+
+A retrospective should convert evidence into a small number of testable process changes.
+
+For each adopted process change, record:
+
+- the change;
+- its authoritative storage/tooling location;
+- the problem it is intended to solve;
+- an observable success criterion for a future retro.
+
+Keep **implemented** and **demonstrated effective** as separate states. A process change is not proven merely because it was installed.
+
+Possible outputs include:
+
+- simplify or shorten instructions;
+- consolidate duplicated rules into one source;
+- improve session bootstrap/discoverability;
+- add or improve a deterministic check;
+- improve test realism;
+- add compact-output wrappers;
+- automate a repeated manual step;
+- alter batching/review criteria;
+- narrow or remove an agent/skill that creates more overhead than value;
+- run a targeted measurement experiment.
+
+Do not turn every observation into permanent process.
+<!-- RULE:R-RETRO:END -->
+
+<!-- RULE:R-DECISION:START -->
+## 20. Overall decision rule
+
+For every proposed piece of agent infrastructure, ask:
+
+> Does this reduce expected total cost of accepted changes after accounting for its own token, maintenance, coordination, verification, and cognitive overhead?
+
+If the answer is unclear, defer it and preserve only enough evidence to revisit the hypothesis later.
+<!-- RULE:R-DECISION:END -->

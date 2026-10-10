@@ -1,0 +1,35 @@
+# Agent instructions (shared core)
+
+Applies to Codex, Claude Code (via `CLAUDE.md`), Copilot (via `.github/copilot-instructions.md`) and any AGENTS-compatible tool.
+
+**Setup status:** TODO  <!-- project-setup skill sets this to DONE -->
+If TODO: follow `.claude/skills/project-setup/SKILL.md` first (when the user asks to set up; otherwise ask once).
+
+**Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
+
+**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`.
+
+## Session start
+Run `scripts/session-start.sh` once per session (read-only state summary). Do not replay history.
+
+## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
+1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
+2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized.
+3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
+4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.
+5. **Git state** (`R-STATE-COHERENCE`): check `git status` before committing and before ending a session. Commit code together with its task changes; never include unrelated changes.
+6. **Bounded delegation** (`R-DELEGATION`): subagents get exact files/diff, one question and an output format. Skip delegation for small mechanical changes.
+7. **Stop conditions** (`R-AUTONOMY`): stop and ask on repeated failure, missing product decision or ambiguous destructive action. `BLOCKED` is a valid outcome.
+8. **Learnings** (`R-LEARNING`): for notable detours, aborts or high context cost, add `Learning: <observation> → <improvement>` to the task notes. Otherwise add nothing.
+
+Load other rules only when their trigger applies (index below), never the whole file:
+
+```sh
+sed -n '/<!-- RULE:R-INDEX:START -->/,/<!-- RULE:R-INDEX:END -->/p' docs/agent/OPERATING_MODEL.md
+ID=R-REVIEW; sed -n "/<!-- RULE:${ID}:START -->/,/<!-- RULE:${ID}:END -->/p" docs/agent/OPERATING_MODEL.md
+```
+
+## Project specifics
+<!-- Filled in during setup (project-setup skill): project goal, stack, verification commands. -->
+- Goal: _(set during setup)_
+- Verify: _(command, always via `scripts/run.sh`)_
