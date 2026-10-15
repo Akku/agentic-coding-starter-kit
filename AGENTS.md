@@ -8,6 +8,7 @@ If TODO: follow `.claude/skills/project-setup/SKILL.md` first (when the user ask
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
 **Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`.
+**Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 
 ## Session start
 Run `scripts/session-start.sh` once per session (read-only state summary). Do not replay history.

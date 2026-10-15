@@ -26,6 +26,7 @@ Give this to the agent after opening the folder:
 | `AGENTS.md` | Shared core rules (Codex and compatible tools) |
 | `CLAUDE.md`, `.github/copilot-instructions.md` | Thin adapters pointing to `AGENTS.md` |
 | `.claude/skills/` | Skills: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices` |
+| `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
 | `scripts/run.sh` | Compact output for tests/CI/CLI (exit code preserved, full log outside the repo) |
 | `scripts/session-start.sh` | Read-only session start (branch, changes, tasks, handoff) |
 | `docs/agent/OPERATING_MODEL.md` | Rules with stable IDs (`R-*`), loaded selectively |

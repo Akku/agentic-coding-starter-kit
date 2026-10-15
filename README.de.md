@@ -24,6 +24,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | --- | --- |
 | `STARTE_HIER.md` / `START_HERE.md` | Anleitung für Menschen (DE/EN) |
 | `.claude/skills/` | Skills: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices` |
+| `.claude/agents/` | Agenten: `ux-designer` (für Projekte mit Oberfläche) |
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |
 | `CLAUDE.md` / `.github/copilot-instructions.md` | Dünne Adapter, verweisen auf `AGENTS.md` |
 | `scripts/run.sh` | Kompakte Ausgabe für Tests/CI/CLI (Exitcode bleibt erhalten, Volllog außerhalb des Repos) |

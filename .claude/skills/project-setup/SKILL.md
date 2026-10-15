@@ -40,9 +40,10 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Adapt the summary `grep` in `scripts/run.sh` to the test runner's output format, if needed.
 - Create `docs/agent/HANDOFF.md` (max ~40 lines: current task, approvals, next step, blockers). `scripts/session-start.sh` prints it.
 - Add stack-specific pitfalls to `docs/agent/PITFALLS.md` only if already known.
-- Do not add agents, skills, hooks or telemetry now (`R-DECISION`).
+- Do not add further agents, skills, hooks or telemetry now (`R-DECISION`). If the project has a user interface, keep `.claude/agents/ux-designer.md`; otherwise delete it.
 
 ## 7. First backlog
+If the project has a user interface, run the `ux-designer` agent first (concept phase): give it the goal, the users and the stack, and ask for mockups (desktop and mobile) and open decisions; confirm them with the user before creating UI tasks. Also check whether existing skill collections offer skills that fit the stack.
 Create 3–7 tasks from the goal with `backlog task create` (check `--help`): small, each with checkable acceptance criteria. The first task should be a walking skeleton that already runs the verification command end to end.
 
 ## 8. Project README, commit and report
