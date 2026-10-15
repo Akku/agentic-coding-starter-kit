@@ -4,6 +4,7 @@ set -u
 echo "## git"
 if git rev-parse --git-dir >/dev/null 2>&1; then
   echo "branch: $(git branch --show-current)"
+  [ "$(git config core.hooksPath)" = "scripts/githooks" ] || echo "WARNING: pre-commit guard inactive -> git config core.hooksPath scripts/githooks"
   echo "changes: $(git status --porcelain | wc -l | tr -d ' ') file(s)"
   git status --porcelain | head -10
   echo "recent commits:"; git log --oneline -5
