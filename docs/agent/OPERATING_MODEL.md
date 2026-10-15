@@ -538,7 +538,7 @@ Do not turn every observation into permanent process.
 When product or UI direction is unclear, finish a short concept phase before the first vertical slice:
 
 - Write a one-page vision first: audience and roles, core value, boundaries, success measures, non-goals, open decisions. Review it once more at the end of the concept phase; a vision written after the first slice tends to force model changes.
-- For UI concepts, show three deliberately different mockups (mobile and desktop where both matter), let the user pick or merge, then produce one alignment mockup and iterate on feedback.
+- For UI concepts, show three deliberately different mockups (mobile and desktop where both matter), let the user pick or merge, then produce one alignment mockup and iterate on feedback. Delegate the mockup rounds and UX reviews to the `ux-designer` agent (`.claude/agents/ux-designer.md`) with a narrow brief (`R-DELEGATION`).
 - Persist every agreed mockup round as a self-contained file in the repository (for example `docs/ui/`); chat-only mockups are lost.
 - Record each decision with its date in the requirements. Mark superseded sections explicitly instead of leaving contradicting text under a priority note.
 - Derive tasks only after the direction is agreed, with dependencies; remove parked scope in the task that changes the model rather than keeping it dormant.
