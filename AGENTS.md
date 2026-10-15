@@ -15,6 +15,7 @@ Run `scripts/session-start.sh` once per session (read-only state summary). Do no
 
 ## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
+1b. **Follow-ups** (`R-LIFECYCLE` 1.7): when finishing a task, propose useful out-of-scope follow-up tasks (max. 3, with reason and rough size) to the user; create them only after agreement. Do not silently expand the current task.
 2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized.
 3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
 4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.

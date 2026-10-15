@@ -106,6 +106,12 @@ Missing evidence should remain clearly open with a concrete continuation point.
 ### 1.6 Complete with evidence, not activity narration
 
 Use the repository's existing completion mechanism to record what changed and the evidence that supports completion. Prefer concise, reproducible evidence over long descriptions of everything the agent did.
+
+### 1.7 Propose follow-up tasks, do not hide or silently create them
+
+While working, the agent notices work that is out of scope for the current task: missing tests or docs, a related bug, a cleanup, an obvious next feature, review findings that were deferred. Do not expand the current task and do not lose the observation.
+
+When completing a task (or at a natural stopping point), list the useful follow-ups in the report to the user: at most three, each with a title, why it matters and a rough size. Prefer none over weak ideas. Create them as Backlog.md tasks only after the user agrees (use a label such as `Proposed` if the project wants them distinguishable); the user decides priority and order. Record deferred findings in the current task's notes so they are not lost if the user declines.
 <!-- RULE:R-LIFECYCLE:END -->
 
 <!-- RULE:R-INSTRUCTIONS:START -->
