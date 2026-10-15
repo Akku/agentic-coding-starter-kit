@@ -14,6 +14,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Project goal in 3–5 sentences (what, for whom, what "done" looks like).
 - Stack/language preferences, or "decide for me".
 - Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
+- Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
 - Create a GitHub repository now? Default: private, none yet.
 
 ## 3. Check and install prerequisites (assume a non-technical user)
@@ -24,13 +25,14 @@ If a tool is installed but not found, the terminal may need a restart; say so.
 
 ## 4. Git
 If this folder is not a git repository (typical for the ZIP route): `git init -b main`; set `user.name`/`user.email` only if missing (ask the user). Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** because the repository may become public.
+Confidential inputs: create the agreed folder, add it to `.gitignore`, and activate the pre-commit guard with `git config core.hooksPath scripts/githooks` (it blocks office/PDF/database files). Stage explicit paths, not `git add -A`, while untracked inputs exist.
 
 ## 5. Initialise Backlog.md
 ```sh
 backlog init "<project name>" --defaults --integration-mode cli --agent-instructions none
 backlog config get autoCommit   # must be false: code and task changes are committed together
 ```
-`--agent-instructions none` keeps this kit's `AGENTS.md`/`CLAUDE.md` intact. Afterwards confirm both files are unchanged. Run `backlog instructions overview` once and `backlog config --help` to see how to set a Definition of Done; add a short DoD (verification run via `scripts/run.sh`, missing manual evidence stays open, working tree checked).
+`--agent-instructions none` keeps this kit's `AGENTS.md`/`CLAUDE.md` intact. Afterwards confirm both files are unchanged. Run `backlog instructions overview` once and `backlog config --help` to see how to set a Definition of Done; add a short DoD (if code changed: verification run via `scripts/run.sh`; missing manual evidence stays open; working tree checked). Design, decision and documentation tasks have no code to verify, so the first item must be conditional.
 
 ## 6. Adapt the harness to the project goal
 - Fill the "Project specifics" block in `AGENTS.md` (goal, stack, verification commands). Keep it under ~15 lines.

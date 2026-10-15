@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Blocks source documents and local databases from being committed (they may be confidential).
+bad=$(git diff --cached --name-only --diff-filter=AM | grep -i -E '\.(docx|pptx|xlsx|pdf|db|db-shm|db-wal|sqlite)$' || true)
+if [ -n "$bad" ]; then
+  echo "pre-commit: refusing to commit source documents / databases:" >&2
+  echo "$bad" | sed 's/^/  /' >&2
+  echo "Keep them in the ignored inputs folder. Override only deliberately: git commit --no-verify" >&2
+  exit 1
+fi
