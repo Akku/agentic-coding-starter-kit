@@ -13,8 +13,8 @@ for f in "${files[@]}"; do
   open=$(grep -c '^- \[ \] #' "$f" || true)
   if [ "$open" -gt 0 ]; then echo "$id: Done with $open unchecked box(es)"; bad=1; fi
   for dep in $(awk '/^dependencies:/{d=1; next} d&&/^  - /{print $2; next} d{exit}' "$f"); do
-    n=$(echo "$dep" | sed 's/TASK-//')
-    df=$(ls backlog/tasks/task-"$n"\ -*.md 2>/dev/null | head -1)
+    pre=$(echo "${dep%-*}" | tr 'A-Z' 'a-z'); n=${dep##*-}   # honours custom task prefixes and zero-padded ids
+    df=$(find backlog/tasks -maxdepth 1 -name '*.md' 2>/dev/null | grep -iE "/${pre}-0*${n} -" | head -1)
     if [ -n "$df" ] && [ "$(status_of "$df")" != "Done" ]; then echo "$id: Done but depends on $dep which is not Done"; bad=1; fi
   done
 done

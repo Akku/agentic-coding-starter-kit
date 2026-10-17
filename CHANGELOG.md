@@ -2,6 +2,11 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.7.0
+- **Backlog check:** `scripts/check-backlog.sh` + pre-commit hook reject Done tasks with unchecked boxes or unfinished dependencies; session start reports problems. Setup always activates the hook. Source: one project (observed once). Benefits: all projects.
+- **Retro:** `scripts/retro-metrics.sh` (measured evidence), independent subagent read, effect check of last retro's changes; promote only changes with shown effect. Source: one project, effect not yet measured.
+- **Knowledge moved:** web/PWA notes in `docs/agent/stacks/web-pwa.md`, Playwright and contrast checks in `testing-practices`. Benefits: web projects.
+
 ## 0.6.0
 - **License:** MIT. Projects choose their own (setup asks).
 - **Claude Code settings:** safe commands pre-approved (`backlog`, read-only `git`, session start); `SessionStart` hook injects the state summary automatically. Verification commands are added narrowly by setup. Benefits: all Claude Code projects, fewer approval prompts.
