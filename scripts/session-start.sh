@@ -34,7 +34,7 @@ if command -v backlog >/dev/null 2>&1 && { [ -d backlog ] || [ -d .backlog ]; };
   echo "in progress:"; backlog task list -s "In Progress" --plain 2>/dev/null | head -15
   echo "ready (unblocked, to do):"; backlog task list -s "To Do" --ready --plain 2>/dev/null | head -10
 else
-  echo "backlog not initialised (run the project-setup skill)"
+  echo "backlog not initialised (follow SETUP.md)"
 fi
 echo; echo "## backlog check"; scripts/check-backlog.sh 2>/dev/null | head -10; [ "${PIPESTATUS[0]:-0}" -eq 0 ] && echo "ok"
 echo; echo "## handoff"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kit self-check (kit maintenance only; removed from projects by project-setup).
+"""Kit self-check (kit maintenance only; removed from projects by SETUP.md).
 Checks rule markers, rule index, script syntax, skill frontmatter, JSON and version consistency."""
 import json, re, subprocess, sys, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
@@ -40,6 +40,11 @@ v = re.search(r"^version: (\S+)", (root / "KIT_VERSION").read_text(), re.M).grou
 for f in ("README.md", "README.de.md", "START_HERE.md", "STARTE_HIER.md"):
     if f"**Version {v}**" not in (root / f).read_text(): err(f"{f}: version != {v}")
 if not re.search(r"^## " + re.escape(v) + r"$", (root / "CHANGELOG.md").read_text(), re.M): err(f"CHANGELOG.md: no entry for {v}")
+
+# SETUP.md exists and the hidden paths it checks are really in the kit
+if not (root / "SETUP.md").exists(): err("SETUP.md missing")
+for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
+    if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 
 # skills listed in AGENTS.md exist
 agents = (root / "AGENTS.md").read_text()

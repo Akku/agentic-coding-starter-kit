@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.8.0
+- **`SETUP.md` replaces the `project-setup` skill:** a visible root file, so the setup still works when the ZIP route lost hidden folders. Step 0 checks that hidden files arrived and restores missing ones from the kit ZIP. Setup deletes `SETUP.md` at the end, so its description no longer costs context in every session. Human guides warn about hidden files. Benefits: all new projects.
+
 ## 0.7.0
 - **Backlog check:** `scripts/check-backlog.sh` + pre-commit hook reject Done tasks with unchecked boxes or unfinished dependencies; session start reports problems. Setup always activates the hook. Source: one project (observed once). Benefits: all projects.
 - **Retro:** `scripts/retro-metrics.sh` (measured evidence), independent subagent read, effect check of last retro's changes; promote only changes with shown effect. Source: one project, effect not yet measured.

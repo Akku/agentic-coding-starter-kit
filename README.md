@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.7.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+**Version 0.8.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
@@ -20,16 +20,17 @@ At the start of each session the agent checks (once per day) whether a newer kit
 
 Give this to the agent after opening the folder:
 
-> Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
+> Set up this project: follow `SETUP.md`. Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
 ## Contents
 
 | File | Purpose |
 | --- | --- |
 | `START_HERE.md` / `STARTE_HIER.md` | Human guide (EN/DE) |
+| `SETUP.md` | One-time setup procedure for the agent (deleted after setup) |
 | `AGENTS.md` | Shared core rules (Codex and compatible tools) |
 | `CLAUDE.md`, `.github/copilot-instructions.md` | Thin adapters pointing to `AGENTS.md` |
-| `.claude/skills/` | Skills: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
+| `.claude/skills/` | Skills: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
 | `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
 | `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
 | `KIT_VERSION`, `CHANGELOG.md` | Kit version this project is based on; what changed per version |

@@ -2,12 +2,12 @@
 
 Applies to Codex, Claude Code (via `CLAUDE.md`), Copilot (via `.github/copilot-instructions.md`) and any AGENTS-compatible tool.
 
-**Setup status:** TODO  <!-- project-setup skill sets this to DONE -->
-If TODO: follow `.claude/skills/project-setup/SKILL.md` first (when the user asks to set up; otherwise ask once).
+**Setup status:** TODO  <!-- SETUP.md sets this to DONE and deletes itself -->
+If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask once).
 
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
-**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
+**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 
 ## Session start
@@ -33,6 +33,6 @@ ID=R-REVIEW; sed -n "/<!-- RULE:${ID}:START -->/,/<!-- RULE:${ID}:END -->/p" doc
 ```
 
 ## Project specifics
-<!-- Filled in during setup (project-setup skill): project goal, stack, verification commands. -->
+<!-- Filled in during setup (SETUP.md): project goal, stack, verification commands. -->
 - Goal: _(set during setup)_
 - Verify: _(command, always via `scripts/run.sh`)_

@@ -1,11 +1,11 @@
----
-name: project-setup
-description: One-time setup of a new project from the Agentic Coding Starter Kit - asks for the project goal, checks/installs prerequisites, sets up Git and Backlog.md, adapts the harness, creates the first tasks. Use when AGENTS.md says "Setup status: TODO" or the user asks to set up the project.
----
+# Project setup (one-time, agent procedure)
 
-# Project setup (one-time)
+This file is the one-time setup procedure. Delete it as the last step (see step 8); the kit keeps it for the next project.
 
 Talk to the user in their language. Keep status messages to one sentence. Ask before anything with side effects outside this folder (global installs, creating remote repositories, pushing).
+
+## 0. Check that the kit arrived complete
+The ZIP route sometimes loses hidden folders (names starting with a dot are hidden on macOS Finder). Check that these exist: `.claude/skills/`, `.claude/settings.json`, `.github/`, `.gitignore`, `scripts/githooks/pre-commit`. If something is missing: tell the user in one sentence, then restore it yourself: download `<repo>/archive/refs/heads/main.zip` (`repo` from `KIT_VERSION`) into a temp folder outside the project, unzip it there, and copy only the missing files/folders (never overwrite existing ones). If the download is not possible, ask the user to copy the extracted folder as a whole (macOS: Cmd+Shift+. shows hidden files).
 
 ## 1. Understand the kit (≈2 min, do not read everything)
 Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; other agents read the file directly.
@@ -63,7 +63,7 @@ Replace the kit's `README.md`/`README.de.md` with a short project README (goal, 
 Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
-Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE` and tell the user in ≤10 lines: what exists, the milestones, which commands to use, which task comes first.
+Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user in ≤10 lines: what exists, the milestones, which commands to use, which task comes first.
 
 ## Later
 - First retro: run `R-RETRO` and process the open `[KIT]` observations in `docs/agent/LEARNINGS.md`.

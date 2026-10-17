@@ -1,17 +1,17 @@
 # Start here
 
-**Version 0.7.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
+**Version 0.8.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
 
 This kit is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. No technical knowledge is required for the standard path.
 
 ## Standard path: download the ZIP
 
 1. **Download** the kit: [agentic-coding-starter-kit.zip](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip) (also: green **Code** button → **Download ZIP** on the GitHub page).
-2. **Unzip** it (macOS: double-click; Windows: right-click → *Extract All*). Rename the folder to your project name and put it where you keep your projects.
+2. **Unzip** it (macOS: double-click; Windows: right-click → *Extract All*). Rename the folder to your project name and put it where you keep your projects. **Use the whole folder; do not copy files out of it one by one**: it contains hidden items (names starting with a dot, e.g. `.claude`) that Finder hides by default (macOS: Cmd+Shift+. shows them). If something is missing anyway, the agent restores it.
 3. **Open your agent** (e.g. the Claude desktop app, Code tab) and choose that folder as the working folder.
 4. **Give the agent this prompt**, with your goal filled in:
 
-   > Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
+   > Set up this project: follow `SETUP.md`. Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
 5. **Answer the questions** (technology, which agents you use, GitHub yes/no). The agent checks which tools are missing (Git, Node.js, Backlog.md) and installs them for you; you approve each step in the app (if you decline, it gives you manual instructions instead). The installer may ask for your computer password. If an installer asks for your computer password, type it yourself, never into the chat. On Windows the helper scripts need Git for Windows (includes *Git Bash*); the agent will guide you.
 6. **At the end** the agent summarizes what exists and which task comes first. Tell it to start.
@@ -27,7 +27,7 @@ This kit is a starting point for agent-driven development with Git and Backlog.m
 - Git, Backlog.md, a vision document, milestones (vertical slice → MVP → moonshot) and the first 3–7 tasks derived from your goal. The agent will ask you what you imagine for each of the three.
 - Short agent rules (`AGENTS.md`) that load further rules only when needed – saves tokens.
 - `scripts/run.sh` keeps long test/CI output out of the context; `scripts/session-start.sh` gives a compact status at session start.
-- Skills for recurring work: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
+- Skills for recurring work: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 
 ## Working day to day
 

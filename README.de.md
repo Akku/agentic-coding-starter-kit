@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.7.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.8.0** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
@@ -20,15 +20,16 @@ Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere Kit
 
 Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 
-> Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
+> Richte dieses Projekt ein: Folge `SETUP.md`. Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
 
 ## Inhalt
 
 | Datei | Zweck |
 | --- | --- |
 | `STARTE_HIER.md` / `START_HERE.md` | Anleitung für Menschen (DE/EN) |
-| `.claude/skills/` | Skills: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
+| `.claude/skills/` | Skills: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
 | `.claude/agents/` | Agenten: `ux-designer` (für Projekte mit Oberfläche) |
+| `SETUP.md` | Einmalige Setup-Anleitung für den Agenten (wird nach dem Setup gelöscht) |
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |
 | `CLAUDE.md` / `.github/copilot-instructions.md` | Dünne Adapter, verweisen auf `AGENTS.md` |
 | `scripts/githooks/pre-commit` | Schutz vor dem Committen vertraulicher Quelldokumente (wird beim Setup aktiviert) |

@@ -1,17 +1,17 @@
 # Starte hier
 
-**Version 0.7.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.8.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
 ## Standardweg: ZIP herunterladen
 
 1. **Lade** das Kit **herunter**: [agentic-coding-starter-kit.zip](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip) (alternativ: grüner Button **Code** → **Download ZIP** auf der GitHub-Seite).
-2. **Entpacke** es (macOS: Doppelklick; Windows: Rechtsklick → *Alle extrahieren*). Benenne den Ordner nach deinem Projekt um und lege ihn dort ab, wo du Projekte aufbewahrst.
+2. **Entpacke** es (macOS: Doppelklick; Windows: Rechtsklick → *Alle extrahieren*). Benenne den Ordner nach deinem Projekt um und lege ihn dort ab, wo du Projekte aufbewahrst. **Verwende den ganzen Ordner; kopiere keine einzelnen Dateien heraus**: Er enthält versteckte Elemente (Namen mit Punkt am Anfang, z. B. `.claude`), die der Finder standardmäßig ausblendet (macOS: Cmd+Shift+. blendet sie ein). Fehlt trotzdem etwas, stellt der Agent es wieder her.
 3. **Öffne deinen Agenten** (z. B. die Claude-Desktop-App, Tab Code) und wähle diesen Ordner als Arbeitsordner.
 4. **Gib dem Agenten diesen Prompt**, mit deinem Ziel:
 
-   > Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
+   > Richte dieses Projekt ein: Folge `SETUP.md`. Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
 
 5. **Beantworte die Rückfragen** (Technologie, welche Agenten du nutzt, GitHub ja/nein). Der Agent prüft, welche Werkzeuge fehlen (Git, Node.js, Backlog.md), und installiert sie für dich; du genehmigst jeden Schritt in der App (lehnst du ab, gibt er dir stattdessen eine Anleitung). Der Installer fragt eventuell nach deinem Computer-Passwort. Fragt ein Installer nach deinem Computer-Passwort, gib es selbst dort ein, niemals im Chat. Unter Windows brauchen die Hilfsskripte Git für Windows (enthält *Git Bash*); der Agent führt dich dabei.
 6. **Am Ende** fasst der Agent zusammen, was angelegt wurde und welcher Task zuerst kommt. Sag ihm, dass er starten soll.
@@ -27,7 +27,7 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 - Git, Backlog.md, ein Vision-Dokument, Meilensteine (Vertical Slice → MVP → Moonshot) und die ersten 3–7 Tasks aus deinem Ziel. Der Agent fragt dich, was du dir jeweils darunter vorstellst.
 - Kurze Agentenregeln (`AGENTS.md`), die weitere Regeln nur bei Bedarf laden – das spart Tokens.
 - `scripts/run.sh` hält lange Test-/CI-Ausgaben aus dem Kontext; `scripts/session-start.sh` liefert beim Sitzungsstart einen kompakten Stand.
-- Skills für wiederkehrende Aufgaben: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
+- Skills für wiederkehrende Aufgaben: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 
 ## Im Alltag
 
