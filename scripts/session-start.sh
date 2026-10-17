@@ -36,6 +36,7 @@ if command -v backlog >/dev/null 2>&1 && { [ -d backlog ] || [ -d .backlog ]; };
 else
   echo "backlog not initialised (run the project-setup skill)"
 fi
+echo; echo "## backlog check"; scripts/check-backlog.sh 2>/dev/null | head -10; [ "${PIPESTATUS[0]:-0}" -eq 0 ] && echo "ok"
 echo; echo "## handoff"
 if [ -f docs/agent/HANDOFF.md ]; then sed -n '1,40p' docs/agent/HANDOFF.md; else echo "no HANDOFF.md"; fi
 echo; echo "Rules: see AGENTS.md; further rules by ID via docs/agent/OPERATING_MODEL.md"

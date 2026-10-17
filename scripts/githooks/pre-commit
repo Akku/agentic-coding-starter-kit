@@ -7,3 +7,18 @@ if [ -n "$bad" ]; then
   echo "Keep them in the ignored inputs folder. Override only deliberately: git commit --no-verify" >&2
   exit 1
 fi
+
+# Done tasks must have all boxes checked and finished dependencies; only staged task files are checked.
+# Task file names contain spaces, so paths are passed NUL-separated.
+tasks=()
+while IFS= read -r -d '' f; do
+  case "$f" in backlog/tasks/*.md) tasks+=("$f") ;; esac
+done < <(git diff --cached --name-only --diff-filter=AM -z)
+if [ ${#tasks[@]} -gt 0 ]; then
+  if ! out=$(scripts/check-backlog.sh "${tasks[@]}" 2>&1); then
+    echo "pre-commit: backlog check failed:" >&2
+    echo "$out" | sed 's/^/  /' >&2
+    echo "Finish the task (check the boxes or move open work into a follow-up task and say so in the notes) or keep it In Progress." >&2
+    exit 1
+  fi
+fi
