@@ -42,7 +42,7 @@ Confidential inputs: create the agreed folder, add it to `.gitignore`, and activ
 backlog init "<project name>" --defaults --integration-mode cli --agent-instructions none
 backlog config get autoCommit   # must be false: code and task changes are committed together
 ```
-`--agent-instructions none` keeps this kit's `AGENTS.md`/`CLAUDE.md` intact. Afterwards confirm both files are unchanged. Run `backlog instructions overview` once and `backlog config --help` to see how to set a Definition of Done; add a short DoD (if code changed: verification run via `scripts/run.sh`; missing manual evidence stays open; working tree checked). Design, decision and documentation tasks have no code to verify, so the first item must be conditional.
+`--agent-instructions none` keeps this kit's `AGENTS.md`/`CLAUDE.md` intact. Afterwards confirm both files are unchanged. Run `backlog instructions overview` once and `backlog config --help` to see how to set a Definition of Done; add a short DoD (if code changed: verification run via `scripts/run.sh`; every acceptance criterion has evidence, or the missing evidence is recorded in the notes with a continuation point; code and task changes committed together). Done tasks with unchecked boxes are rejected by the pre-commit hook (`scripts/check-backlog.sh`); chore tasks use `--no-dod-defaults`. Design, decision and documentation tasks have no code to verify, so the first item must be conditional.
 
 ## 6. Adapt the harness to the project goal
 - Fill the "Project specifics" block in `AGENTS.md` (goal, stack, verification commands). Keep it under ~15 lines.
