@@ -504,6 +504,7 @@ Run a process retrospective when there is enough evidence to make it worthwhile:
 
 Inputs should remain bounded:
 
+- new findings in the central starter kit from other projects (first input of every retro; procedure in the `retro` skill);
 - notable task-local `Learning:` observations;
 - `PROCESS_IMPROVEMENTS.md`, if used;
 - a representative sample of completed tasks/batches;

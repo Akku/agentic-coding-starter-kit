@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.3.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.4.0** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
