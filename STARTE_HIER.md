@@ -1,6 +1,6 @@
 # Starte hier
 
-**Version 0.5.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.5.1** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -11,9 +11,9 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 3. **Öffne deinen Agenten** (z. B. die Claude-Desktop-App, Tab Code) und wähle diesen Ordner als Arbeitsordner.
 4. **Gib dem Agenten diesen Prompt**, mit deinem Ziel:
 
-   > Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und führe mich Schritt für Schritt durch die Installation von allem, was fehlt. Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
+   > Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
 
-5. **Beantworte die Rückfragen** (Technologie, welche Agenten du nutzt, GitHub ja/nein). Der Agent prüft, welche Werkzeuge fehlen (Git, Node.js, Backlog.md), und führt dich Schritt für Schritt durch die Installation. Du genehmigst jede Installation. Fragt ein Installer nach deinem Computer-Passwort, gib es selbst dort ein, niemals im Chat. Unter Windows brauchen die Hilfsskripte Git für Windows (enthält *Git Bash*); der Agent führt dich dabei.
+5. **Beantworte die Rückfragen** (Technologie, welche Agenten du nutzt, GitHub ja/nein). Der Agent prüft, welche Werkzeuge fehlen (Git, Node.js, Backlog.md), und installiert sie für dich; du genehmigst jeden Schritt in der App (lehnst du ab, gibt er dir stattdessen eine Anleitung). Der Installer fragt eventuell nach deinem Computer-Passwort. Fragt ein Installer nach deinem Computer-Passwort, gib es selbst dort ein, niemals im Chat. Unter Windows brauchen die Hilfsskripte Git für Windows (enthält *Git Bash*); der Agent führt dich dabei.
 6. **Am Ende** fasst der Agent zusammen, was angelegt wurde und welcher Task zuerst kommt. Sag ihm, dass er starten soll.
 
 ## Für technisch Versierte: über GitHub

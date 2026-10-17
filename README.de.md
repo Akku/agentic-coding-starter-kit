@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.5.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.5.1** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
@@ -20,7 +20,7 @@ Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere Kit
 
 Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 
-> Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und führe mich Schritt für Schritt durch die Installation von allem, was fehlt. Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
+> Richte dieses Projekt mit dem Skill `project-setup` ein (`.claude/skills/project-setup/SKILL.md`). Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
 
 ## Inhalt
 

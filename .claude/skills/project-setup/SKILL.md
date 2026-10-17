@@ -20,7 +20,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 
 ## 3. Check and install prerequisites (assume a non-technical user)
 Detect the OS (`uname -s`, or `$OS`/`ver` on Windows). Check: `git --version`, `node --version`, `npm --version`, `backlog --version`; optionally `gh --version`.
-For each missing tool: say in one plain sentence what it is for, show the command, wait for approval, run it, verify with the version command. If an installer needs a password or admin approval, the user types it themselves, never in chat. After an install the terminal/app may need a restart to find the tool; say so.
+**Do it yourself.** For each missing tool: say in one plain sentence what it is for, then run the install command (the tool-permission prompt is the user's approval) and verify with the version command. Give the user step-by-step instructions only if they decline the approval, the app denies the command, or a step cannot be automated (e.g. a password or admin prompt: the user types it themselves, never in chat; a GUI installer). After manual steps, re-check with the version command and continue. After an install the terminal/app may need a restart to find the tool; say so.
 
 | Tool | macOS | Windows | Linux |
 | --- | --- | --- | --- |

@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.5.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+**Version 0.5.1** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
@@ -20,7 +20,7 @@ At the start of each session the agent checks (once per day) whether a newer kit
 
 Give this to the agent after opening the folder:
 
-> Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and guide me step by step through installing anything that is missing. What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
+> Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
 ## Contents
 

@@ -1,6 +1,6 @@
 # Start here
 
-**Version 0.5.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
+**Version 0.5.1** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
 
 This kit is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. No technical knowledge is required for the standard path.
 
@@ -11,9 +11,9 @@ This kit is a starting point for agent-driven development with Git and Backlog.m
 3. **Open your agent** (e.g. the Claude desktop app, Code tab) and choose that folder as the working folder.
 4. **Give the agent this prompt**, with your goal filled in:
 
-   > Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and guide me step by step through installing anything that is missing. What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
+   > Set up this project with the `project-setup` skill (`.claude/skills/project-setup/SKILL.md`). Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
-5. **Answer the questions** (technology, which agents you use, GitHub yes/no). The agent checks which tools are missing (Git, Node.js, Backlog.md) and guides you through installing them step by step. You approve every install. If an installer asks for your computer password, type it yourself, never into the chat. On Windows the helper scripts need Git for Windows (includes *Git Bash*); the agent will guide you.
+5. **Answer the questions** (technology, which agents you use, GitHub yes/no). The agent checks which tools are missing (Git, Node.js, Backlog.md) and installs them for you; you approve each step in the app (if you decline, it gives you manual instructions instead). The installer may ask for your computer password. If an installer asks for your computer password, type it yourself, never into the chat. On Windows the helper scripts need Git for Windows (includes *Git Bash*); the agent will guide you.
 6. **At the end** the agent summarizes what exists and which task comes first. Tell it to start.
 
 ## For technical users: via GitHub

@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.5.1
+- `project-setup` installs missing tools itself (the permission prompt is the approval) and gives manual instructions only if the user declines or a step cannot be automated. Prompt texts adjusted. Benefits: new projects.
+
 ## 0.5.0
 - **Update check:** `scripts/session-start.sh` reports a newer kit version once per day; new `kit-update` skill and rule `R-KIT-UPDATE`. Benefits: all projects.
 - **Milestones:** `project-setup` sharpens the idea into vertical slice, MVP and moonshot, creates Backlog.md milestones and a vision doc; rule `R-ROADMAP` lets the agent propose next tasks; `retro` reviews milestones. Benefits: all projects.
