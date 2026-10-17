@@ -11,7 +11,7 @@ If TODO: follow `.claude/skills/project-setup/SKILL.md` first (when the user ask
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 
 ## Session start
-Run `scripts/session-start.sh` once per session (read-only state summary). Do not replay history. If it reports a newer kit version, tell the user once and offer the `kit-update` skill (`R-KIT-UPDATE`); never update unasked.
+In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/session-start.sh` output; if you do not see its output (other tools, hook disabled), run the script once per session (read-only state summary). Do not replay history. If it reports a newer kit version, tell the user once and offer the `kit-update` skill (`R-KIT-UPDATE`); never update unasked.
 
 ## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.

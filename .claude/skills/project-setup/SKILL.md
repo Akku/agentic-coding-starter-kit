@@ -47,6 +47,7 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 ## 6. Adapt the harness to the project goal
 - Fill the "Project specifics" block in `AGENTS.md` (goal, stack, verification commands). Keep it under ~15 lines.
 - Make sure there is one obvious final verification command and fast targeted ones; document them in `AGENTS.md`. Always via `scripts/run.sh <label> <command>`.
+- Claude Code: add the project's verification commands to `permissions.allow` in `.claude/settings.json` as narrow patterns (e.g. `Bash(scripts/run.sh test npm test)`); never a wildcard on `scripts/run.sh` (it runs arbitrary commands).
 - Adapt the summary `grep` in `scripts/run.sh` to the test runner's output format, if needed.
 - Create `docs/agent/HANDOFF.md` (max ~40 lines: current task, approvals, next step, blockers). `scripts/session-start.sh` prints it.
 - Add stack-specific pitfalls to `docs/agent/PITFALLS.md` only if already known.
@@ -58,7 +59,8 @@ Follow `R-ROADMAP`: write the vision (audience, core value, non-goals, moonshot 
 Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `--help`): small, each with checkable acceptance criteria. The first task is a walking skeleton that already runs the verification command end to end. Tasks for M2 are created later (`R-ROADMAP`).
 
 ## 8. Project README, commit and report
-Replace the kit's `README.md`/`README.de.md` with a short project README (goal, how to run, verification command); keep `START_HERE.md`/`STARTE_HIER.md`/`KIT_VERSION` unless the user wants them removed.
+Replace the kit's `README.md`/`README.de.md` with a short project README (goal, how to run, verification command); keep `START_HERE.md`/`STARTE_HIER.md`/`KIT_VERSION`/`CHANGELOG.md` unless the user wants them removed.
+Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
 Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE` and tell the user in ≤10 lines: what exists, the milestones, which commands to use, which task comes first.

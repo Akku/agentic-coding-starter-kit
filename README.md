@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.5.1** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+**Version 0.6.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
@@ -33,6 +33,8 @@ Give this to the agent after opening the folder:
 | `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
 | `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
 | `KIT_VERSION`, `CHANGELOG.md` | Kit version this project is based on; what changed per version |
+| `.claude/settings.json` | Claude Code: safe commands pre-approved, session-start hook |
+| `LICENSE` | MIT (kit); `.github/kit-check.py` + workflow check the kit itself |
 | `scripts/run.sh` | Compact output for tests/CI/CLI (exit code preserved, full log outside the repo) |
 | `scripts/session-start.sh` | Read-only session start (branch, changes, tasks, handoff) |
 | `docs/agent/OPERATING_MODEL.md` | Rules with stable IDs (`R-*`), loaded selectively |

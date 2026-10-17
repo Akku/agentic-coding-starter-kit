@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.5.1** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.6.0** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
@@ -33,6 +33,8 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `CLAUDE.md` / `.github/copilot-instructions.md` | Dünne Adapter, verweisen auf `AGENTS.md` |
 | `scripts/githooks/pre-commit` | Schutz vor dem Committen vertraulicher Quelldokumente (wird beim Setup aktiviert) |
 | `KIT_VERSION`, `CHANGELOG.md` | Kit-Version, auf der das Projekt basiert; Änderungen je Version |
+| `.claude/settings.json` | Claude Code: sichere Befehle vorab freigegeben, Sitzungsstart-Hook |
+| `LICENSE` | MIT (Kit); `.github/kit-check.py` + Workflow prüfen das Kit selbst |
 | `scripts/run.sh` | Kompakte Ausgabe für Tests/CI/CLI (Exitcode bleibt erhalten, Volllog außerhalb des Repos) |
 | `scripts/session-start.sh` | Lesender Sitzungsstart (Branch, Änderungen, Tasks, Übergabe) |
 | `docs/agent/OPERATING_MODEL.md` | Regeln mit stabilen IDs (`R-*`), gezielt per ID geladen |

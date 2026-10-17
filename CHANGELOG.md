@@ -2,6 +2,11 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.6.0
+- **License:** MIT. Projects choose their own (setup asks).
+- **Claude Code settings:** safe commands pre-approved (`backlog`, read-only `git`, session start); `SessionStart` hook injects the state summary automatically. Verification commands are added narrowly by setup. Benefits: all Claude Code projects, fewer approval prompts.
+- **Kit self-check:** `.github/kit-check.py` + GitHub Action (rule markers and index, scripts, frontmatter, version consistency). Setup removes these maintenance files from projects.
+
 ## 0.5.1
 - `project-setup` installs missing tools itself (the permission prompt is the approval) and gives manual instructions only if the user declines or a step cannot be automated. Prompt texts adjusted. Benefits: new projects.
 
