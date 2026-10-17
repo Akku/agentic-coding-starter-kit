@@ -1,6 +1,6 @@
 # Starte hier
 
-**Version 0.4.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.5.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -24,14 +24,16 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 
 ## Was du bekommst
 
-- Git, Backlog.md und die ersten 3–7 Tasks aus deinem Ziel.
+- Git, Backlog.md, ein Vision-Dokument, Meilensteine (Vertical Slice → MVP → Moonshot) und die ersten 3–7 Tasks aus deinem Ziel. Der Agent fragt dich, was du dir jeweils darunter vorstellst.
 - Kurze Agentenregeln (`AGENTS.md`), die weitere Regeln nur bei Bedarf laden – das spart Tokens.
 - `scripts/run.sh` hält lange Test-/CI-Ausgaben aus dem Kontext; `scripts/session-start.sh` liefert beim Sitzungsstart einen kompakten Stand.
-- Skills für wiederkehrende Aufgaben: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`.
+- Skills für wiederkehrende Aufgaben: `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 
 ## Im Alltag
 
 - Die Arbeit ist backlog-getrieben: jede Änderung ist ein Task mit Akzeptanzkriterien. Ansehen mit `backlog board` oder `backlog browser`.
+- Meldet der Agent zu Sitzungsbeginn eine neuere Kit-Version, kann der Skill `kit-update` dein Projekt aktualisieren (nur mit deiner Zustimmung).
+- Hat ein Meilenstein keine Tasks mehr, schlägt der Agent die nächsten vor; du entscheidest.
 - Eine Sitzung endet mit dem Skill `handoff`; die nächste beginnt mit `docs/agent/HANDOFF.md`.
 - Nach dem ersten Meilenstein: Retro (Skill `retro`). Sie prüft auch das Harness selbst, inklusive der offenen Fragen in `docs/agent/LEARNINGS.md`.
 - Keine Zugangsdaten ins Repository.

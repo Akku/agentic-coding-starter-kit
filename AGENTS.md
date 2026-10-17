@@ -7,15 +7,16 @@ If TODO: follow `.claude/skills/project-setup/SKILL.md` first (when the user ask
 
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
-**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`.
+**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `project-setup`, `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 
 ## Session start
-Run `scripts/session-start.sh` once per session (read-only state summary). Do not replay history.
+Run `scripts/session-start.sh` once per session (read-only state summary). Do not replay history. If it reports a newer kit version, tell the user once and offer the `kit-update` skill (`R-KIT-UPDATE`); never update unasked.
 
 ## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
 1b. **Follow-ups** (`R-LIFECYCLE` 1.7): when finishing a task, propose useful out-of-scope follow-up tasks (max. 3, with reason and rough size) to the user; create them only after agreement. Do not silently expand the current task.
+1c. **Roadmap** (`R-ROADMAP`): work belongs to a milestone; when a milestone runs out of ready tasks, propose the next 3-5 (user agrees before creation).
 2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized.
 3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
 4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.

@@ -48,6 +48,8 @@ Use this index to load only the sections needed for the current action. Do not r
 | `R-LEARNING` | recording process observations |
 | `R-RETRO` | running a process retrospective |
 | `R-CONCEPT` | starting a new product or UI concept, or changing direction after a first slice |
+| `R-ROADMAP` | planning next work, a milestone runs out of tasks, or a milestone is completed |
+| `R-KIT-UPDATE` | session start reports a newer kit version, or the user asks about kit updates |
 | `R-DECISION` | evaluating new harness/process infrastructure |
 
 Retrieve one rule by ID with:
@@ -561,3 +563,25 @@ For every proposed piece of agent infrastructure, ask:
 
 If the answer is unclear, defer it and preserve only enough evidence to revisit the hypothesis later.
 <!-- RULE:R-DECISION:END -->
+
+<!-- RULE:R-ROADMAP:START -->
+## 22. Milestones: vertical slice, MVP, moonshot
+
+Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit criteria>"`, assign with `backlog task create ... -m <milestone>`) to give tasks a direction.
+
+- **Three horizons** are agreed with the user during setup: *vertical slice* (thinnest end-to-end path that proves the idea and the verification chain), *MVP* (what must be included for a first real use, and what is explicitly out), *moonshot* (the dream version).
+- Each milestone description states its goal and an observable exit criterion. Create detailed tasks only for the current milestone; later milestones stay descriptions.
+- Moonshot ideas live in the vision document (`backlog doc`), not as tasks; park them there instead of keeping dormant tasks.
+- **Next work:** when the current milestone has no ready tasks left, propose the next 3-5 tasks derived from its description and the vision, each with reason and rough size; create them only after the user agrees. Between milestones, propose a re-slice if the exit criteria changed.
+- **Milestone completion:** check the exit criterion against evidence, record what was learned, and ask the user whether MVP and moonshot scope still hold. The `retro` skill covers this step.
+<!-- RULE:R-ROADMAP:END -->
+
+<!-- RULE:R-KIT-UPDATE:START -->
+## 23. Staying current with the starter kit
+
+`KIT_VERSION` holds the kit's `repo` and the `version` this project was created or last updated from. `scripts/session-start.sh` compares it once per day with the public kit and prints one line when a newer version exists.
+
+- Tell the user once about a newer version (one sentence) and offer the `kit-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `LEARNINGS.md`, skills the project changed).
+- Updates are normal backlog tasks: read the kit `CHANGELOG.md` entries since the local version, pick what helps this project, apply, verify, commit.
+- If the kit is unreachable, continue silently; the retro checks again.
+<!-- RULE:R-KIT-UPDATE:END -->
