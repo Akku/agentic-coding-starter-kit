@@ -2,6 +2,10 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.11.0
+- **Context measurement:** optional `scripts/context-report.py` (Claude Code transcripts, numbers only) used by the retro. First sample: session length dominated cache-read tokens (3 of 36 sessions ~80 %), tool results at most ~25 %. Observed in one project, estimates rough.
+- **Rules:** `R-CONTEXT-OUTPUT` (load only the needed part of stored output and source files) and `R-BATCHING` session-length hypothesis (hand off at task/milestone boundary or ~300 turns; to be verified in the first retro); `handoff` triggers adjusted. Benefits: all projects.
+
 ## 0.10.0
 - **Retro asks for input:** started without instructions, the `retro` skill first asks the user once whether they want to contribute problems, ideas or goals. Benefits: all projects.
 - **Incoming learnings (kit maintainer):** a GitHub Action opens a pull request automatically when a `learning/**` branch is pushed (GitHub then notifies the maintainer); the kit self-check also runs on such branches; `session-start.sh` lists open PRs and learning branches when run inside the kit repo. Setup removes these maintenance files from projects.

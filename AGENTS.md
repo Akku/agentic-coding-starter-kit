@@ -22,7 +22,7 @@ In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
 1b. **Follow-ups** (`R-LIFECYCLE` 1.7): when finishing a task, propose useful out-of-scope follow-up tasks (max. 3, with reason and rough size) to the user; create them only after agreement. Do not silently expand the current task.
 1c. **Roadmap** (`R-ROADMAP`): work belongs to a milestone; when a milestone runs out of ready tasks, propose the next 3-5 (user agrees before creation).
-2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized.
+2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized; when output or a source file is large, load only the needed part (`grep`, `sed -n`), not the whole file.
 3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
 4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.
 5. **Git state** (`R-STATE-COHERENCE`): check `git status` before committing and before ending a session. Commit code together with its task changes; never include unrelated changes.

@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""Where did the context go? Optional retro tool for Claude Code transcripts (R-MEASUREMENT level 2/3).
+Usage: scripts/context-report.py [transcript-dir]   (default: this project's folder under ~/.claude/projects)
+Prints numbers only. Labels may contain tool names, file base names and the first two words of a shell command:
+review before copying anything into notes. The transcript format is undocumented; unknown format -> "not evaluable".
+Estimates are rough (characters / 4; assumes a result stays in context until the session ends, so compaction makes it an upper bound)."""
+import collections, glob, json, os, re, sys
+
+def main():
+    d = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.claude/projects/" + re.sub(r"[^A-Za-z0-9]", "-", os.getcwd()))
+    files = sorted(glob.glob(d + "/**/*.jsonl", recursive=True))
+    if not files:
+        print("not evaluable: no transcripts in", d); return 0
+    tot, sess, by_tool, cnt, offenders = collections.Counter(), [], collections.Counter(), collections.Counter(), []
+    def size(c):
+        if isinstance(c, str): return len(c)
+        if isinstance(c, list): return sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in c)
+        return len(str(c))
+    def label(n, i):
+        if n == "Bash": return "Bash:" + " ".join((i.get("command") or "").split()[:2])[:30]
+        if n in ("Read", "Edit", "Write"): return n + ":" + os.path.basename(i.get("file_path", ""))
+        return n
+    for f in files:
+        turns, u, pend, items = 0, collections.Counter(), {}, []
+        for line in open(f, errors="replace"):
+            try: r = json.loads(line)
+            except ValueError: continue
+            m = r.get("message") if isinstance(r.get("message"), dict) else {}
+            if r.get("type") == "assistant":
+                turns += 1
+                for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens"):
+                    u[k] += (m.get("usage") or {}).get(k, 0)
+                for b in m.get("content") or []:
+                    if isinstance(b, dict) and b.get("type") == "tool_use": pend[b.get("id")] = (b.get("name", "?"), b.get("input") or {})
+            elif r.get("type") == "user" and isinstance(m.get("content"), list):
+                for b in m["content"]:
+                    if isinstance(b, dict) and b.get("type") == "tool_result":
+                        n, i = pend.get(b.get("tool_use_id"), ("?", {}))
+                        items.append((turns, size(b.get("content")), label(n, i), n))
+        for t, s, lb, n in items:
+            by_tool[n] += s; cnt[n] += 1; offenders.append((s / 4 * (turns - t), s, lb, turns - t))
+        sess.append((os.path.basename(f)[:8], turns, u)); tot.update(u)
+    if not sum(tot.values()):
+        print("not evaluable: no usage data (format changed?)"); return 0
+    print("transcripts: %d, assistant turns: %d" % (len(files), sum(s[1] for s in sess)))
+    print("tokens: fresh_in %d | cache_write %d | cache_read %d | output %d" % (tot["input_tokens"], tot["cache_creation_input_tokens"], tot["cache_read_input_tokens"], tot["output_tokens"]))
+    turns_all = max(sum(s[1] for s in sess), 1)
+    print("avg context carried per turn (cache_read/turn): %dk tokens" % (tot["cache_read_input_tokens"] / turns_all / 1000))
+    print("\nlongest sessions by cache_read (session length is usually the biggest lever):")
+    for sid, t, u in sorted(sess, key=lambda x: -x[2]["cache_read_input_tokens"])[:5]:
+        print("  %s turns %d cache_read %.1fM output %.0fk" % (sid, t, u["cache_read_input_tokens"] / 1e6, u["output_tokens"] / 1e3))
+    print("\ntool result volume (chars, count):")
+    for n, s in by_tool.most_common(6): print("  %s %d %d" % (n, s, cnt[n]))
+    allc = sum(o[0] for o in offenders) or 1
+    print("\nbiggest carried tool results (size/4 x later turns); estimated share of all cache_read: %.0f%%" % (100 * allc / max(tot["cache_read_input_tokens"], 1)))
+    for e, s, lb, after in sorted(offenders, reverse=True)[:10]:
+        print("  %.1fM tok-turns | %d chars | %s | %d turns after" % (e / 1e6, s, lb, after))
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

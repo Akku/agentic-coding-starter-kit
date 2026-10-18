@@ -269,6 +269,10 @@ Heuristic:
 > Batch when shared-context savings are likely to exceed context-growth, coordination, and review cost.
 
 Do not impose a fixed number of tasks per batch unless repository evidence later supports one.
+
+### Session length
+
+Every turn re-reads the whole carried context, so cost grows with session length (observed in one project: three sessions of 1000-2000 turns caused about 80 % of all cache-read tokens; average carried context about 360k tokens per turn). Hypothesis to verify in the retro with `scripts/context-report.py`: hand off (`handoff` skill) and continue in a fresh session at a task or milestone boundary, or after roughly 300 turns, instead of letting one session run on.
 <!-- RULE:R-BATCHING:END -->
 
 <!-- RULE:R-BATCH-CONTRACT:START -->
@@ -311,6 +315,7 @@ Requirements:
 - retain full output outside the active context, preferably in temporary/ignored storage or the CI system rather than committed logs;
 - on failure, load only the relevant error section first and expand further only as needed;
 - avoid re-reading the same large output after it has already been summarized and persisted;
+- when a tool stored a large output in a file, load only the needed part (`grep`, `sed -n 'a,bp'`), never the whole file; read source files by range instead of `cat` of the whole file (observed: such results stay in context for the rest of the session and are re-read every turn);
 - apply the same principle to GitHub/CI CLI output and other verbose automation.
 
 Token efficiency is therefore an information-architecture problem, not merely an instruction to "answer briefly".

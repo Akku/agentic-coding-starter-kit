@@ -23,6 +23,9 @@ for f in ("docs/agent/OPERATING_MODEL.md", "docs/agent/ADVANCED.md"):
 for s in list((root / "scripts").glob("*.sh")) + [root / "scripts/githooks/pre-commit", root / ".github/bump-version.sh"]:
     if subprocess.run(["bash", "-n", str(s)]).returncode: err(f"{s.name}: bash syntax error")
 
+for s in (root / "scripts").glob("*.py"):
+    if subprocess.run([sys.executable, "-m", "py_compile", str(s)]).returncode: err(f"{s.name}: python syntax error")
+
 # JSON
 for j in (root / ".claude/settings.json",):
     try: json.loads(j.read_text())
