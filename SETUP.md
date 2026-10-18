@@ -15,6 +15,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Three horizons (see `R-ROADMAP`): the **vertical slice** (thinnest end-to-end path that proves the idea), what belongs in the **MVP** (and what is explicitly out), and the **moonshot** (the dream version). If the user has no answer, propose one from the goal and ask for corrections.
 - Stack/language preferences, or "decide for me".
 - Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
+- Which model and effort level do you use today (e.g. the largest available one)? Note the answer for the recommendation at the end.
 - Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
 - How much explanation do you want: `guided` (default, recommended for newcomers; explanations and summaries after each step) or `concise` (short answers)? Set `Communication:` in `AGENTS.md` accordingly.
 - Create a GitHub repository now? Default: private, none yet.
@@ -64,7 +65,7 @@ Replace the kit's `README.md`/`README.de.md` with a short project README (goal, 
 Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/workflows/learning-pr.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
-Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user what exists, the milestones, which commands to use and which task comes first (guided: ~12 lines with a one-line explanation per item; concise: ≤10 lines). Mention that the first retro (after the first milestone) revisits the way of working, including how much the agent explains.
+Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user what exists, the milestones, which commands to use and which task comes first (guided: ~12 lines with a one-line explanation per item; concise: ≤10 lines). Give a short **model recommendation** (load `R-ROUTING` from `docs/agent/ADVANCED.md`): for small and medium projects a mid-tier model at medium effort is usually enough for routine implementation; bigger models or higher effort only for specific cases (unclear concept or architecture, hard debugging, security-relevant review), because the largest models cost much more for little gain on routine work. If the user named the largest model, say gently that switching is their choice and where to do it in their app (model/effort selector). Write the agreed default into the `Model:` line in `AGENTS.md`. Never switch the model yourself. Mention that the first retro (after the first milestone) revisits the way of working, including how much the agent explains.
 
 ## Later
 - First retro: run `R-RETRO` and process the open `[KIT]` observations in `docs/agent/LEARNINGS.md`.
