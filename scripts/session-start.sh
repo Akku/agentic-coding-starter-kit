@@ -28,6 +28,13 @@ if [ -f KIT_VERSION ]; then
 else
   echo "no KIT_VERSION file"
 fi
+if [ -f .github/kit-check.py ] && command -v gh >/dev/null 2>&1; then
+  # kit maintainer only (this file is removed from projects): incoming learnings
+  prs=$(gh pr list --state open --limit 5 --json number,title,headRefName -q '.[]|"#\(.number) \(.headRefName): \(.title)"' 2>/dev/null)
+  [ -n "$prs" ] && { echo "KIT MAINTAINER: open pull requests (review, merge or close):"; echo "$prs"; }
+  lb=$(git ls-remote --heads origin 'learning/*' 2>/dev/null | sed 's#.*refs/heads/##' | head -5)
+  [ -n "$lb" ] && { echo "learning branches on origin:"; echo "$lb"; }
+fi
 echo; echo "## backlog"
 if command -v backlog >/dev/null 2>&1 && { [ -d backlog ] || [ -d .backlog ]; }; then
   echo "milestones:"; backlog milestone list --plain 2>/dev/null | sed -n '/^Active/,/^Completed/p' | grep -v '^Completed' | head -8

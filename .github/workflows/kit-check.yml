@@ -2,7 +2,7 @@ name: kit-check
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, 'learning/**']
 permissions:
   contents: read
 jobs:

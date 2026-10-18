@@ -61,7 +61,7 @@ Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `
 
 ## 8. Project README, commit and report
 Replace the kit's `README.md`/`README.de.md` with a short project README (goal, how to run, verification command); keep `START_HERE.md`/`STARTE_HIER.md`/`KIT_VERSION`/`CHANGELOG.md` unless the user wants them removed.
-Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
+Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/workflows/learning-pr.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
 Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user what exists, the milestones, which commands to use and which task comes first (guided: ~12 lines with a one-line explanation per item; concise: ≤10 lines). Mention that the first retro (after the first milestone) revisits the way of working, including how much the agent explains.

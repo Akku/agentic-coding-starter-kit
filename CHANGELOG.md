@@ -2,6 +2,10 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.10.0
+- **Retro asks for input:** started without instructions, the `retro` skill first asks the user once whether they want to contribute problems, ideas or goals. Benefits: all projects.
+- **Incoming learnings (kit maintainer):** a GitHub Action opens a pull request automatically when a `learning/**` branch is pushed (GitHub then notifies the maintainer); the kit self-check also runs on such branches; `session-start.sh` lists open PRs and learning branches when run inside the kit repo. Setup removes these maintenance files from projects.
+
 ## 0.9.0
 - **Guided communication until the first retro:** `Communication: guided|concise` in `AGENTS.md`. Guided mode explains steps and terms and summarizes each phase; context discipline is unchanged. Setup asks for the preference; the first retro asks whether to switch to `concise` and checks the context cost. Benefits: new users.
 
