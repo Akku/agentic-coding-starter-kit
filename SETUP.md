@@ -2,7 +2,7 @@
 
 This file is the one-time setup procedure. Delete it as the last step (see step 8); the kit keeps it for the next project.
 
-Talk to the user in their language. Keep status messages to one sentence. Ask before anything with side effects outside this folder (global installs, creating remote repositories, pushing).
+Talk to the user in their language. Follow the `Communication:` mode in `AGENTS.md` (`guided` by default: explain what you do and why, define new terms at first use, summarize each step in 3-5 lines). Ask before anything with side effects outside this folder (global installs, creating remote repositories, pushing); the tool-permission prompt counts as asking.
 
 ## 0. Check that the kit arrived complete
 The ZIP route sometimes loses hidden folders (names starting with a dot are hidden on macOS Finder). Check that these exist: `.claude/skills/`, `.claude/settings.json`, `.github/`, `.gitignore`, `scripts/githooks/pre-commit`. If something is missing: tell the user in one sentence, then restore it yourself: download `<repo>/archive/refs/heads/main.zip` (`repo` from `KIT_VERSION`) into a temp folder outside the project, unzip it there, and copy only the missing files/folders (never overwrite existing ones). If the download is not possible, ask the user to copy the extracted folder as a whole (macOS: Cmd+Shift+. shows hidden files).
@@ -16,6 +16,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Stack/language preferences, or "decide for me".
 - Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
 - Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
+- How much explanation do you want: `guided` (default, recommended for newcomers; explanations and summaries after each step) or `concise` (short answers)? Set `Communication:` in `AGENTS.md` accordingly.
 - Create a GitHub repository now? Default: private, none yet.
 
 ## 3. Check and install prerequisites (assume a non-technical user)
@@ -63,7 +64,7 @@ Replace the kit's `README.md`/`README.de.md` with a short project README (goal, 
 Remove kit-maintenance files that do not belong in a project: `.github/workflows/kit-check.yml`, `.github/kit-check.py`, `.github/bump-version.sh`. Replace the kit's `LICENSE` (MIT, the kit's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
-Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user in ≤10 lines: what exists, the milestones, which commands to use, which task comes first.
+Check `git status`, commit "Set up agentic harness", optionally push if the user agreed to a remote. Then set `Setup status:` in `AGENTS.md` to `DONE`, delete `SETUP.md` (its description would otherwise cost context in every session) and tell the user what exists, the milestones, which commands to use and which task comes first (guided: ~12 lines with a one-line explanation per item; concise: ≤10 lines). Mention that the first retro (after the first milestone) revisits the way of working, including how much the agent explains.
 
 ## Later
 - First retro: run `R-RETRO` and process the open `[KIT]` observations in `docs/agent/LEARNINGS.md`.

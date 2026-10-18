@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.9.0
+- **Guided communication until the first retro:** `Communication: guided|concise` in `AGENTS.md`. Guided mode explains steps and terms and summarizes each phase; context discipline is unchanged. Setup asks for the preference; the first retro asks whether to switch to `concise` and checks the context cost. Benefits: new users.
+
 ## 0.8.0
 - **`SETUP.md` replaces the `project-setup` skill:** a visible root file, so the setup still works when the ZIP route lost hidden folders. Step 0 checks that hidden files arrived and restores missing ones from the kit ZIP. Setup deletes `SETUP.md` at the end, so its description no longer costs context in every session. Human guides warn about hidden files. Benefits: all new projects.
 

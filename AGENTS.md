@@ -7,6 +7,11 @@ If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask on
 
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
+**Communication:** guided  <!-- guided until the first retro; the retro asks whether to switch to `concise`. The user's own instructions override this. -->
+- `guided`: briefly say what you do and why; explain a new term (backlog, task, milestone, retro) in one sentence at first use; after each phase (setup step, finished task, session end) give 3-5 lines: what happened, what the user can do now, what comes next; ask questions with options and a recommendation. No narration of every tool call; at most ~12 lines per message.
+- `concise`: results, decisions needed and problems only; status messages one sentence.
+- This governs messages to the user only. Context discipline (compact tool output, rules by ID) stays the same in both modes.
+
 **Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 

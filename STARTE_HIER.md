@@ -1,6 +1,6 @@
 # Starte hier
 
-**Version 0.8.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.9.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -31,6 +31,7 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 
 ## Im Alltag
 
+- Bis zur ersten Retro erklärt der Agent, was er tut und warum, und fasst jeden Schritt zusammen (`Communication: guided` in `AGENTS.md`). Sag jederzeit „antworte knapper“, oder lass die erste Retro umstellen.
 - Die Arbeit ist backlog-getrieben: jede Änderung ist ein Task mit Akzeptanzkriterien. Ansehen mit `backlog board` oder `backlog browser`.
 - Meldet der Agent zu Sitzungsbeginn eine neuere Kit-Version, kann der Skill `kit-update` dein Projekt aktualisieren (nur mit deiner Zustimmung).
 - Hat ein Meilenstein keine Tasks mehr, schlägt der Agent die nächsten vor; du entscheidest.
