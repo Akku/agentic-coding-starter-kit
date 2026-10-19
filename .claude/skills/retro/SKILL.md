@@ -20,6 +20,6 @@ Rules: `R-RETRO`, `R-LEARNING`, `R-MEASUREMENT` (load by ID, see AGENTS.md). Do 
 10. **Milestone check** (`R-ROADMAP`, only if a milestone was completed or is overdue): exit criterion met with evidence? what did the slice teach about the MVP and moonshot? Update the vision doc and milestone descriptions, propose the next 3-5 tasks to the user, and re-slice if needed.
 11. Validated, generalizable items (effect shown or evidence strong): use the `promote-learning` skill. Never promote a change that has only been implemented.
 
-If `Communication:` in `AGENTS.md` is `guided` (first retro), ask the user whether to keep it or switch to `concise`; set it accordingly. Check in the metrics whether guided messages caused noticeable context cost (expected: little, since tool output stays compact) and record the result.
+In the first retro ask the user whether the explanations, summaries and links were right (too much, too little) and adjust the `Communication` block in `AGENTS.md` accordingly; keep changes small.
 
 Output to the user: decisions needed, changes made, open criteria. Max 15 lines.

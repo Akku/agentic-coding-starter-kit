@@ -1,6 +1,6 @@
 # Start here
 
-**Version 0.12.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
+**Version 0.13.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
 
 This kit is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. No technical knowledge is required for the standard path.
 
@@ -31,7 +31,8 @@ This kit is a starting point for agent-driven development with Git and Backlog.m
 
 ## Working day to day
 
-- Until the first retro the agent explains what it does and why and summarizes each step (`Communication: guided` in `AGENTS.md`). Say "answer more briefly" at any time, or let the first retro switch it.
+- The agent explains what it does and why, summarizes each step and gives you a direct link whenever you should test or decide something. Say "answer more briefly" at any time; the first retro asks whether the amount was right.
+- If several related tasks are ready, the agent offers to work through them as a batch; you approve once.
 - Work is backlog-driven: every change is a task with acceptance criteria. View it with `backlog board` or `backlog browser`.
 - When the agent reports a newer kit version at session start, you can let the `kit-update` skill bring your project up to date (your approval is required).
 - When a milestone has no tasks left, the agent proposes the next ones; you decide.

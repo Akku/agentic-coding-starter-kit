@@ -7,10 +7,11 @@ If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask on
 
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
-**Communication:** guided  <!-- guided until the first retro; the retro asks whether to switch to `concise`. The user's own instructions override this. -->
-- `guided`: briefly say what you do and why; explain a new term (backlog, task, milestone, retro) in one sentence at first use; after each phase (setup step, finished task, session end) give 3-5 lines: what happened, what the user can do now, what comes next; ask questions with options and a recommendation. No narration of every tool call; at most ~12 lines per message.
-- `concise`: results, decisions needed and problems only; status messages one sentence.
-- This governs messages to the user only. Context discipline (compact tool output, rules by ID) stays the same in both modes.
+**Communication** (messages to the user; one standard, no modes):
+- Explain in plain language what happened, why it matters and what comes next; not every tool call. After each phase (setup step, finished task, session end) give 3-5 lines: what happened, what the user can do or decide now, what comes next. At most ~12 lines per message.
+- Explain a new term (backlog, task, milestone, retro) in one sentence at first use. Ask questions with options and a recommendation. The user may ask for less detail at any time; the user's own instructions override this.
+- **Whenever the user should test, review or decide something, put the direct way in the same message:** for a running app the full URL with port and route (start the server yourself if needed), for files a clickable relative path, for PRs/CI the full URL, otherwise the exact command; plus what to check (2-4 bullets) and which answer you need.
+- Context discipline (compact tool output, rules by ID) is separate and unchanged.
 
 **Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
@@ -21,7 +22,7 @@ In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/
 ## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
 1b. **Follow-ups** (`R-LIFECYCLE` 1.7): when finishing a task, propose useful out-of-scope follow-up tasks (max. 3, with reason and rough size) to the user; create them only after agreement. Do not silently expand the current task.
-1c. **Roadmap** (`R-ROADMAP`): work belongs to a milestone; when a milestone runs out of ready tasks, propose the next 3-5 (user agrees before creation).
+1c. **Roadmap and batches** (`R-ROADMAP`, `R-BATCHING`): work belongs to a milestone; when a milestone runs out of ready tasks, propose the next 3-5 (user agrees before creation). When choosing the next work, check the ready tasks: if two or more are related (same subsystem or files, shared context), offer them as a batch (IDs, why, verification, split conditions) and wait for approval; do not silently work one by one. An approved batch continues without further approval questions.
 2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized; when output or a source file is large, load only the needed part (`grep`, `sed -n`), not the whole file.
 3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
 4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.

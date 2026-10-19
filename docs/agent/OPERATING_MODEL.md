@@ -246,6 +246,8 @@ Backlog tasks remain the independent units of intent, acceptance, status, and tr
 
 One agent context MAY process a batch of related tasks when reusing shared context is expected to save more cost than context growth and coordination introduce.
 
+**Offer batches proactively.** The agent, not the user, notices batch opportunities: after finishing a task, at session start and whenever the user asks what to do next, compare the ready tasks against the criteria below. If a batch fits, offer it in one message (task IDs and order, shared context, verification approach, split conditions) and ask for approval; the user should never have to know the concept to benefit from it.
+
 Batching is useful when most of the following are true:
 
 - tasks touch the same subsystem or closely related files;

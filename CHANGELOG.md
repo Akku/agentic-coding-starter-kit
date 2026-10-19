@@ -2,6 +2,11 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.13.0
+- **One communication standard instead of guided/concise:** always explain what happens and why, summarize phases, define new terms at first use; the setup question about the mode is gone and the retro asks whether the amount of explanation was right. (Feedback from a second project: the concise mode left the user without a good explanation.)
+- **Links:** whenever the user should test, review or decide something, the message contains the direct way (URL with port/route, clickable path, PR/CI URL or exact command), what to check and which answer is needed.
+- **Proactive batches:** the agent offers batches of related ready tasks itself (`AGENTS.md` rule 1c, `R-BATCHING`). Benefits: all projects.
+
 ## 0.12.0
 - **Model recommendation:** `SETUP.md` asks which model/effort the user uses (after the agents question) and ends with a short recommendation (mid-tier model at medium effort by default, escalate for concrete reasons) to avoid unnecessary cost; the default is written to the `Model:` line in `AGENTS.md`; `R-ROUTING` carries the guidance; first retro checks it. Based on the maintainer's experience (anecdotal). Benefits: new users.
 
