@@ -36,7 +36,7 @@ Known pitfalls: Apple Silicon with Rosetta-installed Node/Homebrew gives "illega
 If something cannot be installed, explain what is lost and continue where possible. Windows steps are not yet field-tested: record friction as `Learning:` in `docs/agent/LEARNINGS.md`.
 
 ## 4. Git
-If this folder is not a git repository (typical for the ZIP route): `git init -b main`; set `user.name`/`user.email` only if missing (ask the user). Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** because the repository may become public.
+If this folder is not a git repository (typical for the ZIP route): `git init -b main`; set `user.name`/`user.email` only if missing (ask the user). Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** because the repository may become public (the pre-commit hook blocks `.env` files and common token patterns).
 Always activate the pre-commit hook with `git config core.hooksPath scripts/githooks`: it blocks office/PDF/database files and rejects Done tasks with open boxes (`scripts/check-backlog.sh`). Confidential inputs: create the agreed folder and add it to `.gitignore`; stage explicit paths, not `git add -A`, while untracked inputs exist.
 
 ## 5. Initialise Backlog.md
@@ -50,6 +50,8 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Fill the "Project specifics" block in `AGENTS.md` (goal, stack, verification commands). Keep it under ~15 lines.
 - Make sure there is one obvious final verification command and fast targeted ones; document them in `AGENTS.md`. Always via `scripts/run.sh <label> <command>`.
 - Claude Code: add the project's verification commands to `permissions.allow` in `.claude/settings.json` as narrow patterns (e.g. `Bash(scripts/run.sh test npm test)`); never a wildcard on `scripts/run.sh` (it runs arbitrary commands).
+- `AGENTS.md` stays minimal: no project overview or architecture prose, only requirements the agent cannot infer from the code (`R-SECURITY`, retro budget check).
+- Offer, do not enable silently: the tool's shell sandbox for macOS/Linux/WSL2 (Claude Code `sandbox.enabled`, see its docs; it can block installs or network access; not available on native Windows).
 - Adapt the summary `grep` in `scripts/run.sh` to the test runner's output format, if needed.
 - Create `docs/agent/HANDOFF.md` (max ~40 lines: current task, approvals, next step, blockers). `scripts/session-start.sh` prints it.
 - Add stack-specific pitfalls to `docs/agent/PITFALLS.md` only if already known.

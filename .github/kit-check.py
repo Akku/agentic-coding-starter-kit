@@ -49,6 +49,11 @@ if not (root / "SETUP.md").exists(): err("SETUP.md missing")
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 
+# AGENTS.md is loaded in every session: keep it within budget; settings deny secrets
+if len((root / "AGENTS.md").read_bytes()) > 6144: err("AGENTS.md exceeds the 6 KB budget (move rules to OPERATING_MODEL.md)")
+st = json.loads((root / ".claude/settings.json").read_text())
+if "Read(./.env)" not in st.get("permissions", {}).get("deny", []): err("settings.json: deny rule for .env missing")
+
 # skills listed in AGENTS.md exist
 agents = (root / "AGENTS.md").read_text()
 for d in (root / ".claude/skills").iterdir():

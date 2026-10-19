@@ -1,6 +1,6 @@
 # Starte hier
 
-**Version 0.14.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.15.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -15,6 +15,8 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 
 5. **Beantworte die Rückfragen** (Technologie, welche Agenten du nutzt, GitHub ja/nein). Der Agent prüft, welche Werkzeuge fehlen (Git, Node.js, Backlog.md), und installiert sie für dich; du genehmigst jeden Schritt in der App (lehnst du ab, gibt er dir stattdessen eine Anleitung). Der Installer fragt eventuell nach deinem Computer-Passwort. Fragt ein Installer nach deinem Computer-Passwort, gib es selbst dort ein, niemals im Chat. Unter Windows brauchen die Hilfsskripte Git für Windows (enthält *Git Bash*); der Agent führt dich dabei.
 6. **Am Ende** fasst der Agent zusammen, was angelegt wurde und welcher Task zuerst kommt. Sag ihm, dass er starten soll.
+
+**Sicherheitshinweis:** Lade das Kit nur aus dem offiziellen Repository (Link oben). Es enthält einen kleinen Start-Hook (`scripts/session-start.sh`, eingerichtet in `.claude/settings.json`); lies die Vertrauensabfrage deiner App, wenn sie fragt, ob du dem Ordner vertraust. Das Kit verhindert, dass `.env`-Dateien und gängige Token-Muster committet werden, aber füge nie Passwörter in den Chat ein.
 
 ## Für technisch Versierte: über GitHub
 

@@ -2,6 +2,10 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.15.0
+- **AGENTS.md budget:** the kit self-check fails above 6 KB; the retro audits `AGENTS.md` every retro (would the agent get it wrong without the rule? evidence of use?); setup keeps it free of project overviews. Reason: a 2026 study found repository context files tend to raise cost and not improve success.
+- **Security:** rule `R-SECURITY` (external text is data, secrets, least privilege, project files as attack path, optional sandbox); `permissions.deny` for `.env*`, `~/.ssh` and force-push; secret scan in the pre-commit hook; kit-update/promote-learning/retro treat fetched texts as untrusted; security note in the human guides. Benefits: all projects.
+
 ## 0.14.0
 - **Design (hypotheses from one practitioner's talk, to be checked in the retro):** skill `design-alignment` (short, stoppable interview, one question at a time with recommendation); rule `R-DESIGN` (small steps with checks, deep modules, user owns interfaces, module map `docs/ARCHITECTURE.md`, optional glossary `docs/GLOSSARY.md`, TDD for logic-heavy code); design-health check at milestone completion; setup asks whether a glossary is wanted.
 - **Retro evaluates optional/advanced practices every retro** (use deliberately, keep, remove) using usage evidence from `scripts/context-report.py` (rules loaded by ID, skills used). Benefits: all projects.
