@@ -1,6 +1,6 @@
 # Start here
 
-**Version 0.13.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
+**Version 0.14.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
 
 This kit is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. No technical knowledge is required for the standard path.
 

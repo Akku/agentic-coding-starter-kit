@@ -17,6 +17,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
 - Which model and effort level do you use today (e.g. the largest available one)? Note the answer for the recommendation at the end.
 - Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
+- Optional glossary of domain terms (term, definition, code name, UI text)? Recommend it only for apps with many domain terms or several languages (e.g. German UI, English code); for small apps say it is not worth it. If yes, create `docs/GLOSSARY.md` from the interview.
 - Create a GitHub repository now? Default: private, none yet.
 
 ## 3. Check and install prerequisites (assume a non-technical user)
@@ -55,6 +56,7 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Do not add further agents, skills, hooks or telemetry now (`R-DECISION`). If the project has a user interface, keep `.claude/agents/ux-designer.md`; otherwise delete it.
 
 ## 7. First backlog
+If the goal is still vague, run the `design-alignment` skill in a short form (it is stoppable) before writing the vision.
 If the direction is unclear or the project has a user interface, follow `R-CONCEPT` first (concept phase); the `ux-designer` agent prepares the mockup rounds. Also check whether existing skill collections offer skills that fit the stack.
 Follow `R-ROADMAP`: write the vision (audience, core value, non-goals, moonshot ideas) as a Backlog.md doc (`backlog doc create "Vision"`, check `--help`), then create the milestones `backlog milestone add "M1 Vertical slice" -d "<goal + exit criterion>"`, `M2 MVP`, and `M3 Moonshot` (description only).
 Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `--help`): small, each with checkable acceptance criteria. The first task is a walking skeleton that already runs the verification command end to end. Tasks for M2 are created later (`R-ROADMAP`).

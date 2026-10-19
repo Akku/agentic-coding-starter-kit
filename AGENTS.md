@@ -13,7 +13,7 @@ If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask on
 - **Whenever the user should test, review or decide something, put the direct way in the same message:** for a running app the full URL with port and route (start the server yourself if needed), for files a clickable relative path, for PRs/CI the full URL, otherwise the exact command; plus what to check (2-4 bullets) and which answer you need.
 - Context discipline (compact tool output, rules by ID) is separate and unchanged.
 
-**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
+**Skills** (`.claude/skills/<name>/SKILL.md`; agents without skill support read the file when needed): `retro`, `design-alignment`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
 **Agents** (`.claude/agents/<name>.md`; other tools read the file as instructions for a subagent): `ux-designer` for projects with a user interface (concept phase, mockups, UX reviews of new screens; see `R-DELEGATION` for the brief).
 
 ## Session start
@@ -23,6 +23,7 @@ In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.
 1b. **Follow-ups** (`R-LIFECYCLE` 1.7): when finishing a task, propose useful out-of-scope follow-up tasks (max. 3, with reason and rough size) to the user; create them only after agreement. Do not silently expand the current task.
 1c. **Roadmap and batches** (`R-ROADMAP`, `R-BATCHING`): work belongs to a milestone; when a milestone runs out of ready tasks, propose the next 3-5 (user agrees before creation). When choosing the next work, check the ready tasks: if two or more are related (same subsystem or files, shared context), offer them as a batch (IDs, why, verification, split conditions) and wait for approval; do not silently work one by one. An approved batch continues without further approval questions.
+1d. **Design** (`R-DESIGN`, skill `design-alignment`): unclear or new feature: align first, one question at a time, the user may stop. Interface or module-boundary changes are the user's decision. Work in small steps and check after each. If `docs/GLOSSARY.md` exists, use its terms.
 2. **Compact output** (`R-CONTEXT-OUTPUT`): run tests, builds, CI and other verbose commands via `scripts/run.sh <label> <command>`. Read the log only on failure, and only the relevant part. Never re-read output that was already summarized; when output or a source file is large, load only the needed part (`grep`, `sed -n`), not the whole file.
 3. **One source per rule** (`R-INSTRUCTIONS`): never copy rules into other files; reference the rule ID.
 4. **Evidence has limits** (`R-VERIFY`): green CI is not proof of required manual checks. Keep missing evidence open with a concrete continuation point.

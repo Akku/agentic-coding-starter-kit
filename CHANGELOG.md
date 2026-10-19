@@ -2,6 +2,10 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.14.0
+- **Design (hypotheses from one practitioner's talk, to be checked in the retro):** skill `design-alignment` (short, stoppable interview, one question at a time with recommendation); rule `R-DESIGN` (small steps with checks, deep modules, user owns interfaces, module map `docs/ARCHITECTURE.md`, optional glossary `docs/GLOSSARY.md`, TDD for logic-heavy code); design-health check at milestone completion; setup asks whether a glossary is wanted.
+- **Retro evaluates optional/advanced practices every retro** (use deliberately, keep, remove) using usage evidence from `scripts/context-report.py` (rules loaded by ID, skills used). Benefits: all projects.
+
 ## 0.13.0
 - **One communication standard instead of guided/concise:** always explain what happens and why, summarize phases, define new terms at first use; the setup question about the mode is gone and the retro asks whether the amount of explanation was right. (Feedback from a second project: the concise mode left the user without a good explanation.)
 - **Links:** whenever the user should test, review or decide something, the message contains the direct way (URL with port/route, clickable path, PR/CI URL or exact command), what to check and which answer is needed.

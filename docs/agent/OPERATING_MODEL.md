@@ -49,6 +49,7 @@ Use this index to load only the sections needed for the current action. Do not r
 | `R-RETRO` | running a process retrospective |
 | `R-CONCEPT` | starting a new product or UI concept, or changing direction after a first slice |
 | `R-ROADMAP` | planning next work, a milestone runs out of tasks, or a milestone is completed |
+| `R-DESIGN` | structuring code or modules, changing interfaces, naming domain terms, or choosing how much to generate before checking |
 | `R-KIT-UPDATE` | session start reports a newer kit version, or the user asks about kit updates |
 | `R-DECISION` | evaluating new harness/process infrastructure |
 
@@ -580,7 +581,7 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 - Each milestone description states its goal and an observable exit criterion. Create detailed tasks only for the current milestone; later milestones stay descriptions.
 - Moonshot ideas live in the vision document (`backlog doc`), not as tasks; park them there instead of keeping dormant tasks.
 - **Next work:** when the current milestone has no ready tasks left, propose the next 3-5 tasks derived from its description and the vision, each with reason and rough size; create them only after the user agrees. Between milestones, propose a re-slice if the exit criteria changed.
-- **Milestone completion:** check the exit criterion against evidence, record what was learned, and ask the user whether MVP and moonshot scope still hold. The `retro` skill covers this step.
+- **Milestone completion:** check the exit criterion against evidence, record what was learned, and ask the user whether MVP and moonshot scope still hold. The `retro` skill covers this step. Add a design-health check (`R-DESIGN`): shallow or tangled modules, outdated `docs/ARCHITECTURE.md`, missing glossary terms; propose at most one design task to the user.
 <!-- RULE:R-ROADMAP:END -->
 
 <!-- RULE:R-KIT-UPDATE:START -->
@@ -592,3 +593,17 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 - Updates are normal backlog tasks: read the kit `CHANGELOG.md` entries since the local version, pick what helps this project, apply, verify, commit.
 - If the kit is unreachable, continue silently; the retro checks again.
 <!-- RULE:R-KIT-UPDATE:END -->
+
+<!-- RULE:R-DESIGN:START -->
+## 24. Design stays maintainable: small steps, deep modules, owned interfaces
+
+Generated code is cheap to produce and expensive to change; without deliberate design every change adds entropy. The agent works tactically, the user keeps strategic ownership. Source: one practitioner's talk plus project experience; hypotheses, check in the retro.
+
+- **Align first** when requirements are unclear: `design-alignment` skill (short, stoppable), not a plan built on guesses.
+- **Feedback rate is the speed limit:** produce small increments and run the cheapest check after each (type check, linter, test, looking at the UI). Do not write large amounts of code before the first check. For UI work give the agent a way to see the result (browser tool or screenshots).
+- **Deep modules:** prefer few modules with a simple interface and much behavior behind it over many shallow ones; they are easier to test and to navigate (read the interface, not the internals).
+- **Owned interfaces:** a new or changed public interface or module boundary is a decision for the user (propose, then agree); the inside of a module can be delegated. Treat low-risk modules as gray boxes tested from outside; money, security and personal data get closer scrutiny and review (`R-REVIEW`).
+- **Module map (`docs/ARCHITECTURE.md`, create once the project has about three modules):** one page: module, purpose, public interface, gray box or scrutinized, how it is tested. Update it in the task that changes a boundary. Load it instead of reading code to orient.
+- **Glossary (optional, `docs/GLOSSARY.md`):** only if the user asked for it at setup or the domain has many terms or several languages (e.g. German UI, English code): term, definition, code name, UI text. Use these terms in tasks, code and UI text; add a term when it appears.
+- **TDD** (test, make it pass, refactor in small steps) is recommended for logic-heavy code (`testing-practices` skill), not for throwaway UI or prototypes.
+<!-- RULE:R-DESIGN:END -->

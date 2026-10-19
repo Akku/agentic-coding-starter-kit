@@ -6,12 +6,15 @@ review before copying anything into notes. The transcript format is undocumented
 Estimates are rough (characters / 4; assumes a result stays in context until the session ends, so compaction makes it an upper bound)."""
 import collections, glob, json, os, re, sys
 
+RULE_ID = re.compile(r"\bR-[A-Z][A-Z-]+[A-Z]\b")
+
 def main():
     d = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.claude/projects/" + re.sub(r"[^A-Za-z0-9]", "-", os.getcwd()))
     files = sorted(glob.glob(d + "/**/*.jsonl", recursive=True))
     if not files:
         print("not evaluable: no transcripts in", d); return 0
     tot, sess, by_tool, cnt, offenders = collections.Counter(), [], collections.Counter(), collections.Counter(), []
+    rules, skills, docs = collections.Counter(), collections.Counter(), collections.Counter()
     def size(c):
         if isinstance(c, str): return len(c)
         if isinstance(c, list): return sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in c)
@@ -31,7 +34,17 @@ def main():
                 for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens"):
                     u[k] += (m.get("usage") or {}).get(k, 0)
                 for b in m.get("content") or []:
-                    if isinstance(b, dict) and b.get("type") == "tool_use": pend[b.get("id")] = (b.get("name", "?"), b.get("input") or {})
+                    if isinstance(b, dict) and b.get("type") == "tool_use":
+                        n, i = b.get("name", "?"), b.get("input") or {}
+                        pend[b.get("id")] = (n, i)
+                        cmd = i.get("command") or "" if n == "Bash" else ""
+                        if "RULE:" in cmd or "ID=R-" in cmd:
+                            rules.update(set(RULE_ID.findall(cmd)) - {"R-INDEX"})
+                        if n == "Skill": skills[str(i.get("skill", "?")).split(":")[-1]] += 1
+                        p = i.get("file_path", "") if n == "Read" else ""
+                        sm = re.search(r"\.claude/skills/([^/]+)/SKILL\.md", p)
+                        if sm: skills[sm.group(1)] += 1
+                        if re.search(r"(ADVANCED|GLOSSARY|ARCHITECTURE|PITFALLS|LEARNINGS|HANDOFF)\.md$|docs/agent/stacks/", p): docs[os.path.basename(p)] += 1
             elif r.get("type") == "user" and isinstance(m.get("content"), list):
                 for b in m["content"]:
                     if isinstance(b, dict) and b.get("type") == "tool_result":
@@ -55,6 +68,16 @@ def main():
     print("\nbiggest carried tool results (size/4 x later turns); estimated share of all cache_read: %.0f%%" % (100 * allc / max(tot["cache_read_input_tokens"], 1)))
     for e, s, lb, after in sorted(offenders, reverse=True)[:10]:
         print("  %.1fM tok-turns | %d chars | %s | %d turns after" % (e / 1e6, s, lb, after))
+    print("\nusage of optional material (retro: use deliberately, keep, or remove):")
+    known = set()
+    for f in ("docs/agent/OPERATING_MODEL.md", "docs/agent/ADVANCED.md"):
+        if os.path.exists(f): known |= set(re.findall(r"<!-- RULE:(R-[A-Z-]+):START -->", open(f).read())) - {"R-INDEX"}
+    print("  rules loaded by ID:", dict(rules.most_common()) or "none")
+    if known: print("  rules never loaded:", ", ".join(sorted(known - set(rules))) or "none")
+    avail = set(os.listdir(".claude/skills")) if os.path.isdir(".claude/skills") else set()
+    print("  skills used:", dict(skills.most_common()) or "none")
+    if avail: print("  skills never used:", ", ".join(sorted(avail - set(skills))) or "none")
+    print("  docs read:", dict(docs.most_common()) or "none")
     return 0
 
 if __name__ == "__main__":

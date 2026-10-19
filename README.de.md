@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.13.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.14.0** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
@@ -27,7 +27,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | Datei | Zweck |
 | --- | --- |
 | `STARTE_HIER.md` / `START_HERE.md` | Anleitung für Menschen (DE/EN) |
-| `.claude/skills/` | Skills: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
+| `.claude/skills/` | Skills: `retro`, `design-alignment`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
 | `.claude/agents/` | Agenten: `ux-designer` (für Projekte mit Oberfläche) |
 | `SETUP.md` | Einmalige Setup-Anleitung für den Agenten (wird nach dem Setup gelöscht) |
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |

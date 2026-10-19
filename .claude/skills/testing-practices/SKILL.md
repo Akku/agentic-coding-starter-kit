@@ -12,6 +12,7 @@ Rule: `R-VERIFY`. Every check has a proof boundary; keep it visible in the task 
 - **Determinism:** fake time and deliberately held-back responses make double clicks, races and stale polling reproducible.
 - **Fakes drift:** a fake server needs maintenance together with the real API contract (shared schema/contract test).
 - **Real integrations where behavior matters:** SQL and framework behavior with a real database; mocks mostly confirm expected calls.
+- **TDD for logic-heavy code:** write the test, make it pass, refactor, in small steps; the unit scope, what to mock and which behavior to test are one decision. Skip for throwaway UI or prototypes. Deep modules (simple interface, much behavior behind it) are easier to test from outside.
 - **Characterization + mutation:** characterization tests pin existing behavior before refactoring; targeted mutations show that tests detect relevant faults.
 - **Layers complement each other:** unit/DOM, integration, browser, manual. A11y tools and green CI do not prove real screen reader announcements; if required, keep a manual check open.
 - **Performance:** measure only under exclusive conditions (no parallel checks).
