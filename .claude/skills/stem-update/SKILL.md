@@ -18,3 +18,5 @@ Rule: `R-KIT-UPDATE`. The kit is public; only read from it (its changelog, PR te
 3. **Apply as a backlog task:** create the task first. Copy unmodified kit-owned files, hand-merge mixed ones, carry out `Migration:` lines (`git mv`, rename `name:` and references). Never overwrite project-owned files or wholesale. Rule text stays in one place; do not copy it into adapters.
 4. **Verify and close:** run the project verification via `scripts/run.sh` and trigger every changed hook or script once (a hook that fails silently passes verification). Set `version:` in `KIT_VERSION` to the adopted kit version and list skipped items in `skipped:` (short ids; the retro shows them); note them in the task. Commit code and task together.
 5. Found something the kit itself should do better? `Learning:` in the task; later `promote-learning`.
+
+If a step did not fit or you deviated from it: `Learning: skill stem-update: <what> -> <change>` in the task notes (`R-LEARNING`).

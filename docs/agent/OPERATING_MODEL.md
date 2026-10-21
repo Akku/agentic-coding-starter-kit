@@ -494,6 +494,8 @@ When a notable detour, repeated manual action, missing rule/check, context-cost 
 Learning: <observation> → <possible process improvement or question>
 ```
 
+Skills get feedback the same way: when a step of a skill did not fit or the run deviated from it, write `Learning: skill <name>: <what> -> <change>`; the retro's skill review reads these lines. Only when it happened, not after every run.
+
 Task-local notes preserve evidence and context. Cross-task or reusable observations may additionally be promoted into a lightweight process-improvement inbox, for example:
 
 ```text

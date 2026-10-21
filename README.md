@@ -6,7 +6,7 @@
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.1.3** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+**Version 1.1.4** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
 
 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 

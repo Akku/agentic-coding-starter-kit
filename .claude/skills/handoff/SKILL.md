@@ -29,3 +29,5 @@ Sections agree with each other, approvals are still valid, evidence names the SH
 1. `git status`: nothing unrelated, nothing forgotten. Commit code together with its task changes and the handoff, or state why not.
 2. Unfinished tasks: each has a concrete continuation point in its notes (open criterion, next action), not "still to check".
 3. Notable detours or high context cost: add `Learning:` to the task (only if it happened).
+
+If a step did not fit or you deviated from it: `Learning: skill handoff: <what> -> <change>` in the task notes (`R-LEARNING`).

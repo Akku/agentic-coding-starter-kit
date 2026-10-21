@@ -19,3 +19,5 @@ Rule: `R-VERIFY`. Every check has a proof boundary; keep it visible in the task 
 - **Browser tests (Playwright):** the default desktop viewport may open a two-pane layout; run the main flows in a phone viewport. `getByText` matches substrings case-insensitively; give indicators their own element or use `exact`. A shared e2e database makes names collide: use unique ones per test.
 - **Contrast checks:** a design token the browser serializes as `#fff` parses as NaN in a 6-digit parser, and a NaN ratio never fails. Assert every token is a valid colour.
 - Run suites via `scripts/run.sh`; load only failing sections of a log.
+
+If a step did not fit or you deviated from it: `Learning: skill testing-practices: <what> -> <change>` in the task notes (`R-LEARNING`).

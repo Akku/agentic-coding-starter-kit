@@ -43,6 +43,22 @@ if command -v backlog >/dev/null 2>&1 && { [ -d backlog ] || [ -d .backlog ]; };
 else
   echo "backlog not initialised (follow SETUP.md)"
 fi
+# retro due hint: Done tasks changed since the last retro notes commit (docs/agent/retros/YYYY-MM-DD.md)
+if [ -d backlog/tasks ]; then
+  lr=$(ls docs/agent/retros 2>/dev/null | grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}\.md$' | sort | tail -1)
+  lrd="${lr%.md}"; since=""; [ -n "$lr" ] && since=$(TZ=UTC git log -1 --format=%cd --date=format-local:'%Y-%m-%d %H:%M' -- "docs/agent/retros/$lr" 2>/dev/null)
+  [ -z "$since" ] && [ -n "$lr" ] && since="${lr%.md} 23:59"
+  n=0
+  for f in backlog/tasks/task-*.md; do
+    [ -f "$f" ] || continue
+    grep -q "^status: Done" "$f" || continue
+    d=$(sed -n "s/^updated_date: '\([0-9: -]*\)'.*/\1/p;s/^created_date: '\([0-9: -]*\)'.*/\1/p" "$f" | tail -1)
+    if [ -z "$since" ] || [[ "$d" > "$since" ]]; then n=$((n+1)); fi
+  done
+  if [ "$n" -ge "${RETRO_DUE_AFTER:-8}" ]; then
+    echo "RETRO DUE: $n tasks done since ${lrd:-the start} (threshold ${RETRO_DUE_AFTER:-8}); offer the retro skill, do not start unasked"
+  fi
+fi
 echo; echo "## backlog check"; scripts/check-backlog.sh 2>/dev/null | head -10; [ "${PIPESTATUS[0]:-0}" -eq 0 ] && echo "ok"
 echo; echo "## handoff"
 if [ -f docs/agent/HANDOFF.md ]; then

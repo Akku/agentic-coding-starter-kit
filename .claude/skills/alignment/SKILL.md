@@ -13,3 +13,5 @@ Rules: `R-CONCEPT` (product/UI direction), `R-DESIGN`, `R-AUTONOMY` (do not inve
 4. **Stop** when no open decision could change the plan materially, when the budget is used, or when the user says stop. Then list the assumptions you made.
 5. **Write the result down** where it lives (one place): vision doc or PRD (`backlog doc`), or acceptance criteria in the tasks, with date; new domain terms into `docs/GLOSSARY.md` if the project has one. Only then plan and create tasks.
 6. Offer a batch if the resulting tasks are related (`R-BATCHING`).
+
+If a step did not fit or you deviated from it: `Learning: skill alignment: <what> -> <change>` in the task notes (`R-LEARNING`).
