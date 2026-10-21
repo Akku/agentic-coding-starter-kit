@@ -1,8 +1,26 @@
-# STEM
+<div align="center">
 
-*Agentic Coding Starter Kit*
+```text
+ ____ _____ _____ __  __
+/ ___|_   _| ____|  \/  |
+\___ \ | | |  _| | |\/| |
+ ___) || | | |___| |  | |
+|____/ |_| |_____|_|  |_|
+```
 
-**Version 0.18.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+**Agentic Coding Starter Kit**
+
+`[ you ]──▶[ STEM ]──▶[ more you ]`
+
+*Spec-driven development on steroids.*
+
+**Version 1.0.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+
+🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+
+[Usage](#usage) · [How it works](#how-it-works) · [Updates](#staying-up-to-date) · [Prompt](#prompt-to-start) · [Contents](#contents) · [Principles](#principles)
+
+</div>
 
 LLM harnesses change frequently. Wouldn't it be great to start out with all the **current** best practices for your new project? Meet [STEM](https://www.imdb.com/title/tt6499752/) – an agentic coding starter template.
 
@@ -12,11 +30,29 @@ A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub
 
 ## Usage
 
-**Standard path (no technical knowledge needed):** [download the ZIP](https://github.com/Akku/stem/archive/refs/heads/main.zip), unzip it, open the folder in your agent and give it the prompt from [START_HERE.md](START_HERE.md). The agent installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks.
+**Standard path (no technical knowledge needed):**
+
+1. [Download the ZIP](https://github.com/Akku/stem/archive/refs/heads/main.zip) and unzip it.
+2. Open the folder in your agent.
+3. Give it the prompt from [START_HERE.md](START_HERE.md).
+
+The agent then installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks.
 
 **Technical users:** click **Use this template** on GitHub, or clone the repository, then use the same prompt.
 
 At the start of each session the agent runs `scripts/session-start.sh` (short state summary).
+
+## How it works
+
+Spec-driven development on steroids: the idea is sharpened into a spec first, then every change runs through the same traceable loop, and the harness learns from each round.
+
+```mermaid
+flowchart LR
+    T[Task] --> P[Plan] --> I[Implement] --> V[Verify] --> D[Done] --> R[Reflect]
+    R -.-> T
+```
+
+Reflect is the `retro` skill: learnings flow back into the harness (and, once proven, into the kit).
 
 ## Staying up to date
 
@@ -29,6 +65,9 @@ Give this to the agent after opening the folder:
 > Set up this project: follow `SETUP.md`. Work in my language and install anything that is missing yourself (I will approve the steps). What I want to build is the following: *<your idea: what, for whom, what "done" looks like – a few sentences>*
 
 ## Contents
+
+<details>
+<summary>Show all files</summary>
 
 | File | Purpose |
 | --- | --- |
@@ -54,6 +93,8 @@ Give this to the agent after opening the folder:
 | `docs/agent/LEARNINGS.md` | Observations for retros (includes starting points for the first retro) |
 | `docs/agent/PITFALLS.md` | Growing list of technical pitfalls |
 | `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro handling and feeding learnings back into the kit |
+
+</details>
 
 ## Principles
 

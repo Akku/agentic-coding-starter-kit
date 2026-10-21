@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 1.0.0
+- **First stable release.** With the rename to STEM the kit's scope and name are settled. READMEs (EN/DE) redesigned: hero block with ASCII logo, badges and quick navigation, "Spec-driven development on steroids" positioning, three-step usage, workflow diagram (Task → Plan → Implement → Verify → Done → Reflect), collapsible file table. No rule changes; benefits: new users.
+
 ## 0.18.0
 - **Renamed to STEM** (repository `Akku/stem`, tagline "Agentic Coding Starter Kit"; name after the AI in the film Upgrade). GitHub keeps the old links working (verified: ZIP, raw files and git); the update check additionally follows redirects (`curl -L`) as a precaution, so older projects keep working. The unzipped ZIP folder is now `stem-main`.
 

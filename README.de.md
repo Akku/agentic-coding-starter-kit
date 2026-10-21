@@ -1,8 +1,26 @@
-# STEM
+<div align="center">
 
-*Agentic Coding Starter Kit*
+```text
+ ____ _____ _____ __  __
+/ ___|_   _| ____|  \/  |
+\___ \ | | |  _| | |\/| |
+ ___) || | | |___| |  | |
+|____/ |_| |_____|_|  |_|
+```
 
-**Version 0.18.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Agentic Coding Starter Kit**
+
+`[ you ]──▶[ STEM ]──▶[ more you ]`
+
+*Spec-Driven Development on Steroids.*
+
+**Version 1.0.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+
+🇬🇧 **English version: [README.md](README.md)**
+
+[Nutzung](#nutzung) · [Ablauf](#ablauf) · [Updates](#aktuell-bleiben) · [Prompt](#start-prompt) · [Inhalt](#inhalt) · [Prinzipien](#prinzipien)
+
+</div>
 
 LLM-Harnesses ändern sich ständig. Wäre es nicht großartig, ein neues Projekt gleich mit allen **aktuellen** Best Practices zu starten? Das ist [STEM](https://www.imdb.com/title/tt6499752/) – ein Starter-Template für agentisches Coding.
 
@@ -12,11 +30,29 @@ Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, Gi
 
 ## Nutzung
 
-**Standardweg (kein technisches Wissen nötig):** [ZIP herunterladen](https://github.com/Akku/stem/archive/refs/heads/main.zip), entpacken, den Ordner im Agenten öffnen und den Prompt aus [STARTE_HIER.md](STARTE_HIER.md) geben. Der Agent installiert fehlende Werkzeuge gemeinsam mit dir, richtet Git und Backlog.md ein, hilft dir, die Idee in Vertical Slice, MVP und Moonshot zu schärfen, passt das Harness an dein Ziel an und legt Backlog.md-Meilensteine und erste Tasks an.
+**Standardweg (kein technisches Wissen nötig):**
+
+1. [ZIP herunterladen](https://github.com/Akku/stem/archive/refs/heads/main.zip) und entpacken.
+2. Den Ordner im Agenten öffnen.
+3. Den Prompt aus [STARTE_HIER.md](STARTE_HIER.md) geben.
+
+Der Agent installiert dann fehlende Werkzeuge gemeinsam mit dir, richtet Git und Backlog.md ein, hilft dir, die Idee in Vertical Slice, MVP und Moonshot zu schärfen, passt das Harness an dein Ziel an und legt Backlog.md-Meilensteine und erste Tasks an.
 
 **Technisch Versierte:** auf GitHub **Use this template** wählen oder das Repository klonen, dann derselbe Prompt.
 
 Pro Sitzung führt der Agent `scripts/session-start.sh` aus (kurzer Zustandsüberblick).
+
+## Ablauf
+
+Spec-Driven Development on Steroids: Die Idee wird zuerst zu einer Spezifikation geschärft, danach läuft jede Änderung durch dieselbe nachvollziehbare Schleife, und das Harness lernt aus jeder Runde.
+
+```mermaid
+flowchart LR
+    T[Task] --> P[Plan] --> I[Implement] --> V[Verify] --> D[Done] --> R[Reflect]
+    R -.-> T
+```
+
+Reflect ist der Skill `retro`: Learnings fließen ins Harness zurück (und, wenn bewährt, ins Kit).
 
 ## Aktuell bleiben
 
@@ -29,6 +65,9 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 > Richte dieses Projekt ein: Folge `SETUP.md`. Arbeite in meiner Sprache und installiere alles, was fehlt, selbst (ich genehmige die Schritte). Was ich entwickeln will, ist folgendes: *<deine Idee: was, für wen, woran erkennt man „fertig“ – ein paar Sätze>*
 
 ## Inhalt
+
+<details>
+<summary>Alle Dateien anzeigen</summary>
 
 | Datei | Zweck |
 | --- | --- |
@@ -54,6 +93,8 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `docs/agent/LEARNINGS.md` | Beobachtungen für die Retro (enthält Startpunkte für die erste Retro) |
 | `docs/agent/PITFALLS.md` | Wachsende Liste technischer Stolperfallen |
 | `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro-Behandlung und Rückfluss ins Kit |
+
+</details>
 
 ## Prinzipien
 
