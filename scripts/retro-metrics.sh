@@ -2,6 +2,11 @@
 # Measured evidence for a retro (R-RETRO): cheap, repeatable numbers. Usage: scripts/retro-metrics.sh [since-date]  (default: 14 days)
 set -u
 cd "$(dirname "$0")/.."
+# --snapshot: also store the output as a dated baseline (docs/agent/baselines/) before changing a cost-carrying rule.
+if [ "${1:-}" = "--snapshot" ]; then
+  shift; mkdir -p docs/agent/baselines; out="docs/agent/baselines/$(date +%F).txt"
+  "$0" "$@" | tee "$out"; echo "baseline saved: $out"; exit 0
+fi
 since=${1:-$(date -v-14d +%Y-%m-%d 2>/dev/null || date -d '14 days ago' +%Y-%m-%d)}
 echo "== retro metrics since $since =="
 files=(backlog/tasks/*.md)
@@ -24,4 +29,22 @@ echo "lines added/deleted: ${add:-0} / ${del:-0} (deleted share $share %; high v
 echo "review/fix commits (message contains fix or review): $(git log --since="$since 00:00" --oneline | grep -ciE 'fix|review')"
 if command -v gh >/dev/null 2>&1; then
   echo "CI runs since $since (conclusions):"; gh run list --limit 100 --json conclusion,createdAt --jq "[.[]|select(.createdAt>=\"$since\")]|group_by(.conclusion)|map({(.[0].conclusion):length})|add" 2>/dev/null | sed 's/^/  /'
+fi
+# Normalise by accepted work (Done tasks updated since the start date); absolute sums mislead when the amount of work differs.
+done_p=0
+for f in "${files[@]}"; do
+  [ -f "$f" ] || continue
+  grep -q '^status: Done' "$f" || continue
+  u=$(awk -F"'" '/^updated_date:/{print substr($2,1,10); exit}' "$f")
+  [ -n "$u" ] && [ "$u" \> "$since" -o "$u" = "$since" ] && done_p=$((done_p+1))
+done
+echo "accepted tasks in period (Done, updated since $since): $done_p"
+if [ -f scripts/context-report.py ] && command -v python3 >/dev/null 2>&1; then
+  b=$(python3 scripts/context-report.py --since "$since" --brief 2>/dev/null | head -1)
+  case "$b" in sessions=*)
+    echo "usage: $b"
+    t=$(echo "$b" | sed -n 's/.* turns=\([0-9]*\).*/\1/p'); c=$(echo "$b" | sed -n 's/.*cache_read=\([0-9]*\).*/\1/p')
+    if [ "$done_p" -gt 0 ]; then echo "per accepted task: turns $((t/done_p)), cache_read $((c/done_p/1000))k tokens (small numbers of tasks: an indication, not proof)"; fi ;;
+  *) echo "usage: not evaluable" ;;
+  esac
 fi

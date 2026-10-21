@@ -46,6 +46,7 @@ if not re.search(r"^## " + re.escape(v) + r"$", (root / "CHANGELOG.md").read_tex
 
 # SETUP.md exists and the hidden paths it checks are really in the kit
 if not (root / "SETUP.md").exists(): err("SETUP.md missing")
+if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENTS.md missing")
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 

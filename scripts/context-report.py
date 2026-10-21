@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Where did the context go? Optional retro tool for Claude Code transcripts (R-MEASUREMENT level 2/3).
-Usage: scripts/context-report.py [transcript-dir]   (default: this project's folder under ~/.claude/projects)
+Usage: scripts/context-report.py [--since YYYY-MM-DD] [--brief] [transcript-dir]   (default dir: this project's folder under ~/.claude/projects)
+--brief prints one key=value line (for retro-metrics.sh): sessions, turns, tokens, longest session, models and effort levels seen (confounders).
 Prints numbers only. Labels may contain tool names, file base names and the first two words of a shell command:
 review before copying anything into notes. The transcript format is undocumented; unknown format -> "not evaluable".
 Estimates are rough (characters / 4; assumes a result stays in context until the session ends, so compaction makes it an upper bound)."""
@@ -9,12 +10,17 @@ import collections, glob, json, os, re, sys
 RULE_ID = re.compile(r"\bR-[A-Z][A-Z-]+[A-Z]\b")
 
 def main():
-    d = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.claude/projects/" + re.sub(r"[^A-Za-z0-9]", "-", os.getcwd()))
+    args = sys.argv[1:]
+    since = args[args.index("--since") + 1] if "--since" in args else ""
+    brief = "--brief" in args
+    pos = [a for i, a in enumerate(args) if not a.startswith("--") and (i == 0 or args[i - 1] != "--since")]
+    d = pos[0] if pos else os.path.expanduser("~/.claude/projects/" + re.sub(r"[^A-Za-z0-9]", "-", os.getcwd()))
     files = sorted(glob.glob(d + "/**/*.jsonl", recursive=True))
     if not files:
         print("not evaluable: no transcripts in", d); return 0
     tot, sess, by_tool, cnt, offenders = collections.Counter(), [], collections.Counter(), collections.Counter(), []
     rules, skills, docs = collections.Counter(), collections.Counter(), collections.Counter()
+    models, efforts = collections.Counter(), collections.Counter()
     def size(c):
         if isinstance(c, str): return len(c)
         if isinstance(c, list): return sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in c)
@@ -29,8 +35,11 @@ def main():
             try: r = json.loads(line)
             except ValueError: continue
             m = r.get("message") if isinstance(r.get("message"), dict) else {}
+            if since and str(r.get("timestamp", ""))[:10] < since: continue
             if r.get("type") == "assistant":
                 turns += 1
+                models[str(m.get("model", "?"))] += 1
+                if r.get("effort"): efforts[str(r.get("effort"))] += 1
                 for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens"):
                     u[k] += (m.get("usage") or {}).get(k, 0)
                 for b in m.get("content") or []:
@@ -52,9 +61,13 @@ def main():
                         items.append((turns, size(b.get("content")), label(n, i), n))
         for t, s, lb, n in items:
             by_tool[n] += s; cnt[n] += 1; offenders.append((s / 4 * (turns - t), s, lb, turns - t))
-        sess.append((os.path.basename(f)[:8], turns, u)); tot.update(u)
+        if turns: sess.append((os.path.basename(f)[:8], turns, u))
+        tot.update(u)
     if not sum(tot.values()):
         print("not evaluable: no usage data (format changed?)"); return 0
+    if brief:
+        print("sessions=%d turns=%d cache_read=%d cache_write=%d output=%d max_session_turns=%d models=%s effort=%s" % (len(sess), sum(s[1] for s in sess), tot["cache_read_input_tokens"], tot["cache_creation_input_tokens"], tot["output_tokens"], max([s[1] for s in sess] or [0]), ",".join(k for k, _ in models.most_common(3)) or "?", ",".join(k for k, _ in efforts.most_common(3)) or "?"))
+        return 0
     print("transcripts: %d, assistant turns: %d" % (len(files), sum(s[1] for s in sess)))
     print("tokens: fresh_in %d | cache_write %d | cache_read %d | output %d" % (tot["input_tokens"], tot["cache_creation_input_tokens"], tot["cache_read_input_tokens"], tot["output_tokens"]))
     turns_all = max(sum(s[1] for s in sess), 1)

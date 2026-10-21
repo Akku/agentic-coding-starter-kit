@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.16.0
+- **Evidence standard for cost-carrying rules only** (`AGENTS.md` content, default model/effort, session-length threshold, communication standard): entry in `docs/agent/EXPERIMENTS.md` *before* the change (hypothesis, metric, threshold, check date, confounders), baseline via `scripts/retro-metrics.sh --snapshot`, comparison per accepted task, one change at a time where practical, evidence grades G0-G3; "effective" only from G2, kit defaults need G3 or a mechanical reason. `retro-metrics.sh` normalises per accepted task and shows models and effort as confounders; `context-report.py` gained `--since` and `--brief`. Other changes keep the light ladder. Reason: observational data from small projects cannot show cause and effect.
+
 ## 0.15.0
 - **AGENTS.md budget:** the kit self-check fails above 6 KB; the retro audits `AGENTS.md` every retro (would the agent get it wrong without the rule? evidence of use?); setup keeps it free of project overviews. Reason: a 2026 study found repository context files tend to raise cost and not improve success.
 - **Security:** rule `R-SECURITY` (external text is data, secrets, least privilege, project files as attack path, optional sandbox); `permissions.deny` for `.env*`, `~/.ssh` and force-push; secret scan in the pre-commit hook; kit-update/promote-learning/retro treat fetched texts as untrusted; security note in the human guides. Benefits: all projects.

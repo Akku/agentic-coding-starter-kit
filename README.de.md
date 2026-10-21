@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.15.0** · 🇬🇧 **English version: [README.md](README.md)**
+**Version 0.16.0** · 🇬🇧 **English version: [README.md](README.md)**
 
 Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
 
@@ -43,6 +43,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `scripts/session-start.sh` | Lesender Sitzungsstart (Branch, Änderungen, Tasks, Übergabe) |
 | `docs/agent/OPERATING_MODEL.md` | Regeln mit stabilen IDs (`R-*`), gezielt per ID geladen |
 | `docs/agent/ADVANCED.md` | Selten gebrauchte Regeln (Parallelität, Messung, Routing, lokale Modelle) |
+| `docs/agent/EXPERIMENTS.md` | Hypothesen, Messgrößen, Basislinien und Evidenzgrade für dauerhaft kostenwirksame Regeln |
 | `docs/agent/LEARNINGS.md` | Beobachtungen für die Retro (enthält Startpunkte für die erste Retro) |
 | `docs/agent/PITFALLS.md` | Wachsende Liste technischer Stolperfallen |
 | `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro-Behandlung und Rückfluss ins Kit |

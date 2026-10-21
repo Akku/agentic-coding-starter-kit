@@ -59,6 +59,16 @@ The principle is:
 > Save cheap evidence continuously; measure continuously only when the economics justify it.
 
 Plausible savings should be described as hypotheses until measured.
+
+### Standard for cost-carrying rules
+
+Rules that cost context in every session or change every session's behavior (content of `AGENTS.md`, default model and effort, session-length threshold, communication standard) deserve more than plausibility. Other changes keep the lighter ladder above. Observational data from small projects cannot prove cause and effect; this standard makes weak evidence visible and cheap to improve:
+
+1. **Before the change** write an entry in `docs/agent/EXPERIMENTS.md`: hypothesis, metric and expected direction, threshold, check date, confounders to note (model, effort, task size, other changes at the same time). Decide threshold and metric *before* looking at the result.
+2. **Baseline:** `scripts/retro-metrics.sh --snapshot` before the change; compare later per accepted task (absolute sums mislead when the amount of work differs).
+3. **One cost-carrying change at a time** where practical; otherwise name the bundle and do not attribute the effect to one part. Per-task switchable rules can alternate between tasks (A/B).
+4. **Metrics inform, they are not targets** (a number that becomes a goal stops measuring). Use a second view (quality: rework, failed checks, user feedback) next to cost.
+5. **Evidence grades** in every statement and entry: **G0** anecdote; **G1** observed (data, no baseline); **G2** measured before/after with preset threshold, normalised, confounders noted, one project; **G3** replicated (G2 in two or more projects, or a real A/B). Say "effective" only from G2 (and treat one project as local); recommend to other projects (`promote-learning`) only from G2; make something a kit default only with G3 or a clear mechanical reason. Below G2 write "indication".
 <!-- RULE:R-MEASUREMENT:END -->
 
 <!-- RULE:R-ROUTING:START -->
