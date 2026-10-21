@@ -10,6 +10,15 @@ The ZIP route sometimes loses hidden folders (names starting with a dot are hidd
 ## 1. Understand the kit (≈2 min, do not read everything)
 Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; other agents read the file directly.
 
+## 1a. User profile (ask first, before step 1b)
+Ask in one short message how the agent should write to the user: "**1** Expert (compact: results, decisions, problems only), **2** Technical (programmer: technical explanations), **3** Non-technical (plain language: what happened, why it matters, terms explained). If unsure: 2." Then replace the whole `Communication` block in `AGENTS.md` (the three bullets after `**Communication**`) with the chosen variant below, nothing else added. Keep the last bullet (direct way to test, review or decide) in every variant.
+
+1. Expert: `- Be brief: results, state, decisions the user must make, problems. No reasoning per step unless asked; one sentence per interim update. The user's own instructions override this.` Also set `"outputStyle": "Concise"` in `.claude/settings.json` (Claude Code only; the text covers other tools).
+2. Technical: `- Explain technically what changed, why and what comes next; name files, commands and trade-offs; not every tool call. After each phase (setup step, finished task, session end) summarize it. Ask questions with options and a recommendation. The user's own instructions override this.`
+3. Non-technical: `- Explain in plain language what happened, why it matters and what comes next; no jargon, not every tool call. After each phase (setup step, finished task, session end) summarize it. Explain a new term (backlog, task, milestone, retro) in one sentence at first use. Ask questions with options and a recommendation. The user may ask for less detail at any time; the user's own instructions override this.`
+
+Record the profile in `docs/agent/LEARNINGS.md`. Later change: the user tells the agent, which rewrites the block (and the `outputStyle` entry). Step 3 keeps assuming a non-technical user for installs, whatever the profile.
+
 ## 1b. Project size and modules (ask first, before step 2)
 Ask in one short message: "Is the project **small** (a script, a small tool, a few days), **medium** (an app or service with several features, weeks) or **large** (many parts, several people or long-running)? If unsure: medium." Then show the checklist below with the size's preselection, each line with its effect in plain words, and let the user toggle any item. The core is always on and is not offered as a choice: tasks (Backlog.md), commit guard, handoff and session start, `scripts/run.sh`, `AGENTS.md`.
 

@@ -6,8 +6,7 @@ If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask on
 **Language:** talk to the user in the user's language; keep instruction files and task/rule text in English.
 
 **Communication** (messages to the user; one standard, no modes):
-- Explain in plain language what happened, why it matters and what comes next; not every tool call. After each phase (setup step, finished task, session end) give 3-5 lines: what happened, what the user can do or decide now, what comes next. At most ~12 lines per message.
-- Explain a new term (backlog, task, milestone, retro) in one sentence at first use. Ask questions with options and a recommendation. The user may ask for less detail at any time; the user's own instructions override this.
+- Explain technically what changed, why and what comes next; name files, commands and trade-offs; not every tool call. After each phase (setup step, finished task, session end) summarize it. Ask questions with options and a recommendation. The user's own instructions override this.
 - **Whenever the user should test, review or decide something, put the direct way in the same message:** for a running app the full URL with port and route (start the server yourself if needed), for files a clickable relative path, for PRs/CI the full URL, otherwise the exact command; plus what to check (2-4 bullets) and which answer you need.
 
 **Skills** (`.claude/skills/<name>/SKILL.md`; other tools read the file): `retro`, `design-alignment`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
