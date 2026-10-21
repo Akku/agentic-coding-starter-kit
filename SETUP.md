@@ -25,7 +25,7 @@ Ask in one short message: "Is the project **small** (a script, a small tool, a f
 | Architecture map (`docs/ARCHITECTURE.md`) | Short module overview that the agent reads instead of the code. Must be kept current. | off | off | on |
 | Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch; may block installs or network. Offered, never preselected. | ask | ask | ask |
 
-What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) so they cost no context. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
+What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
 
 ## 2. Ask the user (one message, all questions together)
 Scale to the size from step 1b: small = goal in 1-2 sentences, stack, confidential inputs, GitHub; skip horizons beyond the vertical slice, agents and model questions (use defaults); medium/large = all questions.
