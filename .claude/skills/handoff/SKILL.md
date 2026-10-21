@@ -17,14 +17,13 @@ Always rewrite the whole file, never append or "refresh" (`Earlier:` sections ar
 **Next step:** <one concrete action, with the file/command to start>
 **Evidence open:** <what was verified at which SHA; what is still missing, e.g. manual check>
 **Blockers / decisions:** <what waits for the user>
+**Notes:** <max 3 lines: facts the next run needs that are written nowhere else; re-justify each one at every rewrite, else drop>
 ```
 
-Per line test: does git or the backlog already show it (finished tasks, active task, commit messages)? Then delete it. Durable knowledge goes to `docs/` or `PITFALLS.md`, history stays in tasks and commits.
+Per line test: does git or the backlog already show it (finished tasks, active task, commit messages)? Then delete it. Durable knowledge goes to `docs/` or `PITFALLS.md`, not into Notes, history stays in tasks and commits.
 
 ## 2. Check before saving
-- Sections agree with each other (an approval does not contradict "Next step"; no task listed as open that is done).
-- Every approval is still valid; remove expired or used ones.
-- Evidence names the SHA it verified (`R-STATE-COHERENCE`).
+Sections agree with each other, approvals are still valid, evidence names the SHA it verified (`R-STATE-COHERENCE`).
 
 ## 3. Session-end checklist
 1. `git status`: nothing unrelated, nothing forgotten. Commit code together with its task changes and the handoff, or state why not.
