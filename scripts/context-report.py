@@ -47,7 +47,7 @@ def main():
                         n, i = b.get("name", "?"), b.get("input") or {}
                         pend[b.get("id")] = (n, i)
                         cmd = i.get("command") or "" if n == "Bash" else ""
-                        if "RULE:" in cmd or "ID=R-" in cmd:
+                        if "RULE:" in cmd or "ID=R-" in cmd or ":START" in cmd:
                             rules.update(set(RULE_ID.findall(cmd)) - {"R-INDEX"})
                         if n == "Skill": skills[str(i.get("skill", "?")).split(":")[-1]] += 1
                         p = i.get("file_path", "") if n == "Read" else ""

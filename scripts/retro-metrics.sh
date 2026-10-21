@@ -5,6 +5,7 @@ cd "$(dirname "$0")/.."
 # --snapshot: also store the output as a dated baseline (docs/agent/baselines/) before changing a cost-carrying rule.
 if [ "${1:-}" = "--snapshot" ]; then
   shift; mkdir -p docs/agent/baselines; out="docs/agent/baselines/$(date +%F).txt"
+  n=2; while [ -e "$out" ]; do out="docs/agent/baselines/$(date +%F)-$n.txt"; n=$((n+1)); done  # never overwrite an earlier baseline
   "$0" "$@" | tee "$out"; echo "baseline saved: $out"; exit 0
 fi
 since=${1:-$(date -v-14d +%Y-%m-%d 2>/dev/null || date -d '14 days ago' +%Y-%m-%d)}

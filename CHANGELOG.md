@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## Unreleased
+- **Floor-relative context threshold:** `scripts/context-check.py` warns at the smallest of first-turn context + 40k, 100k and half the model's window (model read from the transcript; unknown model: 100k). Notice text and `R-BATCHING` now say when to continue instead of handing off. `context-report.py` also detects rule loads via `sed '/R-ID:START/...'`; `retro-metrics.sh --snapshot` no longer overwrites a same-day baseline. Benefits: projects with the context hook.
+
 ## 1.0.0
 - **First stable release.** With the rename to STEM the kit's scope and name are settled. READMEs (EN/DE) redesigned: hero block with ASCII logo, badges and quick navigation, "Spec-driven development on steroids" positioning, three-step usage, workflow diagram (Task → Plan → Implement → Verify → Done → Reflect), collapsible file table. No rule changes; benefits: new users.
 
