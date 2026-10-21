@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 130" width="320" height="130" role="img" aria-label="STEM">
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 20px; fill: #1f2328; white-space: pre; }
+    @media (prefers-color-scheme: dark) { text { fill: #e6edf3; } }
+  </style>
+  <g xml:space="preserve">
+    <text x="10" y="24" textLength="300" lengthAdjust="spacing"> ____ _____ _____ __  __ </text>
+    <text x="10" y="46" textLength="300" lengthAdjust="spacing">/ ___|_   _| ____|  \/  |</text>
+    <text x="10" y="68" textLength="300" lengthAdjust="spacing">\___ \ | | |  _| | |\/| |</text>
+    <text x="10" y="90" textLength="300" lengthAdjust="spacing"> ___) || | | |___| |  | |</text>
+    <text x="10" y="112" textLength="300" lengthAdjust="spacing">|____/ |_| |_____|_|  |_|</text>
+  </g>
+</svg>

@@ -1,12 +1,6 @@
 <div align="center">
 
-```text
- ____ _____ _____ __  __
-/ ___|_   _| ____|  \/  |
-\___ \ | | |  _| | |\/| |
- ___) || | | |___| |  | |
-|____/ |_| |_____|_|  |_|
-```
+<img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
 **Agentic Coding Starter Kit**
 
