@@ -2,11 +2,9 @@
 
 <img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
-**Agentic Coding Starter Kit**
+**Spec Driven Agentic Coding Starter Kit**
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
-
-*Spec-Driven Development on Steroids.*
 
 **Version 1.0.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
 
