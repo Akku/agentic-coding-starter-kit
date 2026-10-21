@@ -1,6 +1,9 @@
 # Changelog
 
-Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits.
+Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
+
+## 1.1.3
+- **`stem-update` skill improved:** one clone, diff-first (identical / differs / missing, plus local files the kit dropped), a file ownership list (copy kit-owned, hand-merge mixed, never touch project-owned), `Migration:` lines in the changelog, optional `skipped:` line in `KIT_VERSION` (not proposed again, shown in the retro), smoke test of changed hooks, explicit task step. Benefits: cheaper and less error-prone updates. Migration: none; copy the new skill, optionally add `skipped:` to `KIT_VERSION`.
 
 ## 1.1.2
 - **Skills renamed:** `kit-update` -> `stem-update`, `design-alignment` -> `alignment` (folders under `.claude/skills/`, front matter and all references in `AGENTS.md`, rules, `SETUP.md`, scripts, READMEs). Existing projects: rename the two skill folders (`git mv`), set `name:` in each `SKILL.md`, replace the old names in `AGENTS.md` (skills line, rule 1d), `docs/agent/OPERATING_MODEL.md` and `scripts/session-start.sh` (update message); older entries in this changelog keep the old names. Benefits: all projects; shorter and clearer names.
