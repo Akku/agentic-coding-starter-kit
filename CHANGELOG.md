@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.18.0
+- **Renamed to STEM** (repository `Akku/stem`, tagline "Agentic Coding Starter Kit"; name after the AI in the film Upgrade). GitHub redirects old links; the update check now follows redirects (`curl -L`). Projects with an older `scripts/session-start.sh` lose the update notice silently until they adopt this script; `kit-update` and the retro check (via `gh`) keep working. The unzipped folder is now `stem-main`.
+
 ## 0.17.0
 - **Context watchdog:** `scripts/context-check.py` as `UserPromptSubmit` hook (Claude Code) adds a notice to the agent's context above min(half window, 100k tokens) and every +30k; the agent finishes the task, writes the handoff and tells the user (with a ready sentence) to continue in a new session. Replaces the vague "~300 turns" rule in `R-BATCHING`; `AGENTS.md` rule 10 covers agents without the hook. Experiment entry updated (grade G1). Python 3 added as optional prerequisite in setup.
 

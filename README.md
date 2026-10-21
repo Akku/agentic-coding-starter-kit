@@ -1,12 +1,18 @@
-# Agentic Coding Starter Kit
+# STEM
 
-**Version 0.17.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+*Agentic Coding Starter Kit*
+
+**Version 0.18.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+
+LLM harnesses change frequently. Wouldn't it be great to start out with all the **current** best practices for your new project? Meet [STEM](https://www.imdb.com/title/tt6499752/) – an agentic coding starter template.
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
+*The name is a nod to the AI implant in the film [Upgrade](https://www.imdb.com/title/tt6499752/) (2018): a system that works with you and raises what you can do, while you stay in charge.*
+
 ## Usage
 
-**Standard path (no technical knowledge needed):** [download the ZIP](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip), unzip it, open the folder in your agent and give it the prompt from [START_HERE.md](START_HERE.md). The agent installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks.
+**Standard path (no technical knowledge needed):** [download the ZIP](https://github.com/Akku/stem/archive/refs/heads/main.zip), unzip it, open the folder in your agent and give it the prompt from [START_HERE.md](START_HERE.md). The agent installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks.
 
 **Technical users:** click **Use this template** on GitHub, or clone the repository, then use the same prompt.
 

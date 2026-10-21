@@ -1,12 +1,14 @@
 # Starte hier
 
-**Version 0.17.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+*STEM – Agentic Coding Starter Kit*
+
+**Version 0.18.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
 ## Standardweg: ZIP herunterladen
 
-1. **Lade** das Kit **herunter**: [agentic-coding-starter-kit.zip](https://github.com/Akku/agentic-coding-starter-kit/archive/refs/heads/main.zip) (alternativ: grüner Button **Code** → **Download ZIP** auf der GitHub-Seite).
+1. **Lade** das Kit **herunter**: [stem.zip](https://github.com/Akku/stem/archive/refs/heads/main.zip) (alternativ: grüner Button **Code** → **Download ZIP** auf der GitHub-Seite).
 2. **Entpacke** es (macOS: Doppelklick; Windows: Rechtsklick → *Alle extrahieren*). Benenne den Ordner nach deinem Projekt um und lege ihn dort ab, wo du Projekte aufbewahrst. **Verwende den ganzen Ordner; kopiere keine einzelnen Dateien heraus**: Er enthält versteckte Elemente (Namen mit Punkt am Anfang, z. B. `.claude`), die der Finder standardmäßig ausblendet (macOS: Cmd+Shift+. blendet sie ein). Fehlt trotzdem etwas, stellt der Agent es wieder her.
 3. **Öffne deinen Agenten** (z. B. die Claude-Desktop-App, Tab Code) und wähle diesen Ordner als Arbeitsordner.
 4. **Gib dem Agenten diesen Prompt**, mit deinem Ziel:

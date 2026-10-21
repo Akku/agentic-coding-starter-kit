@@ -18,7 +18,7 @@ if [ -f KIT_VERSION ]; then
   cache="${TMPDIR:-/tmp}/agent-logs/kit-check-$(printf %s "$PWD" | cksum | cut -d' ' -f1)"; mkdir -p "$(dirname "$cache")"
   if [ -n "$repo" ] && command -v curl >/dev/null 2>&1 && { [ ! -f "$cache" ] || [ -n "$(find "$cache" -mtime +0 2>/dev/null)" ]; }; then
     raw="${repo/github.com/raw.githubusercontent.com}/main/KIT_VERSION"
-    rv=$(curl -fsS --max-time 3 "$raw" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
+    rv=$(curl -fsSL --max-time 3 "$raw" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
     [ -n "$rv" ] && printf '%s\n' "$rv" >"$cache"
   fi
   rv=$(cat "$cache" 2>/dev/null)
