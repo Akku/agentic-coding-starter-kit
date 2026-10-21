@@ -2,7 +2,7 @@
 
 *STEM – Agentic Coding Starter Kit*
 
-**Version 1.1.1** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 1.1.2** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -31,14 +31,14 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 - Git, Backlog.md, ein Vision-Dokument, Meilensteine (Vertical Slice → MVP → Moonshot) und die ersten 3–7 Tasks aus deinem Ziel. Der Agent fragt dich, was du dir jeweils darunter vorstellst.
 - Kurze Agentenregeln (`AGENTS.md`), die weitere Regeln nur bei Bedarf laden – das spart Tokens.
 - `scripts/run.sh` hält lange Test-/CI-Ausgaben aus dem Kontext; `scripts/session-start.sh` liefert beim Sitzungsstart einen kompakten Stand.
-- Skills für wiederkehrende Aufgaben: `retro`, `handoff`, `promote-learning`, `testing-practices`, `kit-update`.
+- Skills für wiederkehrende Aufgaben: `retro`, `handoff`, `promote-learning`, `testing-practices`, `stem-update`.
 
 ## Im Alltag
 
 - Der Agent erklärt, was er tut und warum, fasst jeden Schritt zusammen und gibt dir einen direkten Link, wenn du etwas testen oder entscheiden sollst. Sag jederzeit „antworte knapper“; die erste Retro fragt, ob die Menge passte.
 - Sind mehrere zusammengehörige Tasks bereit, bietet der Agent an, sie als Batch abzuarbeiten; du genehmigst einmal.
 - Die Arbeit ist backlog-getrieben: jede Änderung ist ein Task mit Akzeptanzkriterien. Ansehen mit `backlog board` oder `backlog browser`.
-- Meldet der Agent zu Sitzungsbeginn eine neuere Kit-Version, kann der Skill `kit-update` dein Projekt aktualisieren (nur mit deiner Zustimmung).
+- Meldet der Agent zu Sitzungsbeginn eine neuere Kit-Version, kann der Skill `stem-update` dein Projekt aktualisieren (nur mit deiner Zustimmung).
 - Hat ein Meilenstein keine Tasks mehr, schlägt der Agent die nächsten vor; du entscheidest.
 - Sagt der Agent, dass der Kontext groß ist, hat er das Handoff geschrieben; öffne eine neue Sitzung und sage „Mach mit dem Handoff weiter“ (die neue Sitzung startet informiert). Optional: Eine Statuszeile kann in Claude Code die Kontextnutzung anzeigen (siehe deren Dokumentation).
 - Eine Sitzung endet mit dem Skill `handoff`; die nächste beginnt mit `docs/agent/HANDOFF.md`.

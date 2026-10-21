@@ -1,5 +1,5 @@
 ---
-name: design-alignment
+name: alignment
 description: Short, interruptible interview that builds a shared understanding before planning - one question at a time, each with a recommended answer, walking the open decisions in dependency order. Use for unclear or new features, before a large task, when output surprised the user, or optionally during setup.
 ---
 

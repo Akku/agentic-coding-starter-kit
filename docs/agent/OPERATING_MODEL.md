@@ -599,7 +599,7 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 
 `KIT_VERSION` holds the kit's `repo` and the `version` this project was created or last updated from. `scripts/session-start.sh` compares it once per day with the public kit and prints one line when a newer version exists.
 
-- Tell the user once about a newer version (one sentence) and offer the `kit-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `LEARNINGS.md`, skills the project changed).
+- Tell the user once about a newer version (one sentence) and offer the `stem-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `LEARNINGS.md`, skills the project changed).
 - Updates are normal backlog tasks: read the kit `CHANGELOG.md` entries since the local version, pick what helps this project, apply, verify, commit.
 - If the kit is unreachable, continue silently; the retro checks again.
 <!-- RULE:R-KIT-UPDATE:END -->
@@ -609,7 +609,7 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 
 Generated code is cheap to produce and expensive to change; without deliberate design every change adds entropy. The agent works tactically, the user keeps strategic ownership. Source: one practitioner's talk plus project experience; hypotheses, check in the retro.
 
-- **Align first** when requirements are unclear: `design-alignment` skill (short, stoppable), not a plan built on guesses.
+- **Align first** when requirements are unclear: `alignment` skill (short, stoppable), not a plan built on guesses.
 - **Feedback rate is the speed limit:** produce small increments and run the cheapest check after each (type check, linter, test, looking at the UI). Do not write large amounts of code before the first check. For UI work give the agent a way to see the result (browser tool or screenshots).
 - **Deep modules:** prefer few modules with a simple interface and much behavior behind it over many shallow ones; they are easier to test and to navigate (read the interface, not the internals).
 - **Owned interfaces:** a new or changed public interface or module boundary is a decision for the user (propose, then agree); the inside of a module can be delegated. Treat low-risk modules as gray boxes tested from outside; money, security and personal data get closer scrutiny and review (`R-REVIEW`).

@@ -1,6 +1,9 @@
 # Changelog
 
-Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
+Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits.
+
+## 1.1.2
+- **Skills renamed:** `kit-update` -> `stem-update`, `design-alignment` -> `alignment` (folders under `.claude/skills/`, front matter and all references in `AGENTS.md`, rules, `SETUP.md`, scripts, READMEs). Existing projects: rename the two skill folders (`git mv`), set `name:` in each `SKILL.md`, replace the old names in `AGENTS.md` (skills line, rule 1d), `docs/agent/OPERATING_MODEL.md` and `scripts/session-start.sh` (update message); older entries in this changelog keep the old names. Benefits: all projects; shorter and clearer names.
 
 ## 1.1.1
 - **`CONTRIBUTING.md`** (kit repository only, not copied into projects): how to propose changes and learnings; linked from the READMEs. Benefits: contributors.

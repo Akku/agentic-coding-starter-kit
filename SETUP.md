@@ -25,7 +25,7 @@ Ask in one short message: "Is the project **small** (a script, a small tool, a f
 | Module | What it gives you / what it costs | Small | Medium | Large |
 | --- | --- | --- | --- | --- |
 | Vision and milestones (M1-M3) | Written goal and a thin first slice, so work does not drift. Costs ~10 min up front. Small: one-sentence vision and M1 only. | short | on | on |
-| Design interview (`design-alignment`) | The agent asks one question at a time before building, which avoids rework from misunderstandings. Costs your time: 2-4 questions small, 5-12 medium, 10-20 in rounds large. | on | on | on |
+| Design interview (`alignment`) | The agent asks one question at a time before building, which avoids rework from misunderstandings. Costs your time: 2-4 questions small, 5-12 medium, 10-20 in rounds large. | on | on | on |
 | UX designer and concept phase | Mockups and screen reviews before UI code. Only useful with a user interface. | off | if UI | if UI |
 | Context warning hook (needs Python) | Warns when a session gets long and costly and suggests a fresh one. Costs a few lines of context only when it fires. | off | on | on |
 | Testing practices skill | Test-quality hints (realistic data, what green really proves). Useful once tests exist. | off | on | on |
@@ -86,7 +86,7 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Do not add further agents, skills, hooks or telemetry now (`R-DECISION`); the modules chosen in step 1b are the only optional pieces. Remove what is off.
 
 ## 7. First backlog
-If the goal is still vague, run the `design-alignment` skill (stoppable) with the depth from step 1b (small 2-4, medium 5-12, large 10-20 questions in rounds) before writing the vision.
+If the goal is still vague, run the `alignment` skill (stoppable) with the depth from step 1b (small 2-4, medium 5-12, large 10-20 questions in rounds) before writing the vision.
 If the direction is unclear or the project has a user interface, follow `R-CONCEPT` first (concept phase); the `ux-designer` agent prepares the mockup rounds. Also check whether existing skill collections offer skills that fit the stack.
 Follow `R-ROADMAP`: write the vision (audience, core value, non-goals, moonshot ideas) as a Backlog.md doc (`backlog doc create "Vision"`, check `--help`), then create the milestones `backlog milestone add "M1 Vertical slice" -d "<goal + exit criterion>"`, `M2 MVP`, and `M3 Moonshot` (description only).
 Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `--help`): small, each with checkable acceptance criteria. The first task is a walking skeleton that already runs the verification command end to end. Tasks for M2 are created later (`R-ROADMAP`).

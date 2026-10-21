@@ -6,7 +6,7 @@
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.1.1** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+**Version 1.1.2** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
 
 🇬🇧 **English version: [README.md](README.md)**
 
@@ -48,7 +48,7 @@ Reflect ist der Skill `retro`: Learnings fließen ins Harness zurück (und, wenn
 
 ## Aktuell bleiben
 
-Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere Kit-Version gibt, und sagt dir Bescheid. Mit deiner Zustimmung liest der Skill `kit-update` das [Changelog](CHANGELOG.md), wählt aus, was deinem Projekt nützt, und übernimmt es, ohne projektspezifische Inhalte zu überschreiben. Auch der Skill `retro` prüft das Kit.
+Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere Kit-Version gibt, und sagt dir Bescheid. Mit deiner Zustimmung liest der Skill `stem-update` das [Changelog](CHANGELOG.md), wählt aus, was deinem Projekt nützt, und übernimmt es, ohne projektspezifische Inhalte zu überschreiben. Auch der Skill `retro` prüft das Kit.
 
 ## Start-Prompt
 
@@ -64,7 +64,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | Datei | Zweck |
 | --- | --- |
 | `STARTE_HIER.md` / `START_HERE.md` | Anleitung für Menschen (DE/EN) |
-| `.claude/skills/` | Skills: `retro`, `design-alignment`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
+| `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `testing-practices`, `stem-update` |
 | `.claude/agents/` | Agenten: `ux-designer` (für Projekte mit Oberfläche) |
 | `SETUP.md` | Einmalige Setup-Anleitung für den Agenten (wird nach dem Setup gelöscht) |
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |

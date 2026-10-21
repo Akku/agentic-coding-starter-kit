@@ -23,7 +23,7 @@ if [ -f KIT_VERSION ]; then
   fi
   rv=$(cat "$cache" 2>/dev/null)
   if [ -n "$rv" ] && [ -n "$lv" ] && [ "$rv" != "$lv" ] && [ "$(printf '%s\n%s\n' "$lv" "$rv" | sort -V | tail -1)" = "$rv" ]; then
-    echo "KIT UPDATE AVAILABLE: $lv -> $rv (offer the kit-update skill; do not update unasked)"
+    echo "KIT UPDATE AVAILABLE: $lv -> $rv (offer the stem-update skill; do not update unasked)"
   fi
 else
   echo "no KIT_VERSION file"

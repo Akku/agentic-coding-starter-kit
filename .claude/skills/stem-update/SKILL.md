@@ -1,5 +1,5 @@
 ---
-name: kit-update
+name: stem-update
 description: Bring a project created from the STEM starter kit up to date with the current kit - read the changelog since the local version, pick what helps this project, apply it with the user's approval. Use when session start reports "KIT UPDATE AVAILABLE", before a retro, or when the user asks about kit updates.
 ---
 

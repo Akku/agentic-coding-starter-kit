@@ -6,7 +6,7 @@
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.1.1** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+**Version 1.1.2** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
 
 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
@@ -48,7 +48,7 @@ Reflect is the `retro` skill: learnings flow back into the harness (and, once pr
 
 ## Staying up to date
 
-At the start of each session the agent checks (once per day) whether a newer kit version exists and tells you. With your approval the `kit-update` skill reads the [changelog](CHANGELOG.md), picks what helps your project and merges it without overwriting your project-specific content. The `retro` skill checks the kit as well.
+At the start of each session the agent checks (once per day) whether a newer kit version exists and tells you. With your approval the `stem-update` skill reads the [changelog](CHANGELOG.md), picks what helps your project and merges it without overwriting your project-specific content. The `retro` skill checks the kit as well.
 
 ## Prompt to start
 
@@ -67,7 +67,7 @@ Give this to the agent after opening the folder:
 | `SETUP.md` | One-time setup procedure for the agent (deleted after setup) |
 | `AGENTS.md` | Shared core rules (Codex and compatible tools) |
 | `CLAUDE.md`, `.github/copilot-instructions.md` | Thin adapters pointing to `AGENTS.md` |
-| `.claude/skills/` | Skills: `retro`, `design-alignment`, `handoff`, `promote-learning`, `testing-practices`, `kit-update` |
+| `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `testing-practices`, `stem-update` |
 | `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
 | `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
 | `KIT_VERSION`, `CHANGELOG.md` | Kit version this project is based on; what changed per version |
