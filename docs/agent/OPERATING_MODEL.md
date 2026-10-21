@@ -378,6 +378,8 @@ A review subagent should normally return actionable findings with location, fail
 Skills should encapsulate recurring workflows and refer to authoritative shared rules instead of copying them. Tool-specific skills should document a fallback when the preferred tool is unavailable; unavailable evidence remains open rather than being silently assumed.
 
 For small mechanical changes, delegation may cost more than it saves.
+
+Project agents live in `.claude/agents/<name>.md` (for example `ux-designer`, see `R-CONCEPT`); tools without agent support read the file as instructions for a subagent.
 <!-- RULE:R-DELEGATION:END -->
 
 <!-- RULE:R-REVIEW:START -->

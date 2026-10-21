@@ -3,6 +3,7 @@
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
 ## Unreleased
+- **`AGENTS.md` slimmed (5.9 -> 4.6 KB):** removed the human-only intro and a duplicate line, shortened skills/session-start/roadmap/design/output rules, moved the Agents line and the delegation rule into `R-CONCEPT`/`R-DELEGATION` (already there; one sentence added), rule 10 now defers to `R-BATCHING`. Core rules renumbered (delegation removed). Setup removes the `If TODO` line when done. Benefits: lower fixed context in every session; check in the next retro via `context-report.py` that moved rules still load.
 - **Floor-relative context threshold:** `scripts/context-check.py` warns at the smallest of first-turn context + 40k, 100k and half the model's window (model read from the transcript; unknown model: 100k). Notice text and `R-BATCHING` now say when to continue instead of handing off. `context-report.py` also detects rule loads via `sed '/R-ID:START/...'`; `retro-metrics.sh --snapshot` no longer overwrites a same-day baseline. Benefits: projects with the context hook.
 
 ## 1.0.0
