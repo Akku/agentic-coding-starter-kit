@@ -10,7 +10,25 @@ The ZIP route sometimes loses hidden folders (names starting with a dot are hidd
 ## 1. Understand the kit (≈2 min, do not read everything)
 Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; other agents read the file directly.
 
+## 1b. Project size and modules (ask first, before step 2)
+Ask in one short message: "Is the project **small** (a script, a small tool, a few days), **medium** (an app or service with several features, weeks) or **large** (many parts, several people or long-running)? If unsure: medium." Then show the checklist below with the size's preselection, each line with its effect in plain words, and let the user toggle any item. The core is always on and is not offered as a choice: tasks (Backlog.md), commit guard, handoff and session start, `scripts/run.sh`, `AGENTS.md`.
+
+| Module | What it gives you / what it costs | Small | Medium | Large |
+| --- | --- | --- | --- | --- |
+| Vision and milestones (M1-M3) | Written goal and a thin first slice, so work does not drift. Costs ~10 min up front. Small: one-sentence vision and M1 only. | short | on | on |
+| Design interview (`design-alignment`) | The agent asks one question at a time before building, which avoids rework from misunderstandings. Costs your time: 2-4 questions small, 5-12 medium, 10-20 in rounds large. | on | on | on |
+| UX designer and concept phase | Mockups and screen reviews before UI code. Only useful with a user interface. | off | if UI | if UI |
+| Context warning hook (needs Python) | Warns when a session gets long and costly and suggests a fresh one. Costs a few lines of context only when it fires. | off | on | on |
+| Testing practices skill | Test-quality hints (realistic data, what green really proves). Useful once tests exist. | off | on | on |
+| Market analysis (when available) | Looks at existing alternatives so you do not rebuild what exists. | off | on | on |
+| Glossary (`docs/GLOSSARY.md`) | One list of domain terms and their code and UI names; worth it with many terms or several languages. | off | many terms only | on |
+| Architecture map (`docs/ARCHITECTURE.md`) | Short module overview that the agent reads instead of the code. Must be kept current. | off | off | on |
+| Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch; may block installs or network. Offered, never preselected. | ask | ask | ask |
+
+What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) so they cost no context. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
+
 ## 2. Ask the user (one message, all questions together)
+Scale to the size from step 1b: small = goal in 1-2 sentences, stack, confidential inputs, GitHub; skip horizons beyond the vertical slice, agents and model questions (use defaults); medium/large = all questions.
 - Project goal in 3–5 sentences (what, for whom, what "done" looks like).
 - Three horizons (see `R-ROADMAP`): the **vertical slice** (thinnest end-to-end path that proves the idea), what belongs in the **MVP** (and what is explicitly out), and the **moonshot** (the dream version). If the user has no answer, propose one from the goal and ask for corrections.
 - Stack/language preferences, or "decide for me".
@@ -56,10 +74,10 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Adapt the summary `grep` in `scripts/run.sh` to the test runner's output format, if needed.
 - Create `docs/agent/HANDOFF.md` (max ~40 lines: current task, approvals, next step, blockers). `scripts/session-start.sh` prints it.
 - Add stack-specific pitfalls to `docs/agent/PITFALLS.md` only if already known.
-- Do not add further agents, skills, hooks or telemetry now (`R-DECISION`). If the project has a user interface, keep `.claude/agents/ux-designer.md`; otherwise delete it.
+- Do not add further agents, skills, hooks or telemetry now (`R-DECISION`); the modules chosen in step 1b are the only optional pieces. Remove what is off.
 
 ## 7. First backlog
-If the goal is still vague, run the `design-alignment` skill in a short form (it is stoppable) before writing the vision.
+If the goal is still vague, run the `design-alignment` skill (stoppable) with the depth from step 1b (small 2-4, medium 5-12, large 10-20 questions in rounds) before writing the vision.
 If the direction is unclear or the project has a user interface, follow `R-CONCEPT` first (concept phase); the `ux-designer` agent prepares the mockup rounds. Also check whether existing skill collections offer skills that fit the stack.
 Follow `R-ROADMAP`: write the vision (audience, core value, non-goals, moonshot ideas) as a Backlog.md doc (`backlog doc create "Vision"`, check `--help`), then create the milestones `backlog milestone add "M1 Vertical slice" -d "<goal + exit criterion>"`, `M2 MVP`, and `M3 Moonshot` (description only).
 Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `--help`): small, each with checkable acceptance criteria. The first task is a walking skeleton that already runs the verification command end to end. Tasks for M2 are created later (`R-ROADMAP`).
