@@ -1,6 +1,6 @@
 # Agentic Coding Starter Kit
 
-**Version 0.16.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
+**Version 0.17.0** · 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
 A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
 
@@ -39,6 +39,7 @@ Give this to the agent after opening the folder:
 | `scripts/check-backlog.sh`, `scripts/retro-metrics.sh` | Backlog consistency check (also in the pre-commit hook); measured evidence for retros |
 | `docs/agent/stacks/` | Stack-specific notes, loaded only when the stack applies |
 | `scripts/context-report.py` | Optional retro tool (Claude Code): where the context went, longest sessions; numbers only |
+| `scripts/context-check.py` | Claude Code hook: warns when the context is large and a new session is due |
 | `scripts/run.sh` | Compact output for tests/CI/CLI (exit code preserved, full log outside the repo) |
 | `scripts/session-start.sh` | Read-only session start (branch, changes, tasks, handoff) |
 | `docs/agent/OPERATING_MODEL.md` | Rules with stable IDs (`R-*`), loaded selectively |

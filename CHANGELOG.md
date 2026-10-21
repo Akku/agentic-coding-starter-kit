@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## 0.17.0
+- **Context watchdog:** `scripts/context-check.py` as `UserPromptSubmit` hook (Claude Code) adds a notice to the agent's context above min(half window, 100k tokens) and every +30k; the agent finishes the task, writes the handoff and tells the user (with a ready sentence) to continue in a new session. Replaces the vague "~300 turns" rule in `R-BATCHING`; `AGENTS.md` rule 10 covers agents without the hook. Experiment entry updated (grade G1). Python 3 added as optional prerequisite in setup.
+
 ## 0.16.0
 - **Evidence standard for cost-carrying rules only** (`AGENTS.md` content, default model/effort, session-length threshold, communication standard): entry in `docs/agent/EXPERIMENTS.md` *before* the change (hypothesis, metric, threshold, check date, confounders), baseline via `scripts/retro-metrics.sh --snapshot`, comparison per accepted task, one change at a time where practical, evidence grades G0-G3; "effective" only from G2, kit defaults need G3 or a mechanical reason. `retro-metrics.sh` normalises per accepted task and shows models and effort as confounders; `context-report.py` gained `--since` and `--brief`. Other changes keep the light ladder. Reason: observational data from small projects cannot show cause and effect.
 

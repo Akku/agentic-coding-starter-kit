@@ -276,7 +276,14 @@ Do not impose a fixed number of tasks per batch unless repository evidence later
 
 ### Session length
 
-Every turn re-reads the whole carried context, so cost grows with session length (observed in one project: three sessions of 1000-2000 turns caused about 80 % of all cache-read tokens; average carried context about 360k tokens per turn). Hypothesis to verify in the retro with `scripts/context-report.py`: hand off (`handoff` skill) and continue in a fresh session at a task or milestone boundary, or after roughly 300 turns, instead of letting one session run on.
+Every turn re-reads the whole carried context, so cost grows with session length, and quality tends to decline before the window is full ("context rot"; observed in one project: three sessions of 1000-2000 turns caused about 80 % of all cache-read tokens, average carried context about 360k tokens per turn).
+
+**Threshold (hypothesis, tracked in `docs/agent/EXPERIMENTS.md`):** the smaller of half the model's context window and 100k tokens.
+
+- **Signal:** the agent cannot see its own context size. In Claude Code the `UserPromptSubmit` hook (`scripts/context-check.py`) adds a notice to the context above the threshold (again every +30k). Tools that display usage (a status line, a usage command) work as well. Without any signal, use proxies: a very long session, many large tool outputs, a compaction that already happened.
+- **Reaction:** never abandon a task midway. When the task is finished, write `docs/agent/HANDOFF.md` (`handoff` skill) and, as the last paragraph of the reply, tell the user that the context is large and give a ready sentence for the new session (the session-start hook shows the handoff). Far above the threshold (over 1.5x) recommend the switch immediately.
+- The user decides; continuing in the same session stays possible.
+
 <!-- RULE:R-BATCHING:END -->
 
 <!-- RULE:R-BATCH-CONTRACT:START -->

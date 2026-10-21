@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Write or refresh docs/agent/HANDOFF.md so the next session can continue without replaying history; also the end-of-session checklist. Use when ending a session, at a task or milestone boundary, after roughly 300 turns, when context is large, or before switching agents.
+description: Write or refresh docs/agent/HANDOFF.md so the next session can continue without replaying history; also the end-of-session checklist. Use when ending a session, at a task or milestone boundary, when a context notice reports a large context (threshold in `R-BATCHING`), or before switching agents.
 ---
 
 # Handoff / session end

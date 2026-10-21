@@ -1,6 +1,6 @@
 # Starte hier
 
-**Version 0.16.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 0.17.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
@@ -38,6 +38,7 @@ Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md
 - Die Arbeit ist backlog-getrieben: jede Änderung ist ein Task mit Akzeptanzkriterien. Ansehen mit `backlog board` oder `backlog browser`.
 - Meldet der Agent zu Sitzungsbeginn eine neuere Kit-Version, kann der Skill `kit-update` dein Projekt aktualisieren (nur mit deiner Zustimmung).
 - Hat ein Meilenstein keine Tasks mehr, schlägt der Agent die nächsten vor; du entscheidest.
+- Sagt der Agent, dass der Kontext groß ist, hat er das Handoff geschrieben; öffne eine neue Sitzung und sage „Mach mit dem Handoff weiter“ (die neue Sitzung startet informiert). Optional: Eine Statuszeile kann in Claude Code die Kontextnutzung anzeigen (siehe deren Dokumentation).
 - Eine Sitzung endet mit dem Skill `handoff`; die nächste beginnt mit `docs/agent/HANDOFF.md`.
 - Nach dem ersten Meilenstein: Retro (Skill `retro`). Sie prüft auch das Harness selbst, inklusive der offenen Fragen in `docs/agent/LEARNINGS.md`.
 - Keine Zugangsdaten ins Repository.

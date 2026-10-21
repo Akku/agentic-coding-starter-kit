@@ -26,6 +26,16 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/context-check.py\" 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   }
 }

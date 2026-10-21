@@ -21,7 +21,7 @@ Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live 
 - Create a GitHub repository now? Default: private, none yet.
 
 ## 3. Check and install prerequisites (assume a non-technical user)
-Detect the OS (`uname -s`, or `$OS`/`ver` on Windows). Check: `git --version`, `node --version`, `npm --version`, `backlog --version`; optionally `gh --version`.
+Detect the OS (`uname -s`, or `$OS`/`ver` on Windows). Check: `git --version`, `node --version`, `npm --version`, `backlog --version`, `python3 --version` (optional); optionally `gh --version`.
 **Do it yourself.** For each missing tool: say in one plain sentence what it is for, then run the install command (the tool-permission prompt is the user's approval) and verify with the version command. Give the user step-by-step instructions only if they decline the approval, the app denies the command, or a step cannot be automated (e.g. a password or admin prompt: the user types it themselves, never in chat; a GUI installer). After manual steps, re-check with the version command and continue. After an install the terminal/app may need a restart to find the tool; say so.
 
 | Tool | macOS | Windows | Linux |
@@ -29,6 +29,7 @@ Detect the OS (`uname -s`, or `$OS`/`ver` on Windows). Check: `git --version`, `
 | Git | `xcode-select --install` (also installs Command Line Tools) or `brew install git` | `winget install --id Git.Git -e` (includes Git Bash) | `sudo apt install git` / distro equivalent |
 | Node.js (LTS) | `brew install node`, or the installer from nodejs.org | `winget install --id OpenJS.NodeJS.LTS -e` | `sudo apt install nodejs npm`, or nodejs.org |
 | Backlog.md | `brew install backlog-md` or `npm i -g backlog.md` | `npm i -g backlog.md` (no Windows-specific steps in its README; fallback `npx backlog.md`) | `npm i -g backlog.md` |
+| Python 3 (optional: context warning hook and reports in `scripts/*.py`) | usually present with Command Line Tools; else `brew install python` | `winget install --id Python.Python.3.12 -e` | `sudo apt install python3` |
 | GitHub CLI (optional) | `brew install gh` | `winget install --id GitHub.cli -e` | see cli.github.com |
 
 Homebrew missing on macOS: offer the installer from brew.sh (needs the user's password, typed by the user in the terminal) or use the npm route. `winget` missing on Windows: use the installers from git-scm.com and nodejs.org.
