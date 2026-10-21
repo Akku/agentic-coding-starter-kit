@@ -2,7 +2,7 @@
 
 *STEM – Agentic Coding Starter Kit*
 
-**Version 1.0.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
+**Version 1.1.0** · 🇬🇧 **English version: [START_HERE.md](START_HERE.md)**
 
 Dieses Kit ist ein Startpunkt für agentische Entwicklung mit Git und Backlog.md. Du gibst dem Agenten dein Projektziel; er installiert, was fehlt, richtet die Werkzeuge ein, passt die Regeln an dein Ziel an und arbeitet danach Task für Task. Im Standardweg ist kein technisches Wissen nötig.
 
