@@ -8,6 +8,9 @@ if [ "${1:-}" = "--snapshot" ]; then
   n=2; while [ -e "$out" ]; do out="docs/agent/baselines/$(date +%F)-$n.txt"; n=$((n+1)); done  # never overwrite an earlier baseline
   "$0" "$@" | tee "$out"; echo "baseline saved: $out"; exit 0
 fi
+# --repo PATH (repeatable): also count commits of another repository (e.g. the product repo of a kit project).
+repos=()
+while [ "${1:-}" = "--repo" ]; do repos+=("$2"); shift 2; done
 since=${1:-$(date -v-14d +%Y-%m-%d 2>/dev/null || date -d '14 days ago' +%Y-%m-%d)}
 echo "== retro metrics since $since =="
 files=(backlog/tasks/*.md)
@@ -28,6 +31,16 @@ read -r add del < <(git log --since="$since 00:00" --numstat --format= | awk '{a
 share=0; [ "${add:-0}" -gt 0 ] && share=$(( 100*del/add ))
 echo "lines added/deleted: ${add:-0} / ${del:-0} (deleted share $share %; high values right after features point to rework)"
 echo "review/fix commits (message contains fix or review): $(git log --since="$since 00:00" --oneline | grep -ciE 'fix|review')"
+# Handoff overhead and untracked work: handoff commits and commits without a task ID (TASK-n / task n), per repository.
+commit_stats() {  # $1 = repo path, $2 = label
+  local all hand notask
+  all=$(git -C "$1" log --since="$since 00:00" --format=%s | wc -l | tr -d ' ')
+  hand=$(git -C "$1" log --since="$since 00:00" --format=%s | grep -ciE '^handoff|handoff update|; handoff' || true)
+  notask=$(git -C "$1" log --since="$since 00:00" --format=%s | grep -vciE 'task[- ]?[0-9]' || true)
+  echo "$2: $all commits, $hand handoff, $notask without task ID ($([ "$all" -gt 0 ] && echo $((100*notask/all)) || echo 0) %), fix/review $(git -C "$1" log --since="$since 00:00" --format=%s | grep -ciE 'fix|review' || true)"
+}
+commit_stats . "this repo"
+for r in "${repos[@]+"${repos[@]}"}"; do commit_stats "$r" "repo $r"; done
 if command -v gh >/dev/null 2>&1; then
   echo "CI runs since $since (conclusions):"; gh run list --limit 100 --json conclusion,createdAt --jq "[.[]|select(.createdAt>=\"$since\")]|group_by(.conclusion)|map({(.[0].conclusion):length})|add" 2>/dev/null | sed 's/^/  /'
 fi

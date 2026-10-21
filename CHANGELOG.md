@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
 
+## Unreleased
+- **Retro extended:** user view (friction, communication in the full stage), silent-inefficiency check, pooled `Series:` line, unverified-evidence list with evidence grade, reviewer subagent with the standing question "what does the retro not capture", retro action items become Backlog tasks, first-use check for changed skills and rules. `scripts/retro-metrics.sh` takes `--repo <path>` and reports handoff commits and commits without task ID; `scripts/check-backlog.sh` reports duplicate task IDs (pre-commit).
+
 ## 1.1.4
 - **Retro reworked:** `session-start.sh` prints `RETRO DUE` when 8 or more tasks (env `RETRO_DUE_AFTER`) are Done since the last `docs/agent/retros/YYYY-MM-DD.md` commit; the `retro` skill has a light stage (steps 1-6) and a full stage (kit check, independent read, optional practices, `AGENTS.md` budget, milestone check, promote), a skill-review step, topics collected first and prioritised once, the first-retro special case in its own section. New convention: when a skill step did not fit, write `Learning: skill <name>: ...` in the task notes (added to every skill and `R-LEARNING`). `EXPERIMENTS.md` has an entry measuring whether this makes retros happen and pay off. Benefits: all projects; retros no longer depend on the agent remembering. Migration: none; copy the changed skills, `scripts/session-start.sh` and the `R-LEARNING` paragraph.
 

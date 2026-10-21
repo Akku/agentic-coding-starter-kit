@@ -6,6 +6,9 @@ cd "$(dirname "$0")/.."
 files=("$@"); [ ${#files[@]} -gt 0 ] || files=(backlog/tasks/*.md)
 status_of() { awk -F': ' '/^status:/{print $2; exit}' "$1"; }
 bad=0
+# Duplicate task IDs (e.g. two sessions or two projects creating the same number): always checked across all tasks.
+dups=$(awk -F': ' '/^id:/{print tolower($2)}' backlog/tasks/*.md 2>/dev/null | sort | uniq -d)
+for d in $dups; do echo "duplicate task id: $d"; bad=1; done
 for f in "${files[@]}"; do
   [ -f "$f" ] || continue
   [ "$(status_of "$f")" = "Done" ] || continue
