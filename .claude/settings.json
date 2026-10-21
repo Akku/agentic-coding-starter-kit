@@ -32,7 +32,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/context-check.py\" 2>/dev/null || true"
+            "command": "for p in python3 python \"py -3\"; do $p -c \"import sys; sys.exit(sys.version_info[0] < 3)\" 2>/dev/null && { $p \"$CLAUDE_PROJECT_DIR/scripts/context-check.py\" 2>/dev/null; break; }; done; true"
           }
         ]
       }

@@ -31,7 +31,7 @@ def main():
         return n
     for f in files:
         turns, u, pend, items = 0, collections.Counter(), {}, []
-        for line in open(f, errors="replace"):
+        for line in open(f, encoding="utf-8", errors="replace"):
             try: r = json.loads(line)
             except ValueError: continue
             m = r.get("message") if isinstance(r.get("message"), dict) else {}
@@ -84,7 +84,7 @@ def main():
     print("\nusage of optional material (retro: use deliberately, keep, or remove):")
     known = set()
     for f in ("docs/agent/OPERATING_MODEL.md", "docs/agent/ADVANCED.md"):
-        if os.path.exists(f): known |= set(re.findall(r"<!-- RULE:(R-[A-Z-]+):START -->", open(f).read())) - {"R-INDEX"}
+        if os.path.exists(f): known |= set(re.findall(r"<!-- RULE:(R-[A-Z-]+):START -->", open(f, encoding="utf-8").read())) - {"R-INDEX"}
     print("  rules loaded by ID:", dict(rules.most_common()) or "none")
     if known: print("  rules never loaded:", ", ".join(sorted(known - set(rules))) or "none")
     avail = set(os.listdir(".claude/skills")) if os.path.isdir(".claude/skills") else set()

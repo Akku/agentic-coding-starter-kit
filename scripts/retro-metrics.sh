@@ -40,8 +40,9 @@ for f in "${files[@]}"; do
   [ -n "$u" ] && [ "$u" \> "$since" -o "$u" = "$since" ] && done_p=$((done_p+1))
 done
 echo "accepted tasks in period (Done, updated since $since): $done_p"
-if [ -f scripts/context-report.py ] && command -v python3 >/dev/null 2>&1; then
-  b=$(python3 scripts/context-report.py --since "$since" --brief 2>/dev/null | head -1)
+py=""; for c in python3 python "py -3"; do $c -c "import sys; sys.exit(sys.version_info[0] < 3)" 2>/dev/null && { py=$c; break; }; done   # Windows: python3 is often a Store stub
+if [ -f scripts/context-report.py ] && [ -n "$py" ]; then
+  b=$($py scripts/context-report.py --since "$since" --brief 2>/dev/null | head -1)
   case "$b" in sessions=*)
     echo "usage: $b"
     t=$(echo "$b" | sed -n 's/.* turns=\([0-9]*\).*/\1/p'); c=$(echo "$b" | sed -n 's/.*cache_read=\([0-9]*\).*/\1/p')

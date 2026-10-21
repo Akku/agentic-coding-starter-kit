@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
+## Unreleased
+- **Windows fixes:** the context hook and `retro-metrics.sh` find Python as `python3`, `python` or `py -3` (the `python3` name is a Store stub on Windows, the hook used to fail silently); `.gitattributes` keeps LF in shell and Python scripts so clones with `autocrlf` do not break bash; `context-report.py` reads UTF-8 explicitly; `SETUP.md` names Git for Windows as prerequisite. Benefits: Windows users. Untested on a real Windows machine (static analysis, see the newcomer test).
+
 ## 1.1.0
 - **New optional skill `market-analysis`:** lean web check of existing alternatives, comparison table, gap and build/adapt/use recommendation, stored as a backlog doc. Offered in the `SETUP.md` module checklist (off for small projects). Benefits: medium/large projects avoid rebuilding what exists.
 - **User profile at setup (`SETUP.md` step 1a):** asks expert / technical / non-technical and swaps the `Communication` block in `AGENTS.md` for the chosen variant (expert also sets `outputStyle: Concise`); shipped default is the technical variant, without line limits. Profile recorded in `LEARNINGS.md`, changeable later by telling the agent. Benefits: all new projects; check readability and output tokens in the retro.
