@@ -2,7 +2,7 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
-## Unreleased
+## 1.1.0
 - **New optional skill `market-analysis`:** lean web check of existing alternatives, comparison table, gap and build/adapt/use recommendation, stored as a backlog doc. Offered in the `SETUP.md` module checklist (off for small projects). Benefits: medium/large projects avoid rebuilding what exists.
 - **User profile at setup (`SETUP.md` step 1a):** asks expert / technical / non-technical and swaps the `Communication` block in `AGENTS.md` for the chosen variant (expert also sets `outputStyle: Concise`); shipped default is the technical variant, without line limits. Profile recorded in `LEARNINGS.md`, changeable later by telling the agent. Benefits: all new projects; check readability and output tokens in the retro.
 - **`AGENTS.md` slimmed (5.9 -> 4.6 KB):** removed the human-only intro and a duplicate line, shortened skills/session-start/roadmap/design/output rules, moved the Agents line and the delegation rule into `R-CONCEPT`/`R-DELEGATION` (already there; one sentence added), rule 10 now defers to `R-BATCHING`. Core rules renumbered (delegation removed). Setup removes the `If TODO` line when done. Benefits: lower fixed context in every session; check in the next retro via `context-report.py` that moved rules still load.
