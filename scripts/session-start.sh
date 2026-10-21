@@ -45,5 +45,8 @@ else
 fi
 echo; echo "## backlog check"; scripts/check-backlog.sh 2>/dev/null | head -10; [ "${PIPESTATUS[0]:-0}" -eq 0 ] && echo "ok"
 echo; echo "## handoff"
-if [ -f docs/agent/HANDOFF.md ]; then sed -n '1,40p' docs/agent/HANDOFF.md; else echo "no HANDOFF.md"; fi
+if [ -f docs/agent/HANDOFF.md ]; then
+  sed -n '1,40p' docs/agent/HANDOFF.md
+  [ "$(wc -c < docs/agent/HANDOFF.md)" -gt 2048 ] && echo "WARNING: HANDOFF.md is over 2 KB: rewrite it from scratch (handoff skill); it is loaded every session"
+else echo "no HANDOFF.md"; fi
 echo; echo "Rules: see AGENTS.md; further rules by ID via docs/agent/OPERATING_MODEL.md"
