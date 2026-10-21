@@ -2,7 +2,8 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `kit-update` skill). Each entry: what changed and who benefits.
 
-## Unreleased
+## 1.1.1
+- **`CONTRIBUTING.md`** (kit repository only, not copied into projects): how to propose changes and learnings; linked from the READMEs. Benefits: contributors.
 - **`handoff` skill reworked:** always rewrite `HANDOFF.md` in full (no appending) with fixed headings (state with commit SHA and date, approvals, next step, open evidence, blockers) and a per-line test (drop what git/backlog already show); `Notes` heading (max 3 lines) for facts the next run needs that live nowhere else; short consistency check before saving. Size guard: `session-start.sh` warns and `kit-check` fails above 2 KB. Reason: the file is loaded every session and had grown into stale, contradicting history. Benefits: all projects; check handoff size and staleness in the next retro.
 - **Windows fixes:** the context hook and `retro-metrics.sh` find Python as `python3`, `python` or `py -3` (the `python3` name is a Store stub on Windows, the hook used to fail silently); `.gitattributes` keeps LF in shell and Python scripts so clones with `autocrlf` do not break bash; `context-report.py` reads UTF-8 explicitly; `SETUP.md` names Git for Windows as prerequisite. Benefits: Windows users. Untested on a real Windows machine (static analysis, see the newcomer test).
 
