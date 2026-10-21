@@ -29,12 +29,12 @@ Ask in one short message: "Is the project **small** (a script, a small tool, a f
 | UX designer and concept phase | Mockups and screen reviews before UI code. Only useful with a user interface. | off | if UI | if UI |
 | Context warning hook (needs Python) | Warns when a session gets long and costly and suggests a fresh one. Costs a few lines of context only when it fires. | off | on | on |
 | Testing practices skill | Test-quality hints (realistic data, what green really proves). Useful once tests exist. | off | on | on |
-| Market analysis (when available) | Looks at existing alternatives so you do not rebuild what exists. | off | on | on |
+| Market analysis skill (`market-analysis`) | Web search for existing alternatives and a one-page build-adapt-use recommendation, so you do not rebuild what exists. Costs a few searches. | off | on | on |
 | Glossary (`docs/GLOSSARY.md`) | One list of domain terms and their code and UI names; worth it with many terms or several languages. | off | many terms only | on |
 | Architecture map (`docs/ARCHITECTURE.md`) | Short module overview that the agent reads instead of the code. Must be kept current. | off | off | on |
 | Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch; may block installs or network. Offered, never preselected. | ask | ask | ask |
 
-What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
+What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, `market-analysis`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
 
 ## 2. Ask the user (one message, all questions together)
 Scale to the size from step 1b: small = goal in 1-2 sentences, stack, confidential inputs, GitHub; skip horizons beyond the vertical slice, agents and model questions (use defaults); medium/large = all questions.
