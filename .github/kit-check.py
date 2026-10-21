@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Kit self-check (kit maintenance only; removed from projects by SETUP.md).
-Checks rule markers, rule index, script syntax, skill frontmatter, JSON and version consistency."""
+Checks rule markers, rule index, script syntax, script fixture tests, skill frontmatter, JSON and version consistency."""
 import json, re, subprocess, sys, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
 errors = []
@@ -61,6 +61,10 @@ if "Read(./.env)" not in st.get("permissions", {}).get("deny", []): err("setting
 agents = (root / "AGENTS.md").read_text()
 for d in (root / ".claude/skills").iterdir():
     if f"`{d.name}`" not in agents: err(f"AGENTS.md does not mention skill {d.name}")
+
+# fixture tests for the scripts (.github/tests/test_scripts.py)
+tr = subprocess.run([sys.executable, str(root / ".github/tests/test_scripts.py")], capture_output=True, text=True)
+if tr.returncode: err("script fixture tests failed:\n" + "\n".join(tr.stderr.strip().splitlines()[-15:]))
 
 print("\n".join(errors) if errors else f"kit-check OK (version {v})")
 sys.exit(1 if errors else 0)
