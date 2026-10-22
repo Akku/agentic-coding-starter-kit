@@ -11,7 +11,7 @@ The ZIP route sometimes loses hidden folders (names starting with a dot are hidd
 Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; Copilot reads that folder, Codex via the symlink `.agents/skills`, others read the file directly.
 
 ## 1a. User profile (ask first, before step 1b)
-Ask in one short message how the agent should write to the user: "**1** Expert (compact: results, decisions, problems only), **2** Technical (programmer: technical explanations), **3** Non-technical (plain language: what happened, why it matters, terms explained). If unsure: 2." Then replace the whole `Communication` block in `AGENTS.md` (the three bullets after `**Communication**`) with the chosen variant below, nothing else added. Keep the last bullet (direct way to test, review or decide) in every variant.
+Ask in one short message how the agent should write to the user: "**1** Expert (compact: results, decisions, problems only), **2** Technical (programmer: technical explanations), **3** Non-technical (plain language: what happened, why it matters, terms explained). **Recommend 2 (Technical) as the default** and say so in the message; never recommend 1 or 3 on your own judgment, the user chooses. If unsure or unanswered: 2." Then replace the whole `Communication` block in `AGENTS.md` (the three bullets after `**Communication**`) with the chosen variant below, nothing else added. Keep the last bullet (direct way to test, review or decide) in every variant.
 
 1. Expert: `- Be brief: results, state, decisions the user must make, problems. No reasoning per step unless asked; one sentence per interim update. The user's own instructions override this.` Also set `"outputStyle": "Concise"` in `.claude/settings.json` (Claude Code only; the text covers other tools).
 2. Technical: `- Explain technically what changed, why and what comes next; name files, commands and trade-offs; not every tool call. After each phase (setup step, finished task, session end) summarize it. Ask questions with options and a recommendation. The user's own instructions override this.`
@@ -32,7 +32,7 @@ Ask in one short message: "Is the project **small** (a script, a small tool, a f
 | Market analysis skill (`market-analysis`) | Web search for existing alternatives and a one-page build-adapt-use recommendation, so you do not rebuild what exists. Costs a few searches. | off | on | on |
 | Glossary (`docs/GLOSSARY.md`) | One list of domain terms and their code and UI names; worth it with many terms or several languages. | off | many terms only | on |
 | Architecture map (`docs/ARCHITECTURE.md`) | Short module overview that the agent reads instead of the code. Must be kept current. | off | off | on |
-| Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch; may block installs or network. Offered, never preselected. | ask | ask | ask |
+| Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch, which protects your files from agent mistakes; may block installs or network. Recommended for every project; enabled only on your yes. | recommend | recommend | recommend |
 
 What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, `market-analysis`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
 
@@ -79,7 +79,7 @@ backlog config get autoCommit   # must be false: code and task changes are commi
 - Make sure there is one obvious final verification command and fast targeted ones; document them in `AGENTS.md`. Always via `scripts/run.sh <label> <command>`.
 - Claude Code: add the project's verification commands to `permissions.allow` in `.claude/settings.json` as narrow patterns (e.g. `Bash(scripts/run.sh test npm test)`); never a wildcard on `scripts/run.sh` (it runs arbitrary commands).
 - `AGENTS.md` stays minimal: no project overview or architecture prose, only requirements the agent cannot infer from the code (`R-SECURITY`, retro budget check).
-- Offer, do not enable silently: the tool's shell sandbox for macOS/Linux/WSL2 (Claude Code `sandbox.enabled`, see its docs; it can block installs or network access; not available on native Windows).
+- Recommend (every project size), enable only on the user's yes: the tool's shell sandbox for macOS/Linux/WSL2 (Claude Code `sandbox.enabled`, see its docs; it can block installs or network access; not available on native Windows).
 - Adapt the summary `grep` in `scripts/run.sh` to the test runner's output format, if needed.
 - Create `docs/agent/HANDOFF.md` (max 2 KB, format in the `handoff` skill: state with SHA, approvals, next step, open evidence, blockers). `scripts/session-start.sh` prints it.
 - Add stack-specific pitfalls to `docs/agent/PITFALLS.md` only if already known.
