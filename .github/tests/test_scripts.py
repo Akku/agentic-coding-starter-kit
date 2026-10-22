@@ -166,6 +166,14 @@ class SessionStart(SandboxRepo):
         (self.repo / "docs/agent/retros").mkdir(parents=True); (self.repo / "docs/agent/retros/2026-10-25.md").write_text("retro\n")
         self.assertNotIn("RETRO DUE", self.start({"RETRO_DUE_AFTER": "3"}))  # all tasks older than the retro
 
+    def test_first_retro_section_left_after_retro_warns(self):
+        (self.repo / "docs/agent/retros").mkdir(parents=True); (self.repo / "docs/agent/NEXT_RETRO.md").write_text("# Next retro\n\n## First retro\n\n- item\n")
+        self.assertNotIn("RETRO OPEN ITEMS", self.start())  # no retro notes yet: section is expected
+        (self.repo / "docs/agent/retros/2026-10-25.md").write_text("retro\n")
+        self.assertIn("RETRO OPEN ITEMS", self.start())
+        (self.repo / "docs/agent/NEXT_RETRO.md").write_text("# Next retro\n\n## Due checks\n")
+        self.assertNotIn("RETRO OPEN ITEMS", self.start())
+
     def test_check_backlog_problem_is_shown(self):
         self.task(1, extra="- [ ] #1 open box")
         self.assertIn("TASK-1: Done with 1 unchecked box", self.start())

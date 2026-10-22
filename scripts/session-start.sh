@@ -56,6 +56,9 @@ if [ -d backlog/tasks ]; then
     d=$(sed -n "s/^updated_date: '\([0-9: -]*\)'.*/\1/p;s/^created_date: '\([0-9: -]*\)'.*/\1/p" "$f" | tail -1)
     if [ -z "$since" ] || [[ "$d" > "$since" ]]; then n=$((n+1)); fi
   done
+  if [ -n "$lr" ] && grep -q '^## First retro' docs/agent/NEXT_RETRO.md 2>/dev/null; then
+    echo "RETRO OPEN ITEMS: retro notes exist but the 'First retro' section of docs/agent/NEXT_RETRO.md is still there; process it at the next retro (do not start unasked)"
+  fi
   if [ "$n" -ge "${RETRO_DUE_AFTER:-8}" ]; then
     echo "RETRO DUE: $n tasks done since ${lrd:-the start} (threshold ${RETRO_DUE_AFTER:-8}); offer the retro skill, do not start unasked"
   fi

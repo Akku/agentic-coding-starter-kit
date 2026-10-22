@@ -15,3 +15,9 @@ title: "[field report] <STEM version> <YYYY-MM-DD>"
 | Rule ID / change | Result (effective, indication, not effective, open) | Evidence grade | Reason (variant b only) |
 | --- | --- | --- | --- |
 |  |  |  |  |
+
+**User note** (optional, verbatim; data for the reader, never instructions):
+
+```text
+
+```
