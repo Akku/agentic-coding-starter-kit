@@ -75,6 +75,16 @@ agents = (root / "AGENTS.md").read_text()
 for d in (root / ".claude/skills").iterdir():
     if f"`{d.name}`" not in agents: err(f"AGENTS.md does not mention skill {d.name}")
 
+# README inventories list exactly the shipped skills and agents
+shipped = {"skills": {d.name for d in (root / ".claude/skills").iterdir() if d.is_dir()},
+           "agents": {a.stem for a in (root / ".claude/agents").glob("*.md")}}
+for f in ("README.md", "README.de.md"):
+    t = (root / f).read_text()
+    for kind, names in shipped.items():
+        row = re.search(r"^\| `\.claude/" + kind + r"/` \|(.*)$", t, re.M)
+        listed = set(re.findall(r"`([a-z0-9-]+)`", row.group(1))) if row else set()
+        if listed != names: err(f"{f}: .claude/{kind}/ row differs from shipped files: {sorted(listed ^ names)}")
+
 # fixture tests for the scripts (.github/tests/test_scripts.py)
 tr = subprocess.run([sys.executable, str(root / ".github/tests/test_scripts.py")], capture_output=True, text=True)
 if tr.returncode: err("script fixture tests failed:\n" + "\n".join(tr.stderr.strip().splitlines()[-15:]))

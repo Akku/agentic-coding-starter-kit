@@ -67,8 +67,9 @@ Give this to the agent after opening the folder:
 | `SETUP.md` | One-time setup procedure for the agent (deleted after setup) |
 | `AGENTS.md` | Shared core rules (Codex and compatible tools) |
 | `CLAUDE.md`, `.github/copilot-instructions.md` | Thin adapters pointing to `AGENTS.md` |
-| `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `testing-practices`, `stem-update` |
-| `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
+| `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `stem-update`; optional modules (chosen in setup): `testing-practices`, `market-analysis` |
+| `.agents/skills` | Link to `.claude/skills/`, so Codex reads the same skill files |
+| `.claude/agents/` | Agents: `ux-designer` (optional module, for projects with a UI) |
 | `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
 | `STEM_VERSION`, `CHANGELOG.md` | STEM version this project is based on; what changed per version |
 | `.claude/settings.json` | Claude Code: safe commands pre-approved, session-start hook |
@@ -78,7 +79,7 @@ Give this to the agent after opening the folder:
 | `scripts/context-report.py` | Optional retro tool (Claude Code): where the context went, longest sessions; numbers only |
 | `scripts/context-check.py` | Claude Code hook: warns when the context is large and a new session is due |
 | `scripts/run.sh` | Compact output for tests/CI/CLI (exit code preserved, full log outside the repo) |
-| `scripts/session-start.sh` | Read-only session start (branch, changes, tasks, handoff) |
+| `scripts/session-start.sh` | Session start summary (branch, changes, tasks, handoff); changes no project files, `STEM_OFFLINE=1` for no network |
 | `docs/agent/OPERATING_MODEL.md` | Rules with stable IDs (`R-*`), loaded selectively |
 | `docs/agent/ADVANCED.md` | Rarely needed rules (parallelism, measurement, routing, local models) |
 | `docs/agent/EXPERIMENTS.md` | Hypotheses, metrics, baselines and evidence grades for cost-carrying rules |
