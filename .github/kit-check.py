@@ -50,9 +50,11 @@ if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENT
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 
-# Codex skill path: symlink to the Claude skills (one source for skill text)
+# Codex skill path: link to the Claude skills (one source for skill text); symlink or git's text-file fallback
 link = root / ".agents/skills"
-if not link.is_symlink() or link.resolve() != (root / ".claude/skills").resolve(): err(".agents/skills must be a symlink to ../.claude/skills")
+ok_link = link.is_symlink() and link.resolve() == (root / ".claude/skills").resolve()
+ok_fallback = link.is_file() and link.read_text().strip() == "../.claude/skills"  # git on Windows without symlink support writes the target as text
+if not (ok_link or ok_fallback): err(".agents/skills must be a symlink to ../.claude/skills")
 
 # AGENTS.md is loaded in every session: keep it within budget; settings deny secrets
 if len((root / "AGENTS.md").read_bytes()) > 6144: err("AGENTS.md exceeds the 6 KB budget (move rules to OPERATING_MODEL.md)")

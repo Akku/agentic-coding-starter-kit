@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
 
+## Unreleased
+- **Windows fix for the Codex skill link:** git on Windows without symlink support checks `.agents/skills` out as a text file; `kit-check` accepts that fallback and `SETUP.md` step 0 repairs the link per OS (`ln -s` or `mklink /J` junction, then `git update-index --skip-worktree`). Without the repair only Codex loses the skills; Claude Code and Copilot read `.claude/skills`. Untested on a real Windows machine. Benefits: Windows users with Codex. Migration: none.
+
 ## 1.2.1
 - **Setup defaults fixed:** `SETUP.md` step 1a now tells the agent to recommend profile 2 (Technical) and never to pick Expert or Non-technical on its own; the shell sandbox is recommended (not only offered) at every project size, still enabled only on the user's yes (`SETUP.md` module table and step 4, `R-HARDENING` wording). Benefits: new projects. Migration: none.
 - **Skills for Codex:** the kit ships `.agents/skills` as a symlink to `.claude/skills` (Codex scans `.agents/skills`, follows symlinks; Copilot reads `.claude/skills` natively, checked in the vendor docs); `kit-check` verifies it, `SETUP.md` step 0 recreates it after a ZIP download (which turns links into files), `stem-update` lists it as kit-owned. Benefits: projects used with Codex. Migration: add the link (`mkdir -p .agents && ln -s ../.claude/skills .agents/skills`, Windows: `mklink /J`); a real `.agents/skills` folder with copies of old skills: delete it first.
