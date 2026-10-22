@@ -226,5 +226,25 @@ class RunWrapper(Sandbox):
         self.assertEqual(len(list((self.tmp / "logs").glob("*-same-*.log"))), 3)
 
 
+class RetiredNames(Sandbox):
+    def check(self, root):
+        return run([sys.executable, str(ROOT / ".github/retired-names.py"), str(root)], self.tmp)
+
+    def test_current_product_passes(self):
+        self.assertEqual(self.check(ROOT).returncode, 0)
+
+    def test_planted_reference_fails_with_file_line(self):
+        (self.tmp / "docs").mkdir()
+        (self.tmp / "docs/a.md").write_text("ok\nsee LEARNINGS.md and kit-update\n")
+        (self.tmp / "CHANGELOG.md").write_text("renamed KIT_VERSION\n")  # history may keep old names
+        (self.tmp / "b.md").write_text("design-alignments and my-kit-check-x are other words\n")
+        r = self.check(self.tmp)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("docs/a.md:2: LEARNINGS.md", r.stdout)
+        self.assertIn("docs/a.md:2: kit-update", r.stdout)
+        self.assertNotIn("CHANGELOG", r.stdout)
+        self.assertNotIn("b.md", r.stdout)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

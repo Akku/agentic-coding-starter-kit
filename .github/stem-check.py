@@ -86,6 +86,10 @@ for f in ("README.md", "README.de.md"):
         listed = set(re.findall(r"`([a-z0-9-]+)`", row.group(1))) if row else set()
         if listed != names: err(f"{f}: .claude/{kind}/ row differs from shipped files: {sorted(listed ^ names)}")
 
+# retired names (.github/retired-names.py): a rename leaves no old references behind
+rn = subprocess.run([sys.executable, str(root / ".github/retired-names.py"), str(root)], capture_output=True, text=True)
+if rn.returncode: err(rn.stdout.strip())
+
 # fixture tests for the scripts (.github/tests/test_scripts.py)
 tr = subprocess.run([sys.executable, str(root / ".github/tests/test_scripts.py")], capture_output=True, text=True)
 if tr.returncode: err("script fixture tests failed:\n" + "\n".join(tr.stderr.strip().splitlines()[-15:]))
