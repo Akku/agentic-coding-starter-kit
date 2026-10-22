@@ -12,7 +12,7 @@ If TODO: follow `SETUP.md` first (when the user asks to set up; otherwise ask on
 **Skills** (`.claude/skills/<name>/SKILL.md`; other tools read the file): `retro`, `alignment`, `handoff`, `promote-learning`, `testing-practices`, `market-analysis`, `stem-update`.
 
 ## Session start
-In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/session-start.sh` output; if you do not see its output (other tools, hook disabled), run the script once per session (read-only state summary). Do not replay history.
+In Claude Code a `SessionStart` hook (`.claude/settings.json`) injects `scripts/session-start.sh` output; if you do not see its output (other tools, hook disabled), run the script once per session (state summary; changes no project files). Do not replay history.
 
 ## Core rules (full text by ID: `docs/agent/OPERATING_MODEL.md`)
 1. **Task first** (`R-LIFECYCLE`): every change is a Backlog.md task: task → plan → implement → verify → evidence → done. Use the `backlog` CLI only; run `backlog instructions overview` once per session and `backlog <cmd> --help` for unknown commands.

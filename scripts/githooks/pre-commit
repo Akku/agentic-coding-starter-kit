@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Blocks source documents and local databases from being committed (they may be confidential).
-bad=$(git diff --cached --name-only --diff-filter=AM | grep -i -E '\.(docx|pptx|xlsx|pdf|db|db-shm|db-wal|sqlite)$' || true)
+# All checks cover added, modified, renamed and copied files (diff-filter AMRC), so a rename cannot bypass them.
+bad=$(git diff --cached --name-only --diff-filter=AMRC | grep -i -E '\.(docx|pptx|xlsx|pdf|db|db-shm|db-wal|sqlite)$' || true)
 if [ -n "$bad" ]; then
   echo "pre-commit: refusing to commit source documents / databases:" >&2
   echo "$bad" | sed 's/^/  /' >&2
@@ -13,7 +14,7 @@ fi
 tasks=()
 while IFS= read -r -d '' f; do
   case "$f" in backlog/tasks/*.md) tasks+=("$f") ;; esac
-done < <(git diff --cached --name-only --diff-filter=AM -z)
+done < <(git diff --cached --name-only --diff-filter=AMRC -z)
 if [ ${#tasks[@]} -gt 0 ]; then
   if ! out=$(scripts/check-backlog.sh "${tasks[@]}" 2>&1); then
     echo "pre-commit: backlog check failed:" >&2
@@ -33,7 +34,7 @@ while IFS= read -r -d '' f; do
     .env|*/.env|.env.*|*/.env.*) leaks+=("$f (environment file)"); continue ;;
   esac
   if git diff --cached -U0 --no-color -- "$f" | grep -E '^\+[^+]' | grep -E -q -e "$pat"; then leaks+=("$f (looks like a credential)"); fi
-done < <(git diff --cached --name-only --diff-filter=AM -z)
+done < <(git diff --cached --name-only --diff-filter=AMRC -z)
 if [ ${#leaks[@]} -gt 0 ]; then
   echo "pre-commit: possible secrets, refusing to commit:" >&2
   printf '  %s\n' "${leaks[@]}" >&2

@@ -8,7 +8,7 @@ set -u
 label=$1; shift
 logdir=${AGENT_LOG_DIR:-${TMPDIR:-/tmp}/agent-logs}
 mkdir -p "$logdir"
-log="$logdir/$(date +%Y%m%d-%H%M%S)-${label//[^A-Za-z0-9_-]/_}.log"
+log="$logdir/$(date +%Y%m%d-%H%M%S)-${label//[^A-Za-z0-9_-]/_}-$$.log"  # PID keeps parallel runs with the same label apart
 start=$(date +%s)
 "$@" >"$log" 2>&1
 code=$?

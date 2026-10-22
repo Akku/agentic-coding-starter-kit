@@ -170,6 +170,33 @@ class SessionStart(SandboxRepo):
         self.task(1, extra="- [ ] #1 open box")
         self.assertIn("TASK-1: Done with 1 unchecked box", self.start())
 
+    def test_offline_opt_out_skips_version_check(self):
+        (self.repo / "STEM_VERSION").write_text("version: 1.0.0\nrepo: https://github.com/x/stem\n")
+        marker = self.tmp / "curl-called"
+        (self.nogh / "curl").write_text(f"#!/bin/sh\ntouch '{marker}'\nexit 1\n"); (self.nogh / "curl").chmod(0o755)
+        self.start({"STEM_OFFLINE": "1"})
+        self.assertFalse(marker.exists())
+        self.start()
+        self.assertTrue(marker.exists())  # the stub is reached without the opt-out
+
+
+class PreCommit(SandboxRepo):
+    def test_rename_into_blocked_file_is_rejected(self):
+        run(["git", "config", "core.hooksPath", "scripts/githooks"], self.repo)
+        (self.repo / "notes.txt").write_text("confidential\n" * 20); self.assertEqual(self.commit("init").returncode, 0)
+        run(["git", "mv", "notes.txt", "notes.pdf"], self.repo)
+        r = run(["git", "commit", "-qm", "rename"], self.repo, self.env)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("notes.pdf", r.stderr)
+
+
+class RunWrapper(Sandbox):
+    def test_parallel_runs_with_same_label_get_own_logs(self):
+        env = dict(os.environ, AGENT_LOG_DIR=str(self.tmp / "logs"))
+        procs = [subprocess.Popen(["bash", str(SCRIPTS / "run.sh"), "same", "true"], env=env, stdout=subprocess.DEVNULL) for _ in range(3)]
+        for p in procs: p.wait()
+        self.assertEqual(len(list((self.tmp / "logs").glob("*-same-*.log"))), 3)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)

@@ -600,7 +600,7 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 <!-- RULE:R-STEM-UPDATE:START -->
 ## 23. Staying current with STEM
 
-`STEM_VERSION` holds STEM's `repo` and the `version` this project was created or last updated from. `scripts/session-start.sh` compares it once per day with the public STEM repository and prints one line when a newer version exists.
+`STEM_VERSION` holds STEM's `repo` and the `version` this project was created or last updated from. `scripts/session-start.sh` compares it once per day with the public STEM repository and prints one line when a newer version exists. `STEM_OFFLINE=1` skips this and every other network call of the script.
 
 - Tell the user once about a newer version (one sentence) and offer the `stem-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `LEARNINGS.md`, skills the project changed).
 - Updates are normal backlog tasks: read the STEM `CHANGELOG.md` entries since the local version, pick what helps this project, apply, verify, commit.
