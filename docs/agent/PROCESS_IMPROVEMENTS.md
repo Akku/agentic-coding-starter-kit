@@ -1,8 +1,8 @@
-# Process Improvement Inbox
+# Process improvement handling
 
-Purpose: keep a small **project-local** set of observations that may justify a future change to this project's agentic-development process.
+How observations about this project's agentic-development process are captured, triaged in retros and promoted to STEM. The observations themselves live in one place: `docs/agent/NEXT_RETRO.md`.
 
-This file is NOT part of normal task context. Read it during retrospectives or when explicitly investigating process efficiency. It is not itself a cross-project knowledge base.
+This file is NOT part of normal task context. Read it during retrospectives or when explicitly investigating process efficiency.
 
 ## Capture rule
 
@@ -14,7 +14,7 @@ Learning: <observation> → <possible improvement or question>
 
 Do not require a learning note after every task.
 
-Promote an observation into this inbox only when it appears reusable across tasks, repeated, unusually costly, or surprisingly effective. Do not duplicate every task-local learning here.
+Add an observation to `NEXT_RETRO.md` only when it appears reusable across tasks, repeated, unusually costly, or surprisingly effective. Do not duplicate every task-local learning here.
 
 Typical candidates:
 
@@ -29,12 +29,6 @@ Typical candidates:
 - an agent/tool whose overhead appears disproportionate;
 - a test/evaluation whose proof boundary was misunderstood.
 
-## Open observations
-
-<!-- Minimal format:
-- [TASK-123 / BATCH-X / YYYY-MM-DD] Observation → possible improvement or question
--->
-
 ## Retro handling
 
 During a retrospective, classify useful observations as:
@@ -47,7 +41,7 @@ During a retrospective, classify useful observations as:
 
 For adopted measures, keep implementation and demonstrated effectiveness separate. Define an observable success criterion for a future retro.
 
-Resolved observations should be removed or archived so this inbox stays small.
+Resolved observations are removed from `NEXT_RETRO.md` so it stays small.
 
 ## Cross-project promotion
 

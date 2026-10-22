@@ -186,7 +186,7 @@ class PromoteCheck(SandboxRepo):
     def check(self, experiments, learnings=""):
         (self.repo / "docs/agent").mkdir(parents=True, exist_ok=True)
         (self.repo / "docs/agent/EXPERIMENTS.md").write_text(self.HEAD + experiments)
-        (self.repo / "docs/agent/LEARNINGS.md").write_text(learnings)
+        (self.repo / "docs/agent/NEXT_RETRO.md").write_text(learnings)
         return run(["bash", "scripts/promote-check.sh"], self.repo, self.env)
 
     def test_nothing_to_promote_prints_nothing(self):
@@ -197,7 +197,7 @@ class PromoteCheck(SandboxRepo):
     def test_effective_g2_items_are_listed(self):
         r = self.check("| Rule E | h | m | b | c | x | effective | G2 (two projects) |\n", "- [TASK-2 / 2026-10-02] batching effective, G3 → promote\n")
         self.assertIn("promote candidate: EXPERIMENTS.md: Rule E", r.stdout)
-        self.assertIn("promote candidate: LEARNINGS.md: - [TASK-2", r.stdout)
+        self.assertIn("promote candidate: NEXT_RETRO.md: - [TASK-2", r.stdout)
 
 
 class PreCommit(SandboxRepo):

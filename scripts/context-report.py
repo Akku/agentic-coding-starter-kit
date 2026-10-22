@@ -53,7 +53,7 @@ def main():
                         p = i.get("file_path", "") if n == "Read" else ""
                         sm = re.search(r"\.claude/skills/([^/]+)/SKILL\.md", p)
                         if sm: skills[sm.group(1)] += 1
-                        if re.search(r"(ADVANCED|GLOSSARY|ARCHITECTURE|PITFALLS|LEARNINGS|HANDOFF)\.md$|docs/agent/stacks/", p): docs[os.path.basename(p)] += 1
+                        if re.search(r"(ADVANCED|GLOSSARY|ARCHITECTURE|PITFALLS|NEXT_RETRO|LEARNINGS|HANDOFF)\.md$|docs/agent/stacks/", p): docs[os.path.basename(p)] += 1
             elif r.get("type") == "user" and isinstance(m.get("content"), list):
                 for b in m["content"]:
                     if isinstance(b, dict) and b.get("type") == "tool_result":

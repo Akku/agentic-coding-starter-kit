@@ -42,7 +42,7 @@ STEM is a starting point for agent-driven development with Git and Backlog.md. Y
 - When a milestone has no tasks left, the agent proposes the next ones; you decide.
 - When the agent says the context is large, it has written the handoff; open a new session and say "continue with the handoff" (the new session starts informed). Optional: a status line can show the context usage in Claude Code (see its docs).
 - End a session with the `handoff` skill; the next session starts from `docs/agent/HANDOFF.md`.
-- After the first milestone, run a retro (`retro` skill). It also reviews the harness itself, including the open questions in `docs/agent/LEARNINGS.md`.
+- After the first milestone, run a retro (`retro` skill). It also reviews the harness itself, including everything collected for it in `docs/agent/NEXT_RETRO.md`.
 - Never put secrets into the repository.
 
 ## Trying STEM on a real project: what to watch

@@ -17,7 +17,7 @@ Ask in one short message how the agent should write to the user: "**1** Expert (
 2. Technical: `- Explain technically what changed, why and what comes next; name files, commands and trade-offs; not every tool call. After each phase (setup step, finished task, session end) summarize it. Ask questions with options and a recommendation. The user's own instructions override this.`
 3. Non-technical: `- Explain in plain language what happened, why it matters and what comes next; no jargon, not every tool call. After each phase (setup step, finished task, session end) summarize it. Explain a new term (backlog, task, milestone, retro) in one sentence at first use. Ask questions with options and a recommendation. The user may ask for less detail at any time; the user's own instructions override this.`
 
-Record the profile in `docs/agent/LEARNINGS.md`. Later change: the user tells the agent, which rewrites the block (and the `outputStyle` entry). Step 3 keeps assuming a non-technical user for installs, whatever the profile.
+Record the profile under `Project setup` in `docs/agent/NEXT_RETRO.md`. Later change: the user tells the agent, which rewrites the block (and the `outputStyle` entry). Step 3 keeps assuming a non-technical user for installs, whatever the profile.
 
 ## 1b. Project size and modules (ask first, before step 2)
 Ask in one short message: "Is the project **small** (a script, a small tool, a few days), **medium** (an app or service with several features, weeks) or **large** (many parts, several people or long-running)? If unsure: medium." Then show the checklist below with the size's preselection, each line with its effect in plain words, and let the user toggle any item. The core is always on and is not offered as a choice: tasks (Backlog.md), commit guard, handoff and session start, `scripts/run.sh`, `AGENTS.md`.
@@ -34,14 +34,14 @@ Ask in one short message: "Is the project **small** (a script, a small tool, a f
 | Architecture map (`docs/ARCHITECTURE.md`) | Short module overview that the agent reads instead of the code. Must be kept current. | off | off | on |
 | Shell sandbox (macOS/Linux/WSL2) | Limits what commands can touch, which protects your files from agent mistakes; may block installs or network. Recommended for every project; enabled only on your yes. | recommend | recommend | recommend |
 
-What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, `market-analysis`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules in `docs/agent/LEARNINGS.md` (retro checks which were used).
+What to do with the answers: delete the files of modules that are off (agent file `ux-designer.md`, skill folders `testing-practices`, `market-analysis`, hook entry and `scripts/context-check.py`; glossary and architecture are only created when on) and drop their names from the `Skills` and `Agents` lines in `AGENTS.md` (an empty `Agents` line goes away), so they cost no context and nothing points at missing files. Record the chosen size and modules under `Project setup` in `docs/agent/NEXT_RETRO.md` (retro checks which were used).
 
 ## 2. Ask the user (one message, all questions together)
 Scale to the size from step 1b: small = goal in 1-2 sentences, stack, confidential inputs, GitHub; skip horizons beyond the vertical slice, agents and model questions (use defaults); medium/large = all questions.
 - Project goal in 3–5 sentences (what, for whom, what "done" looks like).
 - Three horizons (see `R-ROADMAP`): the **vertical slice** (thinnest end-to-end path that proves the idea), what belongs in the **MVP** (and what is explicitly out), and the **moonshot** (the dream version). If the user has no answer, propose one from the goal and ask for corrections.
 - Stack/language preferences, or "decide for me".
-- Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless (including the `.agents/skills` symlink); note the answer in `docs/agent/LEARNINGS.md`.
+- Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless (including the `.agents/skills` symlink); note the answer under `Project setup` in `docs/agent/NEXT_RETRO.md`.
 - Which model and effort level do you use today (e.g. the largest available one)? Note the answer for the recommendation at the end.
 - Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
 - Optional glossary of domain terms (term, definition, code name, UI text)? Recommend it only for apps with many domain terms or several languages (e.g. German UI, English code); for small apps say it is not worth it. If yes, create `docs/GLOSSARY.md` from the interview.
@@ -61,7 +61,7 @@ Detect the OS (`uname -s`, or `$OS`/`ver` on Windows). Check: `git --version`, `
 
 Homebrew missing on macOS: offer the installer from brew.sh (needs the user's password, typed by the user in the terminal) or use the npm route. `winget` missing on Windows: use the installers from git-scm.com and nodejs.org.
 Known pitfalls: Apple Silicon with Rosetta-installed Node/Homebrew gives "illegal hardware instruction" / "Binary package not installed" for backlog, so reinstall natively (`arch -arm64 npm i -g backlog.md`). Windows PowerShell may block npm scripts ("running scripts is disabled"); use `npm.cmd`, or after explaining it, `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` with the user's approval. Windows: the scripts in `scripts/` are bash and need **Git for Windows (Git Bash)**; run them with `bash scripts/<name>.sh` (WSL/PowerShell-only setups are untested). Python on Windows is `python` or `py -3`, `python3` is often a Microsoft Store stub; the hook and `retro-metrics.sh` try all three, but when you run `python3 scripts/...` by hand, use the name that works.
-If something cannot be installed, explain what is lost and continue where possible. Windows steps are not yet field-tested: record friction as `Learning:` in `docs/agent/LEARNINGS.md`.
+If something cannot be installed, explain what is lost and continue where possible. Windows steps are not yet field-tested: record friction under `Observations` in `docs/agent/NEXT_RETRO.md`.
 
 ## 4. Git
 If this folder is not a git repository (typical for the ZIP route): `git init -b main`; set `user.name`/`user.email` only if missing (ask the user). Add a `.gitignore` for the chosen stack (include `.env*`, logs, build output). **Never commit secrets** because the repository may become public (the pre-commit hook blocks `.env` files and common token patterns).
@@ -103,5 +103,5 @@ Finish all project files first, then commit once, so the setup commit is the com
 4. Tell the user what exists, the milestones, which commands to use and which task comes first (~12 lines with a one-line explanation per item). Mention that the first retro (after the first milestone) revisits the way of working, including how much the agent explains and whether links and explanations were helpful.
 
 ## Later
-- First retro: run `R-RETRO` and process the open `[STEM]` observations in `docs/agent/LEARNINGS.md`.
+- First retro: run `R-RETRO`; it works through the `First retro` section of `docs/agent/NEXT_RETRO.md`.
 - Valuable, validated learnings can go back into the STEM repository via pull request (`docs/agent/PROCESS_IMPROVEMENTS.md`, "Cross-project promotion").

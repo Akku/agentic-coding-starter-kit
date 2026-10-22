@@ -53,7 +53,8 @@ else:  # step 8: the setup commit comes after every final change, so the startin
     commit = pos('Commit "Set up agentic harness"')
     for p in ("`Model:` line", "to `DONE`", "delete `SETUP.md`"):
         if pos(p) < 0 or commit < 0 or pos(p) > commit: err(f"SETUP.md step 8: '{p}' must come before the setup commit")
-if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENTS.md missing")
+for f in ("docs/agent/EXPERIMENTS.md", "docs/agent/NEXT_RETRO.md"):
+    if not (root / f).exists(): err(f"{f} missing")
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 

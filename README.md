@@ -83,7 +83,7 @@ Give this to the agent after opening the folder:
 | `docs/agent/OPERATING_MODEL.md` | Rules with stable IDs (`R-*`), loaded selectively |
 | `docs/agent/ADVANCED.md` | Rarely needed rules (parallelism, measurement, routing, local models) |
 | `docs/agent/EXPERIMENTS.md` | Hypotheses, metrics, baselines and evidence grades for cost-carrying rules |
-| `docs/agent/LEARNINGS.md` | Observations for retros (includes starting points for the first retro) |
+| `docs/agent/NEXT_RETRO.md` | Everything the next retro needs in one place: due checks, observations, first-retro items |
 | `docs/agent/PITFALLS.md` | Growing list of technical pitfalls |
 | `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro handling and feeding learnings back into STEM |
 

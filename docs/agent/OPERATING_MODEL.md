@@ -497,13 +497,7 @@ Learning: <observation> → <possible process improvement or question>
 
 Skills get feedback the same way: when a step of a skill did not fit or the run deviated from it, write `Learning: skill <name>: <what> -> <change>`; the retro's skill review reads these lines. Only when it happened, not after every run.
 
-Task-local notes preserve evidence and context. Cross-task or reusable observations may additionally be promoted into a lightweight process-improvement inbox, for example:
-
-```text
-docs/agent/PROCESS_IMPROVEMENTS.md
-```
-
-The inbox is not another policy document and is not normal implementation context. It is primarily a **project-local retrospective inbox**: concise candidates for future retrospective analysis that should be pruned after triage.
+Task-local notes preserve evidence and context. Cross-task or reusable observations, and checks a later retro must make, go additionally into the one project-local retro inbox `docs/agent/NEXT_RETRO.md` (as a pointer to the evidence, not a copy). It is not another policy document and not normal implementation context; the retro prunes it after triage. Handling: `docs/agent/PROCESS_IMPROVEMENTS.md`.
 
 Do not use raw project observations directly as universal rules for other projects. During a retro, a validated project learning may be promoted one step further into a separate cross-project pattern library maintained with the shared harness/template. That promotion should preserve the evidence and applicability limits.
 
@@ -511,13 +505,13 @@ Recommended flow:
 
 ```text
 task-local Learning:
-→ project PROCESS_IMPROVEMENTS.md
+→ project NEXT_RETRO.md
 → project retro
 → project-specific rule/automation OR discard/defer
 → optional cross-project pattern after validation
 ```
 
-Do not duplicate every task-local learning into the inbox. Promote only items likely to matter beyond the originating task.
+Do not duplicate every task-local learning into `NEXT_RETRO.md`. Promote only items likely to matter beyond the originating task.
 <!-- RULE:R-LEARNING:END -->
 
 <!-- RULE:R-RETRO:START -->
@@ -602,7 +596,7 @@ Use Backlog.md milestones (`backlog milestone add "<name>" -d "<goal and exit cr
 
 `STEM_VERSION` holds STEM's `repo` and the `version` this project was created or last updated from. `scripts/session-start.sh` compares it once per day with the public STEM repository and prints one line when a newer version exists. `STEM_OFFLINE=1` skips this and every other network call of the script.
 
-- Tell the user once about a newer version (one sentence) and offer the `stem-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `LEARNINGS.md`, skills the project changed).
+- Tell the user once about a newer version (one sentence) and offer the `stem-update` skill. Never update without the user's approval; never overwrite project-specific content (`Project specifics` in `AGENTS.md`, `PITFALLS.md`, `NEXT_RETRO.md`, skills the project changed).
 - Updates are normal backlog tasks: read the STEM `CHANGELOG.md` entries since the local version, pick what helps this project, apply, verify, commit.
 - If STEM is unreachable, continue silently; the retro checks again.
 <!-- RULE:R-STEM-UPDATE:END -->
