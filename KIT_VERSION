@@ -1,3 +1,3 @@
 # Legacy copy: projects from STEM 1.2.x and older read this file for the update check. Removed after the next minor release; the real file is STEM_VERSION.
-version: 1.2.1
+version: 1.3.0
 repo: https://github.com/Akku/stem
