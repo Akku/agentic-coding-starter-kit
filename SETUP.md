@@ -5,10 +5,10 @@ This file is the one-time setup procedure. Delete it as the last step (see step 
 Talk to the user in their language. Follow the `Communication` standard in `AGENTS.md` (explain what you do and why, define new terms at first use, summarize each step, give links for anything the user should test or decide). Ask before anything with side effects outside this folder (global installs, creating remote repositories, pushing); the tool-permission prompt counts as asking.
 
 ## 0. Check that the kit arrived complete
-The ZIP route sometimes loses hidden folders (names starting with a dot are hidden on macOS Finder). Check that these exist: `.claude/skills/`, `.claude/settings.json`, `.github/`, `.gitignore`, `scripts/githooks/pre-commit`. If something is missing: tell the user in one sentence, then restore it yourself: download `<repo>/archive/refs/heads/main.zip` (`repo` from `KIT_VERSION`) into a temp folder outside the project, unzip it there, and copy only the missing files/folders (never overwrite existing ones). If the download is not possible, ask the user to copy the extracted folder as a whole (macOS: Cmd+Shift+. shows hidden files).
+The ZIP route sometimes loses hidden folders (names starting with a dot are hidden on macOS Finder). Check that these exist: `.claude/skills/`, `.agents/skills` (a symlink to `../.claude/skills` so Codex finds the skills; the ZIP route turns it into a plain file: delete that file and recreate it with `ln -s ../.claude/skills .agents/skills`, on Windows `mklink /J .agents\skills .claude\skills`), `.claude/settings.json`, `.github/`, `.gitignore`, `scripts/githooks/pre-commit`. If something is missing: tell the user in one sentence, then restore it yourself: download `<repo>/archive/refs/heads/main.zip` (`repo` from `KIT_VERSION`) into a temp folder outside the project, unzip it there, and copy only the missing files/folders (never overwrite existing ones). If the download is not possible, ask the user to copy the extracted folder as a whole (macOS: Cmd+Shift+. shows hidden files).
 
 ## 1. Understand the kit (≈2 min, do not read everything)
-Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; other agents read the file directly.
+Read only `AGENTS.md`. Other files are loaded on demand by rule ID. Skills live in `.claude/skills/*/SKILL.md`; Copilot reads that folder, Codex via the symlink `.agents/skills`, others read the file directly.
 
 ## 1a. User profile (ask first, before step 1b)
 Ask in one short message how the agent should write to the user: "**1** Expert (compact: results, decisions, problems only), **2** Technical (programmer: technical explanations), **3** Non-technical (plain language: what happened, why it matters, terms explained). If unsure: 2." Then replace the whole `Communication` block in `AGENTS.md` (the three bullets after `**Communication**`) with the chosen variant below, nothing else added. Keep the last bullet (direct way to test, review or decide) in every variant.
@@ -41,7 +41,7 @@ Scale to the size from step 1b: small = goal in 1-2 sentences, stack, confidenti
 - Project goal in 3–5 sentences (what, for whom, what "done" looks like).
 - Three horizons (see `R-ROADMAP`): the **vertical slice** (thinnest end-to-end path that proves the idea), what belongs in the **MVP** (and what is explicitly out), and the **moonshot** (the dream version). If the user has no answer, propose one from the goal and ask for corrections.
 - Stack/language preferences, or "decide for me".
-- Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless; note the answer in `docs/agent/LEARNINGS.md`.
+- Which agents will be used (Claude Code / Codex / Copilot)? Keep all adapters regardless (including the `.agents/skills` symlink); note the answer in `docs/agent/LEARNINGS.md`.
 - Which model and effort level do you use today (e.g. the largest available one)? Note the answer for the recommendation at the end.
 - Confidential inputs (customer documents, scripts, exports)? Which folder holds them? Default: `inputs/`.
 - Optional glossary of domain terms (term, definition, code name, UI text)? Recommend it only for apps with many domain terms or several languages (e.g. German UI, English code); for small apps say it is not worth it. If yes, create `docs/GLOSSARY.md` from the interview.

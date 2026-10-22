@@ -129,6 +129,7 @@ A practical shape is:
 AGENTS.md                         # shared core rules + Codex / AGENTS-compatible entry
 CLAUDE.md                         # Claude Code adapter (imports AGENTS.md)
 .github/copilot-instructions.md  # GitHub Copilot adapter, when used
+.agents/skills                    # symlink to .claude/skills (Codex skill path; Copilot reads .claude/skills itself)
 docs/agent/OPERATING_MODEL.md    # authoritative shared cross-provider rules
 ```
 

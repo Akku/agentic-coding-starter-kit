@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `KIT_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
 
+## Unreleased
+- **Skills for Codex:** the kit ships `.agents/skills` as a symlink to `.claude/skills` (Codex scans `.agents/skills`, follows symlinks; Copilot reads `.claude/skills` natively, checked in the vendor docs); `kit-check` verifies it, `SETUP.md` step 0 recreates it after a ZIP download (which turns links into files), `stem-update` lists it as kit-owned. Benefits: projects used with Codex. Migration: add the link (`mkdir -p .agents && ln -s ../.claude/skills .agents/skills`, Windows: `mklink /J`); a real `.agents/skills` folder with copies of old skills: delete it first.
+
 ## 1.2.0
 - **Script fixture tests** (kit repository only): `.github/tests/test_scripts.py` covers `context-check`, `context-report`, `retro-metrics` and `session-start` with sandbox fixtures; `kit-check` runs it; `CONTRIBUTING.md` requires a fixture test for new or changed scripts. Benefits: maintainers.
 - **Retro extended:** user view (friction, communication in the full stage), silent-inefficiency check, pooled `Series:` line, unverified-evidence list with evidence grade, reviewer subagent with the standing question "what does the retro not capture", retro action items become Backlog tasks, first-use check for changed skills and rules. `scripts/retro-metrics.sh` takes `--repo <path>` and reports handoff commits and commits without task ID; `scripts/check-backlog.sh` reports duplicate task IDs (pre-commit).

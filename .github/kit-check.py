@@ -50,6 +50,10 @@ if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENT
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
 
+# Codex skill path: symlink to the Claude skills (one source for skill text)
+link = root / ".agents/skills"
+if not link.is_symlink() or link.resolve() != (root / ".claude/skills").resolve(): err(".agents/skills must be a symlink to ../.claude/skills")
+
 # AGENTS.md is loaded in every session: keep it within budget; settings deny secrets
 if len((root / "AGENTS.md").read_bytes()) > 6144: err("AGENTS.md exceeds the 6 KB budget (move rules to OPERATING_MODEL.md)")
 handoff = root / "docs/agent/HANDOFF.md"
