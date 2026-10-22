@@ -44,11 +44,11 @@ flowchart LR
     R -.-> T
 ```
 
-Reflect ist der Skill `retro`: Learnings fließen ins Harness zurück (und, wenn bewährt, ins Kit).
+Reflect ist der Skill `retro`: Learnings fließen ins Harness zurück (und, wenn bewährt, in STEM).
 
 ## Aktuell bleiben
 
-Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere Kit-Version gibt, und sagt dir Bescheid. Mit deiner Zustimmung liest der Skill `stem-update` das [Changelog](CHANGELOG.md), wählt aus, was deinem Projekt nützt, und übernimmt es, ohne projektspezifische Inhalte zu überschreiben. Auch der Skill `retro` prüft das Kit.
+Zu Beginn jeder Sitzung prüft der Agent (einmal pro Tag), ob es eine neuere STEM-Version gibt, und sagt dir Bescheid. Mit deiner Zustimmung liest der Skill `stem-update` das [Changelog](CHANGELOG.md), wählt aus, was deinem Projekt nützt, und übernimmt es, ohne projektspezifische Inhalte zu überschreiben. Auch der Skill `retro` prüft STEM.
 
 ## Start-Prompt
 
@@ -70,9 +70,9 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |
 | `CLAUDE.md` / `.github/copilot-instructions.md` | Dünne Adapter, verweisen auf `AGENTS.md` |
 | `scripts/githooks/pre-commit` | Schutz vor dem Committen vertraulicher Quelldokumente (wird beim Setup aktiviert) |
-| `KIT_VERSION`, `CHANGELOG.md` | Kit-Version, auf der das Projekt basiert; Änderungen je Version |
+| `STEM_VERSION`, `CHANGELOG.md` | STEM-Version, auf der das Projekt basiert; Änderungen je Version |
 | `.claude/settings.json` | Claude Code: sichere Befehle vorab freigegeben, Sitzungsstart-Hook |
-| `LICENSE` | MIT (Kit); `.github/kit-check.py` + Workflow prüfen das Kit selbst |
+| `LICENSE` | MIT (STEM); `.github/stem-check.py` + Workflow prüfen STEM selbst |
 | `scripts/check-backlog.sh`, `scripts/retro-metrics.sh` | Backlog-Konsistenzprüfung (auch im Pre-commit-Hook); Messwerte für Retros |
 | `docs/agent/stacks/` | Stack-spezifische Hinweise, nur bei passendem Stack geladen |
 | `scripts/context-report.py` | Optionales Retro-Werkzeug (Claude Code): wohin der Kontext floss, längste Sitzungen; nur Zahlen |
@@ -84,7 +84,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `docs/agent/EXPERIMENTS.md` | Hypothesen, Messgrößen, Basislinien und Evidenzgrade für dauerhaft kostenwirksame Regeln |
 | `docs/agent/LEARNINGS.md` | Beobachtungen für die Retro (enthält Startpunkte für die erste Retro) |
 | `docs/agent/PITFALLS.md` | Wachsende Liste technischer Stolperfallen |
-| `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro-Behandlung und Rückfluss ins Kit |
+| `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro-Behandlung und Rückfluss in STEM |
 
 </details>
 

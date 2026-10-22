@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fixture tests for the kit scripts (kit maintenance only; run by kit-check.py or directly: python3 .github/tests/test_scripts.py).
+"""Fixture tests for STEM scripts (STEM maintenance only; run by stem-check.py or directly: python3 .github/tests/test_scripts.py).
 Each test builds its own sandbox repository or transcript folder in a temp dir, so nothing depends on the real project."""
 import json, os, pathlib, shutil, subprocess, sys, tempfile, unittest
 
@@ -99,7 +99,7 @@ class ContextReport(Sandbox):
 
 
 class SandboxRepo(Sandbox):
-    """A project folder with the kit scripts, a git repository and a few backlog tasks."""
+    """A project folder with STEM scripts, a git repository and a few backlog tasks."""
     def setUp(self):
         super().setUp()
         self.repo = self.tmp / "proj"
@@ -150,9 +150,9 @@ class SessionStart(SandboxRepo):
         return run(["bash", "scripts/session-start.sh"], self.repo, {**self.env, **(extra_env or {})}).stdout
 
     def test_summary_sections_without_backlog_cli_state(self):
-        (self.repo / "KIT_VERSION").write_text("version: 1.0.0\n"); self.commit("init")
+        (self.repo / "STEM_VERSION").write_text("version: 1.0.0\n"); self.commit("init")
         out = self.start()
-        for s in ("## git", "branch: main", "kit version: 1.0.0", "WARNING: pre-commit guard inactive", "## handoff", "no HANDOFF.md"):
+        for s in ("## git", "branch: main", "stem version: 1.0.0", "WARNING: pre-commit guard inactive", "## handoff", "no HANDOFF.md"):
             self.assertIn(s, out)
 
     def test_oversized_handoff_warns(self):

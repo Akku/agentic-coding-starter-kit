@@ -1,4 +1,4 @@
-name: kit-check
+name: stem-check
 on:
   pull_request:
   push:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 .github/kit-check.py
+      - run: python3 .github/stem-check.py

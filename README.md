@@ -44,11 +44,11 @@ flowchart LR
     R -.-> T
 ```
 
-Reflect is the `retro` skill: learnings flow back into the harness (and, once proven, into the kit).
+Reflect is the `retro` skill: learnings flow back into the harness (and, once proven, into STEM).
 
 ## Staying up to date
 
-At the start of each session the agent checks (once per day) whether a newer kit version exists and tells you. With your approval the `stem-update` skill reads the [changelog](CHANGELOG.md), picks what helps your project and merges it without overwriting your project-specific content. The `retro` skill checks the kit as well.
+At the start of each session the agent checks (once per day) whether a newer STEM version exists and tells you. With your approval the `stem-update` skill reads the [changelog](CHANGELOG.md), picks what helps your project and merges it without overwriting your project-specific content. The `retro` skill checks STEM as well.
 
 ## Prompt to start
 
@@ -70,9 +70,9 @@ Give this to the agent after opening the folder:
 | `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `testing-practices`, `stem-update` |
 | `.claude/agents/` | Agents: `ux-designer` (for projects with a UI) |
 | `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
-| `KIT_VERSION`, `CHANGELOG.md` | Kit version this project is based on; what changed per version |
+| `STEM_VERSION`, `CHANGELOG.md` | STEM version this project is based on; what changed per version |
 | `.claude/settings.json` | Claude Code: safe commands pre-approved, session-start hook |
-| `LICENSE` | MIT (kit); `.github/kit-check.py` + workflow check the kit itself |
+| `LICENSE` | MIT (STEM); `.github/stem-check.py` + workflow check STEM itself |
 | `scripts/check-backlog.sh`, `scripts/retro-metrics.sh` | Backlog consistency check (also in the pre-commit hook); measured evidence for retros |
 | `docs/agent/stacks/` | Stack-specific notes, loaded only when the stack applies |
 | `scripts/context-report.py` | Optional retro tool (Claude Code): where the context went, longest sessions; numbers only |
@@ -84,7 +84,7 @@ Give this to the agent after opening the folder:
 | `docs/agent/EXPERIMENTS.md` | Hypotheses, metrics, baselines and evidence grades for cost-carrying rules |
 | `docs/agent/LEARNINGS.md` | Observations for retros (includes starting points for the first retro) |
 | `docs/agent/PITFALLS.md` | Growing list of technical pitfalls |
-| `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro handling and feeding learnings back into the kit |
+| `docs/agent/PROCESS_IMPROVEMENTS.md` | Retro handling and feeding learnings back into STEM |
 
 </details>
 

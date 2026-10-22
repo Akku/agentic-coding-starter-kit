@@ -8,7 +8,7 @@ if [ "${1:-}" = "--snapshot" ]; then
   n=2; while [ -e "$out" ]; do out="docs/agent/baselines/$(date +%F)-$n.txt"; n=$((n+1)); done  # never overwrite an earlier baseline
   "$0" "$@" | tee "$out"; echo "baseline saved: $out"; exit 0
 fi
-# --repo PATH (repeatable): also count commits of another repository (e.g. the product repo of a kit project).
+# --repo PATH (repeatable): also count commits of another repository (e.g. the product repo of a STEM project).
 repos=()
 while [ "${1:-}" = "--repo" ]; do repos+=("$2"); shift 2; done
 since=${1:-$(date -v-14d +%Y-%m-%d 2>/dev/null || date -d '14 days ago' +%Y-%m-%d)}

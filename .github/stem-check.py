@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Kit self-check (kit maintenance only; removed from projects by SETUP.md).
+"""STEM self-check (STEM maintenance only; removed from projects by SETUP.md).
 Checks rule markers, rule index, script syntax, script fixture tests, skill frontmatter, JSON and version consistency."""
 import json, re, subprocess, sys, pathlib
 root = pathlib.Path(__file__).resolve().parent.parent
@@ -39,12 +39,14 @@ for a in (root / ".claude/agents").glob("*.md"):
     if not re.match(r"---\n(?:.*\n)*?name: " + a.stem, a.read_text()): err(f"agent {a.name}: bad frontmatter/name")
 
 # version consistency
-v = re.search(r"^version: (\S+)", (root / "KIT_VERSION").read_text(), re.M).group(1)
+v = re.search(r"^version: (\S+)", (root / "STEM_VERSION").read_text(), re.M).group(1)
 for f in ("README.md", "README.de.md", "START_HERE.md", "STARTE_HIER.md"):
     if f"**Version {v}**" not in (root / f).read_text(): err(f"{f}: version != {v}")
+legacy = root / "KIT_VERSION"  # copy for projects from 1.2.x and older; remove after the next minor release
+if legacy.exists() and f"version: {v}\n" not in legacy.read_text(): err(f"KIT_VERSION: version != {v}")
 if not re.search(r"^## " + re.escape(v) + r"$", (root / "CHANGELOG.md").read_text(), re.M): err(f"CHANGELOG.md: no entry for {v}")
 
-# SETUP.md exists and the hidden paths it checks are really in the kit
+# SETUP.md exists and the hidden paths it checks are really in STEM
 if not (root / "SETUP.md").exists(): err("SETUP.md missing")
 if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENTS.md missing")
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
@@ -72,5 +74,5 @@ for d in (root / ".claude/skills").iterdir():
 tr = subprocess.run([sys.executable, str(root / ".github/tests/test_scripts.py")], capture_output=True, text=True)
 if tr.returncode: err("script fixture tests failed:\n" + "\n".join(tr.stderr.strip().splitlines()[-15:]))
 
-print("\n".join(errors) if errors else f"kit-check OK (version {v})")
+print("\n".join(errors) if errors else f"stem-check OK (version {v})")
 sys.exit(1 if errors else 0)

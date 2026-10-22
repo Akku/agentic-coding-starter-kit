@@ -11,27 +11,27 @@ if git rev-parse --git-dir >/dev/null 2>&1; then
 else
   echo "no git repository"
 fi
-echo; echo "## kit"
-if [ -f KIT_VERSION ]; then
-  lv=$(sed -n 's/^version: *//p' KIT_VERSION | head -1); repo=$(sed -n 's/^repo: *//p' KIT_VERSION | head -1)
-  echo "kit version: ${lv:-unknown}"
-  cache="${TMPDIR:-/tmp}/agent-logs/kit-check-$(printf %s "$PWD" | cksum | cut -d' ' -f1)"; mkdir -p "$(dirname "$cache")"
+echo; echo "## stem"
+if [ -f STEM_VERSION ]; then
+  lv=$(sed -n 's/^version: *//p' STEM_VERSION | head -1); repo=$(sed -n 's/^repo: *//p' STEM_VERSION | head -1)
+  echo "stem version: ${lv:-unknown}"
+  cache="${TMPDIR:-/tmp}/agent-logs/stem-check-$(printf %s "$PWD" | cksum | cut -d' ' -f1)"; mkdir -p "$(dirname "$cache")"
   if [ -n "$repo" ] && command -v curl >/dev/null 2>&1 && { [ ! -f "$cache" ] || [ -n "$(find "$cache" -mtime +0 2>/dev/null)" ]; }; then
-    raw="${repo/github.com/raw.githubusercontent.com}/main/KIT_VERSION"
+    raw="${repo/github.com/raw.githubusercontent.com}/main/STEM_VERSION"
     rv=$(curl -fsSL --max-time 3 "$raw" 2>/dev/null | sed -n 's/^version: *//p' | head -1)
     [ -n "$rv" ] && printf '%s\n' "$rv" >"$cache"
   fi
   rv=$(cat "$cache" 2>/dev/null)
   if [ -n "$rv" ] && [ -n "$lv" ] && [ "$rv" != "$lv" ] && [ "$(printf '%s\n%s\n' "$lv" "$rv" | sort -V | tail -1)" = "$rv" ]; then
-    echo "KIT UPDATE AVAILABLE: $lv -> $rv (offer the stem-update skill; do not update unasked)"
+    echo "STEM UPDATE AVAILABLE: $lv -> $rv (offer the stem-update skill; do not update unasked)"
   fi
 else
-  echo "no KIT_VERSION file"
+  echo "no STEM_VERSION file"
 fi
-if [ -f .github/kit-check.py ] && command -v gh >/dev/null 2>&1; then
-  # kit maintainer only (this file is removed from projects): incoming learnings
+if [ -f .github/stem-check.py ] && command -v gh >/dev/null 2>&1; then
+  # STEM maintainer only (this file is removed from projects): incoming learnings
   prs=$(gh pr list --state open --limit 5 --json number,title,headRefName -q '.[]|"#\(.number) \(.headRefName): \(.title)"' 2>/dev/null)
-  [ -n "$prs" ] && { echo "KIT MAINTAINER: open pull requests (review, merge or close):"; echo "$prs"; }
+  [ -n "$prs" ] && { echo "STEM MAINTAINER: open pull requests (review, merge or close):"; echo "$prs"; }
   lb=$(git ls-remote --heads origin 'learning/*' 2>/dev/null | sed 's#.*refs/heads/##' | head -5)
   [ -n "$lb" ] && { echo "learning branches on origin:"; echo "$lb"; }
 fi

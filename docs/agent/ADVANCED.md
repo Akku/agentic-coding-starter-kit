@@ -68,7 +68,7 @@ Rules that cost context in every session or change every session's behavior (con
 2. **Baseline:** `scripts/retro-metrics.sh --snapshot` before the change; compare later per accepted task (absolute sums mislead when the amount of work differs).
 3. **One cost-carrying change at a time** where practical; otherwise name the bundle and do not attribute the effect to one part. Per-task switchable rules can alternate between tasks (A/B).
 4. **Metrics inform, they are not targets** (a number that becomes a goal stops measuring). Use a second view (quality: rework, failed checks, user feedback) next to cost.
-5. **Evidence grades** in every statement and entry: **G0** anecdote; **G1** observed (data, no baseline); **G2** measured before/after with preset threshold, normalised, confounders noted, one project; **G3** replicated (G2 in two or more projects, or a real A/B). Say "effective" only from G2 (and treat one project as local); recommend to other projects (`promote-learning`) only from G2; make something a kit default only with G3 or a clear mechanical reason. Below G2 write "indication".
+5. **Evidence grades** in every statement and entry: **G0** anecdote; **G1** observed (data, no baseline); **G2** measured before/after with preset threshold, normalised, confounders noted, one project; **G3** replicated (G2 in two or more projects, or a real A/B). Say "effective" only from G2 (and treat one project as local); recommend to other projects (`promote-learning`) only from G2; make something a STEM default only with G3 or a clear mechanical reason. Below G2 write "indication".
 <!-- RULE:R-MEASUREMENT:END -->
 
 <!-- RULE:R-ROUTING:START -->

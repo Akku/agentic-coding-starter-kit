@@ -51,7 +51,7 @@ Resolved observations should be removed or archived so this inbox stays small.
 
 ## Cross-project promotion
 
-Learnings intended for other projects go into the kit repository (this template) via pull request, e.g. into `docs/agent/PITFALLS.md` or `OPERATING_MODEL.md`. Do not export raw observations automatically. A promoted pattern should state:
+Learnings intended for other projects go into the STEM repository (this template) via pull request, e.g. into `docs/agent/PITFALLS.md` or `OPERATING_MODEL.md`. Do not export raw observations automatically. A promoted pattern should state:
 
 - generalized problem;
 - recommended pattern;

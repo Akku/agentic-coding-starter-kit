@@ -1,4 +1,4 @@
-# Kit maintenance: when someone pushes a learning/* branch, open a pull request automatically
+# STEM maintenance: when someone pushes a learning/* branch, open a pull request automatically
 # so the maintainer is notified by GitHub. Removed from projects by SETUP.md.
 name: learning-pr
 on:
@@ -24,4 +24,4 @@ jobs:
           fi
           title=$(git log -1 --format=%s)
           gh pr create --base main --head "$BRANCH" --title "$title" \
-            --body "Opened automatically for review. Check: no project/company details, evidence and applicability stated (see promote-learning skill), kit-check green."
+            --body "Opened automatically for review. Check: no project/company details, evidence and applicability stated (see promote-learning skill), stem-check green."
