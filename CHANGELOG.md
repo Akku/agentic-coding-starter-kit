@@ -2,6 +2,9 @@
 
 Newest first. Projects read the entries newer than their `STEM_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
 
+## Unreleased
+- **Legacy `KIT_VERSION` removed:** the copy kept for 1.2.x projects in 1.3.0 is gone; projects read only `STEM_VERSION`. Benefits: one version file. Migration: delete a leftover `KIT_VERSION` (projects still on 1.2.x no longer get an update notice; run `stem-update` by hand).
+
 ## 1.3.0
 - **"kit" renamed to STEM:** `KIT_VERSION` -> `STEM_VERSION`, `.github/kit-check.py` -> `.github/stem-check.py` (workflow `stem-check.yml`), rule `R-KIT-UPDATE` -> `R-STEM-UPDATE`, labels `[KIT ...]` -> `[STEM ...]`, session-start output `## stem`, `stem version:`, `STEM UPDATE AVAILABLE`; all texts say STEM instead of "the kit". The tagline "Agentic Coding Starter Kit" stays. The repository keeps a legacy `KIT_VERSION` copy until the next minor release so older projects still see the update. Benefits: one name everywhere. Migration: `git mv KIT_VERSION STEM_VERSION`; replace `R-KIT-UPDATE` with `R-STEM-UPDATE` and `[KIT` with `[STEM` in `AGENTS.md`, `docs/agent/LEARNINGS.md` and other project files; copy the changed STEM-owned files (`scripts/session-start.sh`, skills, `OPERATING_MODEL.md`). Older entries below keep the old names.
 - **Windows fix for the Codex skill link:** git on Windows without symlink support checks `.agents/skills` out as a text file; `stem-check` accepts that fallback and `SETUP.md` step 0 repairs the link per OS (`ln -s` or `mklink /J` junction, then `git update-index --skip-worktree`). Without the repair only Codex loses the skills; Claude Code and Copilot read `.claude/skills`. Untested on a real Windows machine. Benefits: Windows users with Codex. Migration: none.

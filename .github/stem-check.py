@@ -42,8 +42,6 @@ for a in (root / ".claude/agents").glob("*.md"):
 v = re.search(r"^version: (\S+)", (root / "STEM_VERSION").read_text(), re.M).group(1)
 for f in ("README.md", "README.de.md", "START_HERE.md", "STARTE_HIER.md"):
     if f"**Version {v}**" not in (root / f).read_text(): err(f"{f}: version != {v}")
-legacy = root / "KIT_VERSION"  # copy for projects from 1.2.x and older; remove after the next minor release
-if legacy.exists() and f"version: {v}\n" not in legacy.read_text(): err(f"KIT_VERSION: version != {v}")
 if not re.search(r"^## " + re.escape(v) + r"$", (root / "CHANGELOG.md").read_text(), re.M): err(f"CHANGELOG.md: no entry for {v}")
 
 # SETUP.md exists and the hidden paths it checks are really in STEM
