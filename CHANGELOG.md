@@ -3,6 +3,7 @@
 Newest first. Projects read the entries newer than their `STEM_VERSION` (see `stem-update` skill). Each entry: what changed and who benefits; renames and removals get a `Migration:` line (what to rename or delete) that `stem-update` carries out.
 
 ## Unreleased
+- **Setup commit is complete:** `SETUP.md` step 8 now finishes the `Model:` line, `Setup status: DONE` and the deletion of `SETUP.md` before the single setup commit, so `git status` is clean after setup (before, these changes stayed uncommitted); `stem-check` guards the order. Benefits: new projects. Migration: none (existing projects: commit any leftover setup changes).
 - **Legacy `KIT_VERSION` removed:** the copy kept for 1.2.x projects in 1.3.0 is gone; projects read only `STEM_VERSION`. Benefits: one version file. Migration: delete a leftover `KIT_VERSION` (projects still on 1.2.x no longer get an update notice; run `stem-update` by hand).
 
 ## 1.3.0

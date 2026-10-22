@@ -46,6 +46,13 @@ if not re.search(r"^## " + re.escape(v) + r"$", (root / "CHANGELOG.md").read_tex
 
 # SETUP.md exists and the hidden paths it checks are really in STEM
 if not (root / "SETUP.md").exists(): err("SETUP.md missing")
+else:  # step 8: the setup commit comes after every final change, so the starting state is fully committed
+    s8 = re.search(r"^## 8\..*?(?=^## )", (root / "SETUP.md").read_text(), re.S | re.M)
+    s8 = s8.group(0) if s8 else ""
+    pos = lambda p: s8.find(p) if p in s8 else -1
+    commit = pos('Commit "Set up agentic harness"')
+    for p in ("`Model:` line", "to `DONE`", "delete `SETUP.md`"):
+        if pos(p) < 0 or commit < 0 or pos(p) > commit: err(f"SETUP.md step 8: '{p}' must come before the setup commit")
 if not (root / "docs/agent/EXPERIMENTS.md").exists(): err("docs/agent/EXPERIMENTS.md missing")
 for pth in (".claude/skills", ".claude/settings.json", ".github", ".gitignore", "scripts/githooks/pre-commit"):
     if not (root / pth).exists(): err(f"{pth} missing (SETUP.md step 0 expects it)")
