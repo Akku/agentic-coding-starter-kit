@@ -93,7 +93,7 @@ Create 3–7 tasks for M1 with `backlog task create ... -m <milestone>` (check `
 
 ## 8. Project README, commit and report
 Replace STEM's `README.md`/`README.de.md` with a short project README (goal, how to run, verification command); keep `START_HERE.md`/`STARTE_HIER.md`/`STEM_VERSION`/`CHANGELOG.md` unless the user wants them removed.
-Remove STEM maintenance files that do not belong in a project: `.github/workflows/stem-check.yml`, `.github/workflows/learning-pr.yml`, `.github/stem-check.py`, `.github/bump-version.sh`, `CONTRIBUTING.md` (about contributing to STEM), and the STEM logo `docs/assets/` (only used by the STEM README). Replace STEM's `LICENSE` (MIT, STEM's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
+Remove STEM maintenance files that do not belong in a project: `.github/workflows/stem-check.yml`, `.github/workflows/learning-pr.yml`, `.github/stem-check.py`, `.github/bump-version.sh`, `.github/ISSUE_TEMPLATE/` (field reports go to STEM's repository), `CONTRIBUTING.md` (about contributing to STEM), and the STEM logo `docs/assets/` (only used by the STEM README). Replace STEM's `LICENSE` (MIT, STEM's license) with the project's own choice: ask the user; if unsure, delete it and say that no license means all rights reserved.
 
 
 Finish all project files first, then commit once, so the setup commit is the complete starting state:

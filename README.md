@@ -74,7 +74,7 @@ Give this to the agent after opening the folder:
 | `STEM_VERSION`, `CHANGELOG.md` | STEM version this project is based on; what changed per version |
 | `.claude/settings.json` | Claude Code: safe commands pre-approved, session-start hook |
 | `LICENSE` | MIT (STEM); `.github/stem-check.py` + workflow check STEM itself |
-| `scripts/check-backlog.sh`, `scripts/retro-metrics.sh` | Backlog consistency check (also in the pre-commit hook); measured evidence for retros |
+| `scripts/check-backlog.sh`, `scripts/retro-metrics.sh`, `scripts/promote-check.sh` | Backlog consistency check (also in the pre-commit hook); measured evidence for retros; learnings ready to share with STEM |
 | `docs/agent/stacks/` | Stack-specific notes, loaded only when the stack applies |
 | `scripts/context-report.py` | Optional retro tool (Claude Code): where the context went, longest sessions; numbers only |
 | `scripts/context-check.py` | Claude Code hook: warns when the context is large and a new session is due |

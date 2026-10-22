@@ -74,7 +74,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `STEM_VERSION`, `CHANGELOG.md` | STEM-Version, auf der das Projekt basiert; Änderungen je Version |
 | `.claude/settings.json` | Claude Code: sichere Befehle vorab freigegeben, Sitzungsstart-Hook |
 | `LICENSE` | MIT (STEM); `.github/stem-check.py` + Workflow prüfen STEM selbst |
-| `scripts/check-backlog.sh`, `scripts/retro-metrics.sh` | Backlog-Konsistenzprüfung (auch im Pre-commit-Hook); Messwerte für Retros |
+| `scripts/check-backlog.sh`, `scripts/retro-metrics.sh`, `scripts/promote-check.sh` | Backlog-Konsistenzprüfung (auch im Pre-commit-Hook); Messwerte für Retros; Learnings, die STEM teilen kann |
 | `docs/agent/stacks/` | Stack-spezifische Hinweise, nur bei passendem Stack geladen |
 | `scripts/context-report.py` | Optionales Retro-Werkzeug (Claude Code): wohin der Kontext floss, längste Sitzungen; nur Zahlen |
 | `scripts/context-check.py` | Claude-Code-Hook: warnt bei großem Kontext, dass eine neue Sitzung fällig ist |

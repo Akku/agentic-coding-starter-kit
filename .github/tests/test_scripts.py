@@ -180,6 +180,26 @@ class SessionStart(SandboxRepo):
         self.assertTrue(marker.exists())  # the stub is reached without the opt-out
 
 
+class PromoteCheck(SandboxRepo):
+    HEAD = "| Rule / change | Hypothesis | Metric | Baseline | Check by | Confounders | Result | Grade |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n"
+
+    def check(self, experiments, learnings=""):
+        (self.repo / "docs/agent").mkdir(parents=True, exist_ok=True)
+        (self.repo / "docs/agent/EXPERIMENTS.md").write_text(self.HEAD + experiments)
+        (self.repo / "docs/agent/LEARNINGS.md").write_text(learnings)
+        return run(["bash", "scripts/promote-check.sh"], self.repo, self.env)
+
+    def test_nothing_to_promote_prints_nothing(self):
+        r = self.check("| A | h | m | b | c | x | open | G0 |\n| B | h | m | b | c | x | not effective | G2 |\n| C | h | m | b | c | x | effective, promoted #12 | G2 |\n| D | h | m | b | c | x | indication | G1 |\n",
+                       "- [TASK-1 / 2026-10-01] effective at G1 only\n")
+        self.assertEqual((r.returncode, r.stdout), (0, ""))
+
+    def test_effective_g2_items_are_listed(self):
+        r = self.check("| Rule E | h | m | b | c | x | effective | G2 (two projects) |\n", "- [TASK-2 / 2026-10-02] batching effective, G3 → promote\n")
+        self.assertIn("promote candidate: EXPERIMENTS.md: Rule E", r.stdout)
+        self.assertIn("promote candidate: LEARNINGS.md: - [TASK-2", r.stdout)
+
+
 class PreCommit(SandboxRepo):
     def test_rename_into_blocked_file_is_rejected(self):
         run(["git", "config", "core.hooksPath", "scripts/githooks"], self.repo)
