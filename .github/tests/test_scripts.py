@@ -159,6 +159,17 @@ class SessionStart(SandboxRepo):
         (self.repo / "docs/agent").mkdir(parents=True); (self.repo / "docs/agent/HANDOFF.md").write_text("x" * 3000)
         self.assertIn("HANDOFF.md is over 2 KB", self.start())
 
+    def test_handoff_version_mismatch_warns(self):
+        (self.repo / "STEM_VERSION").write_text("version: 1.2.1\n"); (self.repo / "docs/agent").mkdir(parents=True)
+        cases = {"State: stem 1.2.0, main @ abc": True, "State: STEM version: 1.2.1": False,
+                 "State: main @ abc, no version": False, "system 1.2.0 is not stem": False}
+        for text, warns in cases.items():
+            (self.repo / "docs/agent/HANDOFF.md").write_text(text + "\n")
+            out = self.start({"STEM_OFFLINE": "1"})
+            self.assertEqual("WARNING: HANDOFF.md names stem" in out, warns, text)
+        (self.repo / "docs/agent/HANDOFF.md").write_text("stem 1.2.0\n")
+        self.assertIn("names stem 1.2.0 but STEM_VERSION is 1.2.1", self.start({"STEM_OFFLINE": "1"}))
+
     def test_retro_due_after_threshold_and_cleared_by_retro_notes(self):
         for n in (1, 2, 3): self.task(n)
         self.assertIn("RETRO DUE: 3 tasks done", self.start({"RETRO_DUE_AFTER": "3"}))

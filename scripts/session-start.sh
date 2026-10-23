@@ -68,5 +68,8 @@ echo; echo "## handoff"
 if [ -f docs/agent/HANDOFF.md ]; then
   sed -n '1,40p' docs/agent/HANDOFF.md
   [ "$(wc -c < docs/agent/HANDOFF.md)" -gt 2048 ] && echo "WARNING: HANDOFF.md is over 2 KB: rewrite it from scratch (handoff skill); it is loaded every session"
+  # staleness: the first "stem [version] X.Y.Z" named in the handoff must match STEM_VERSION
+  hv=$(grep -oiE '(^|[^a-z])stem( version)?:? v?[0-9]+\.[0-9]+\.[0-9]+' docs/agent/HANDOFF.md | head -1 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+$')
+  [ -n "$hv" ] && [ -n "${lv:-}" ] && [ "$hv" != "$lv" ] && echo "WARNING: HANDOFF.md names stem $hv but STEM_VERSION is $lv: the handoff may be stale; check it against the current state"
 else echo "no HANDOFF.md"; fi
 echo; echo "Rules: see AGENTS.md; further rules by ID via docs/agent/OPERATING_MODEL.md"
