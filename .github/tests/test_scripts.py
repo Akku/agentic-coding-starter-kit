@@ -131,6 +131,22 @@ class RetroMetrics(SandboxRepo):
         self.assertIn("tasks: 1 done, 1 open", out)
         self.assertRegex(out, r"this repo: 2 commits, 0 handoff, 1 without task ID \(50 %\)")
 
+    def test_since_time_applies_to_commits_and_accepted_tasks(self):
+        self.task(1, updated="2026-10-23 08:00"); self.task(2, updated="2026-10-23 12:00")
+        self.commit("TASK-1 done")
+        out = run(["bash", "scripts/retro-metrics.sh", "2026-10-23 10:00"], self.repo, self.env).stdout
+        self.assertIn("since 2026-10-23 10:00", out)
+        self.assertIn("accepted tasks in period (Done, updated since 2026-10-23 10:00): 1", out)
+
+    def test_new_process_lines(self):
+        self.task(1, updated="2026-10-23 12:00"); self.task(2, status="In Progress", extra="- [ ] #1 open")
+        self.commit("TASK-1/2 combined"); run(["git", "tag", "v1"], self.repo)
+        out = run(["bash", "scripts/retro-metrics.sh", "2000-01-01"], self.repo, self.env).stdout
+        self.assertIn("this repo: releases (tags) 1, commits with several task IDs 1", out)
+        self.assertIn("task intake in period: 2 created, 1 done", out)
+        self.assertIn("In Progress with unchecked criteria (possibly waiting on an outside event): TASK-2", out)
+        self.assertIn("oldest open task: TASK-2, created 2026-10-01", out)
+
     def test_repo_option_adds_second_repository(self):
         self.task(1); self.commit("TASK-1 done")
         other = self.tmp / "product"; other.mkdir(); run(["git", "init", "-q", "-b", "main"], other)

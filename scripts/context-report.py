@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Where did the context go? Optional retro tool for Claude Code transcripts (R-MEASUREMENT level 2/3).
-Usage: scripts/context-report.py [--since YYYY-MM-DD] [--brief] [transcript-dir]   (default dir: this project's folder under ~/.claude/projects)
+Usage: scripts/context-report.py [--since YYYY-MM-DD[ HH:MM]] [--brief] [transcript-dir]   (default dir: this project's folder under ~/.claude/projects)
 --brief prints one key=value line (for retro-metrics.sh): sessions, turns, tokens, longest session, models and effort levels seen (confounders).
 Prints numbers only. Labels may contain tool names, file base names and the first two words of a shell command:
 review before copying anything into notes. The transcript format is undocumented; unknown format -> "not evaluable".
@@ -35,7 +35,7 @@ def main():
             try: r = json.loads(line)
             except ValueError: continue
             m = r.get("message") if isinstance(r.get("message"), dict) else {}
-            if since and str(r.get("timestamp", ""))[:10] < since: continue
+            if since and str(r.get("timestamp", ""))[:len(since)] < since.replace(" ", "T"): continue
             if r.get("type") == "assistant":
                 turns += 1
                 models[str(m.get("model", "?"))] += 1
