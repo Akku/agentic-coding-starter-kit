@@ -2,41 +2,56 @@
 
 <img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
-**Spec Driven Agentic Coding Starter Kit**
+**An Evolving Agentic Coding Harness**
+
+*You stay in charge; your agent keeps the thread and gets better every round.*
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.4.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+**Version 1.4.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Claude Code](https://img.shields.io/badge/Claude%20Code-tested-green) ![Codex · Copilot](https://img.shields.io/badge/Codex%20%C2%B7%20Copilot-adapters%2C%20untested-lightgrey)
 
 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
-[Usage](#usage) · [How it works](#how-it-works) · [Updates](#staying-up-to-date) · [Prompt](#prompt-to-start) · [Contents](#contents) · [Principles](#principles)
+[Why STEM](#why-stem) · [Get started](#get-started) · [When it does not fit](#when-stem-does-not-fit) · [How it works](#how-it-works) · [Updates](#staying-up-to-date) · [Contents](#contents)
 
 </div>
 
-LLM harnesses change frequently. Wouldn't it be great to start out with all the **current** best practices for your new project? Meet [STEM](https://www.imdb.com/title/tt6499752/) – an agentic coding starter template.
+STEM is a harness for working with a coding agent. A harness is the frame around the agent: rules, skills (step-by-step instructions for recurring jobs) and small scripts that steer how it works with you. You open the STEM folder in your agent (Claude Code; Codex and GitHub Copilot through adapters), describe your goal, and the agent works with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) task by task.
 
-A minimal, growing base for agent-driven development (Claude Code, Codex, GitHub Copilot) with Git and [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-efficient and traceable.
+*The name is a nod to the AI implant in the film [Upgrade](https://www.imdb.com/title/tt6499752/) (2018). Unlike there, you stay in charge here.*
 
-*The name is a nod to the AI implant in the film [Upgrade](https://www.imdb.com/title/tt6499752/) (2018): a system that works with you and raises what you can do, while you stay in charge.*
+## Why STEM
 
-## Usage
+1. **Guided start.** You describe your idea; the agent installs and explains the tools (Git, Node.js, Backlog.md) and works out with you a vision, milestones and the first tasks.
+2. **Continuity.** Each session ends with a short handoff note and the next one starts with a state summary, so work picks up where it stopped instead of starting from zero.
+3. **Learning.** Short retrospectives turn measured friction into rule changes in your project; learnings that prove themselves flow back into STEM as versioned releases.
+4. **Traceability.** Every change runs through a task with acceptance criteria and recorded evidence, so you can see what the agent did and why it counts as done.
 
-**Standard path (no technical knowledge needed):**
+Also: designed to keep the agent's context small (rules load on demand, long logs stay out of the chat), and a pre-commit guard blocks `.env` files and common API-token formats from being committed.
+
+## Get started
 
 1. [Download the ZIP](https://github.com/Akku/stem/archive/refs/heads/main.zip) and unzip it.
-2. Open the folder in your agent.
+2. Open the folder in your coding agent (for example the Claude desktop app, Code tab).
 3. Give it the prompt from [START_HERE.md](START_HERE.md).
 
-The agent then installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks.
+The agent then installs missing tools with you, sets up Git and Backlog.md, helps you sharpen the idea into a vertical slice, MVP and moonshot, adapts the harness to your goal, creates Backlog.md milestones and the first tasks. macOS is tested; Windows is prepared but not yet tested.
 
 **Technical users:** click **Use this template** on GitHub, or clone the repository, then use the same prompt.
 
 At the start of each session the agent runs `scripts/session-start.sh` (short state summary).
 
+## When STEM does not fit
+
+- One-off scripts and throwaway prototypes: the overhead outweighs the benefit; use the plain agent.
+- Teams with their own process, CI and review culture.
+- You want full automation without approvals.
+- Projects where Git or Backlog.md cannot be used.
+- You want an AI to run your project without you. We've seen that story; it doesn't end well for the human.
+
 ## How it works
 
-Spec-driven development on steroids: the idea is sharpened into a spec first, then every change runs through the same traceable loop, and the harness learns from each round.
+The idea is sharpened into a spec first (spec-driven development), then every change runs through the same traceable loop, and the harness learns from each round.
 
 ```mermaid
 flowchart LR
@@ -70,7 +85,7 @@ Give this to the agent after opening the folder:
 | `.claude/skills/` | Skills: `retro`, `alignment`, `handoff`, `promote-learning`, `stem-update`; optional modules (chosen in setup): `testing-practices`, `market-analysis` |
 | `.agents/skills` | Link to `.claude/skills/`, so Codex reads the same skill files |
 | `.claude/agents/` | Agents: `ux-designer` (optional module, for projects with a UI) |
-| `scripts/githooks/pre-commit` | Guard against committing confidential source documents (activated during setup) |
+| `scripts/githooks/pre-commit` | Guard against committing confidential source documents and common secrets (activated during setup) |
 | `STEM_VERSION`, `CHANGELOG.md` | STEM version this project is based on; what changed per version |
 | `.claude/settings.json` | Claude Code: safe commands pre-approved, session-start hook |
 | `LICENSE` | MIT (STEM); `.github/stem-check.py` + workflow check STEM itself |

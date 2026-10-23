@@ -1,10 +1,10 @@
 # Start here
 
-*STEM – Agentic Coding Starter Kit*
+*STEM – An Evolving Agentic Coding Harness*
 
 **Version 1.4.0** · 🇩🇪 **Deutsche Version: [STARTE_HIER.md](STARTE_HIER.md)**
 
-STEM is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. No technical knowledge is required for the standard path.
+STEM is a starting point for agent-driven development with Git and Backlog.md. You give the agent your project goal; it installs what is missing, sets up the tooling, adapts the rules to your goal and then works task by task. On the standard path the agent installs and explains the tools for you.
 
 ## Standard path: download the ZIP
 
@@ -18,7 +18,7 @@ STEM is a starting point for agent-driven development with Git and Backlog.md. Y
 5. **Answer the questions** (technology, which agents you use, GitHub yes/no). The agent checks which tools are missing (Git, Node.js, Backlog.md) and installs them for you; you approve each step in the app (if you decline, it gives you manual instructions instead). The installer may ask for your computer password. If an installer asks for your computer password, type it yourself, never into the chat. On Windows the helper scripts need Git for Windows (includes *Git Bash*); the agent will guide you.
 6. **At the end** the agent summarizes what exists and which task comes first. Tell it to start.
 
-**Security note:** download STEM only from the official repository (link above). STEM contains a small start hook (`scripts/session-start.sh`, configured in `.claude/settings.json`); when your app asks whether to trust the folder, read that prompt. STEM blocks `.env` files and common token patterns from being committed, but never paste passwords into the chat.
+**Security note:** download STEM only from the official repository (link above). STEM contains a small start hook (`scripts/session-start.sh`, configured in `.claude/settings.json`); when your app asks whether to trust the folder, read that prompt. STEM blocks `.env` files and common API-token formats from being committed (no guarantee for other formats), but never paste passwords into the chat.
 
 ## For technical users: via GitHub
 
@@ -29,7 +29,7 @@ STEM is a starting point for agent-driven development with Git and Backlog.md. Y
 ## What you get
 
 - Git, Backlog.md, a vision document, milestones (vertical slice → MVP → moonshot) and the first 3–7 tasks derived from your goal. The agent will ask you what you imagine for each of the three.
-- Short agent rules (`AGENTS.md`) that load further rules only when needed – saves tokens.
+- Short agent rules (`AGENTS.md`) that load further rules only when needed – designed to keep the agent's context small.
 - `scripts/run.sh` keeps long test/CI output out of the context; `scripts/session-start.sh` gives a compact status at session start.
 - Skills for recurring work: `retro`, `handoff`, `promote-learning`, `testing-practices`, `stem-update`.
 

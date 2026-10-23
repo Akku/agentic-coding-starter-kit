@@ -2,41 +2,56 @@
 
 <img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
-**Spec Driven Agentic Coding Starter Kit**
+**An Evolving Agentic Coding Harness**
+
+*Du behältst die Kontrolle; dein Agent behält den Faden und wird mit jeder Runde besser.*
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.4.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Agents](https://img.shields.io/badge/Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Copilot-supported-lightgrey)
+**Version 1.4.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Claude Code](https://img.shields.io/badge/Claude%20Code-getestet-green) ![Codex · Copilot](https://img.shields.io/badge/Codex%20%C2%B7%20Copilot-Adapter%2C%20ungetestet-lightgrey)
 
 🇬🇧 **English version: [README.md](README.md)**
 
-[Nutzung](#nutzung) · [Ablauf](#ablauf) · [Updates](#aktuell-bleiben) · [Prompt](#start-prompt) · [Inhalt](#inhalt) · [Prinzipien](#prinzipien)
+[Warum STEM](#warum-stem) · [Loslegen](#loslegen) · [Wann es nicht passt](#wann-stem-nicht-passt) · [Ablauf](#ablauf) · [Updates](#aktuell-bleiben) · [Inhalt](#inhalt)
 
 </div>
 
-LLM-Harnesses ändern sich ständig. Wäre es nicht großartig, ein neues Projekt gleich mit allen **aktuellen** Best Practices zu starten? Das ist [STEM](https://www.imdb.com/title/tt6499752/) – ein Starter-Template für agentisches Coding.
+STEM ist ein Harness für die Arbeit mit einem Coding-Agenten. Ein Harness ist der Rahmen um den Agenten: Regeln, Skills (Schritt-für-Schritt-Anleitungen für wiederkehrende Aufgaben) und kleine Skripte, die steuern, wie er mit dir arbeitet. Du öffnest den STEM-Ordner in deinem Agenten (Claude Code; Codex und GitHub Copilot über Adapter), beschreibst dein Ziel, und der Agent arbeitet mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) Task für Task.
 
-Minimale, mitwachsende Basis für agentische Entwicklung (Claude Code, Codex, GitHub Copilot) mit Git und [Backlog.md](https://github.com/MrLesk/Backlog.md) – token-sparsam und nachvollziehbar.
+*Der Name ist eine Anspielung auf das KI-Implantat im Film [Upgrade](https://www.imdb.com/title/tt6499752/) (2018). Anders als dort behältst du hier die Kontrolle.*
 
-*Der Name ist eine Anspielung auf das KI-Implantat im Film [Upgrade](https://www.imdb.com/title/tt6499752/) (2018): ein System, das mit dir arbeitet und erweitert, was du kannst, während du die Kontrolle behältst.*
+## Warum STEM
 
-## Nutzung
+1. **Geführter Start.** Du beschreibst deine Idee; der Agent installiert und erklärt die Werkzeuge (Git, Node.js, Backlog.md) und erarbeitet mit dir Vision, Meilensteine und die ersten Tasks.
+2. **Kontinuität.** Jede Sitzung endet mit einer kurzen Übergabenotiz, die nächste beginnt mit einem Zustandsüberblick. So geht die Arbeit dort weiter, wo sie aufgehört hat, statt bei null.
+3. **Lernen.** Kurze Retrospektiven machen aus gemessener Reibung Regeländerungen in deinem Projekt; Erkenntnisse, die sich bewähren, fließen als versionierte Releases zurück in STEM.
+4. **Nachvollziehbarkeit.** Jede Änderung läuft über einen Task mit Akzeptanzkriterien und festgehaltenen Belegen. Du siehst, was der Agent getan hat und warum es als fertig gilt.
 
-**Standardweg (kein technisches Wissen nötig):**
+Außerdem: darauf ausgelegt, den Kontext des Agenten klein zu halten (Regeln werden bei Bedarf geladen, lange Logs bleiben aus dem Chat), und ein Pre-Commit-Schutz verhindert, dass `.env`-Dateien und gängige API-Token-Formate committet werden.
+
+## Loslegen
 
 1. [ZIP herunterladen](https://github.com/Akku/stem/archive/refs/heads/main.zip) und entpacken.
-2. Den Ordner im Agenten öffnen.
+2. Den Ordner in deinem Coding-Agenten öffnen (zum Beispiel in der Claude-Desktop-App, Tab Code).
 3. Den Prompt aus [STARTE_HIER.md](STARTE_HIER.md) geben.
 
-Der Agent installiert dann fehlende Werkzeuge gemeinsam mit dir, richtet Git und Backlog.md ein, hilft dir, die Idee in Vertical Slice, MVP und Moonshot zu schärfen, passt das Harness an dein Ziel an und legt Backlog.md-Meilensteine und erste Tasks an.
+Der Agent installiert dann fehlende Werkzeuge gemeinsam mit dir, richtet Git und Backlog.md ein, hilft dir, die Idee in Vertical Slice, MVP und Moonshot zu schärfen, passt das Harness an dein Ziel an und legt Backlog.md-Meilensteine und erste Tasks an. macOS ist getestet; Windows ist vorbereitet, aber noch nicht getestet.
 
 **Technisch Versierte:** auf GitHub **Use this template** wählen oder das Repository klonen, dann derselbe Prompt.
 
 Pro Sitzung führt der Agent `scripts/session-start.sh` aus (kurzer Zustandsüberblick).
 
+## Wann STEM nicht passt
+
+- Einmal-Skripte und Wegwerf-Prototypen: Der Aufwand übersteigt den Nutzen; nimm den Agenten pur.
+- Teams mit eigenem Prozess, eigener CI und Review-Kultur.
+- Du willst volle Automatisierung ohne Freigaben.
+- Projekte, in denen Git oder Backlog.md nicht nutzbar sind.
+- Du willst, dass eine KI dein Projekt ohne dich führt. Die Geschichte kennen wir; für den Menschen endet sie nicht gut.
+
 ## Ablauf
 
-Spec-Driven Development on Steroids: Die Idee wird zuerst zu einer Spezifikation geschärft, danach läuft jede Änderung durch dieselbe nachvollziehbare Schleife, und das Harness lernt aus jeder Runde.
+Die Idee wird zuerst zu einer Spezifikation geschärft (Spec-Driven Development), danach läuft jede Änderung durch dieselbe nachvollziehbare Schleife, und das Harness lernt aus jeder Runde.
 
 ```mermaid
 flowchart LR
@@ -70,7 +85,7 @@ Gib dies dem Agenten, nachdem du den Ordner geöffnet hast:
 | `SETUP.md` | Einmalige Setup-Anleitung für den Agenten (wird nach dem Setup gelöscht) |
 | `AGENTS.md` | Gemeinsame Kernregeln (Codex & kompatible Tools) |
 | `CLAUDE.md` / `.github/copilot-instructions.md` | Dünne Adapter, verweisen auf `AGENTS.md` |
-| `scripts/githooks/pre-commit` | Schutz vor dem Committen vertraulicher Quelldokumente (wird beim Setup aktiviert) |
+| `scripts/githooks/pre-commit` | Schutz vor dem Committen vertraulicher Quelldokumente und gängiger Secrets (wird beim Setup aktiviert) |
 | `STEM_VERSION`, `CHANGELOG.md` | STEM-Version, auf der das Projekt basiert; Änderungen je Version |
 | `.claude/settings.json` | Claude Code: sichere Befehle vorab freigegeben, Sitzungsstart-Hook |
 | `LICENSE` | MIT (STEM); `.github/stem-check.py` + Workflow prüfen STEM selbst |
