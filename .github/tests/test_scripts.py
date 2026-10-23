@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fixture tests for STEM scripts (STEM maintenance only; run by stem-check.py or directly: python3 .github/tests/test_scripts.py).
 Each test builds its own sandbox repository or transcript folder in a temp dir, so nothing depends on the real project."""
-import json, os, pathlib, shutil, subprocess, sys, tempfile, unittest
+import json, os, pathlib, re, shutil, subprocess, sys, tempfile, unittest
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 SCRIPTS = ROOT / "scripts"
@@ -224,6 +224,21 @@ class RunWrapper(Sandbox):
         procs = [subprocess.Popen(["bash", str(SCRIPTS / "run.sh"), "same", "true"], env=env, stdout=subprocess.DEVNULL) for _ in range(3)]
         for p in procs: p.wait()
         self.assertEqual(len(list((self.tmp / "logs").glob("*-same-*.log"))), 3)
+
+    def test_default_log_is_durable_ignored_and_cited(self):
+        run(["git", "init", "-q"], self.tmp)
+        env = {k: v for k, v in os.environ.items() if k != "AGENT_LOG_DIR"}
+        r = run(["bash", str(SCRIPTS / "run.sh"), "chk", "false"], self.tmp, env)
+        self.assertEqual(r.returncode, 1)
+        ptr = re.search(r"^evidence: run.sh chk FAIL (\.agent-logs/\S+-chk-\d+\.log)$", r.stdout, re.M)
+        self.assertTrue(ptr and (self.tmp / ptr.group(1)).is_file(), r.stdout)
+        self.assertEqual(run(["git", "status", "--porcelain", "--ignored=no"], self.tmp).stdout, "")
+
+    def test_outside_a_repo_falls_back_to_tmpdir(self):
+        env = {k: v for k, v in os.environ.items() if k != "AGENT_LOG_DIR"}
+        env.update(TMPDIR=str(self.tmp), GIT_CEILING_DIRECTORIES=str(self.tmp.parent))
+        r = run(["bash", str(SCRIPTS / "run.sh"), "chk", "true"], self.tmp, env)
+        self.assertIn("evidence: run.sh chk PASS %s/agent-logs/" % self.tmp, r.stdout)
 
 
 class RetiredNames(Sandbox):
