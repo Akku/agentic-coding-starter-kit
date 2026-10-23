@@ -12,7 +12,7 @@ Always rewrite the whole file, never append or "refresh" (`Earlier:` sections ar
 
 ```
 # Handoff
-**State:** <date>, <branch> @ <commit SHA>; <what is true in one or two sentences>
+**State:** <date>, stem <version from STEM_VERSION>, <branch> @ <commit SHA>; <what is true in one or two sentences>
 **Approvals:** <what the user allowed, date>; <scope, batch, release>
 **Next step:** <one concrete action, with the file/command to start>
 **Evidence open:** <what was verified at which SHA; what is still missing, e.g. manual check>
