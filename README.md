@@ -2,9 +2,7 @@
 
 <img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
-**An Evolving Agentic Coding Harness**
-
-*You stay in charge; your agent keeps the thread and gets better every round.*
+**An Evolving Agentic Coding Harness** – You stay in charge; your agent keeps the thread and learns from every round.
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 

@@ -2,9 +2,7 @@
 
 <img src="docs/assets/stem-logo.svg" alt="STEM" width="320">
 
-**An Evolving Agentic Coding Harness**
-
-*Du behältst die Kontrolle; dein Agent behält den Faden und wird mit jeder Runde besser.*
+**An Evolving Agentic Coding Harness** – Du behältst die Kontrolle; dein Agent behält den Faden und lernt aus jeder Runde.
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
