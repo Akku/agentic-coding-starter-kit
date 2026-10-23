@@ -229,6 +229,18 @@ class PreCommit(SandboxRepo):
         self.assertIn("notes.pdf", r.stderr)
 
 
+    def test_secret_files_and_stripe_keys_are_rejected(self):
+        run(["git", "config", "core.hooksPath", "scripts/githooks"], self.repo)
+        self.assertEqual(self.commit("init").returncode, 0)
+        stripe = "sk_" + "live_" + "a1B2" * 6  # split so this file does not trip the guard
+        for name, text in ((".envrc", "export K=x"), ("prod.env", "K=x"), ("cfg/app.env", "K=x"), ("pay.txt", "k=" + stripe)):
+            (self.repo / name).parent.mkdir(parents=True, exist_ok=True); (self.repo / name).write_text(text + "\n")
+            r = self.commit(name)
+            self.assertNotEqual(r.returncode, 0, name); self.assertIn(name, r.stderr)
+            run(["git", "reset", "-q"], self.repo); (self.repo / name).unlink()
+        (self.repo / "prod.env.example").write_text("K=\n")
+        self.assertEqual(self.commit("example").returncode, 0)
+
 class RunWrapper(Sandbox):
     def test_parallel_runs_with_same_label_get_own_logs(self):
         env = dict(os.environ, AGENT_LOG_DIR=str(self.tmp / "logs"))
