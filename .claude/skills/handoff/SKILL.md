@@ -16,7 +16,7 @@ Always rewrite the whole file, never append or "refresh" (`Earlier:` sections ar
 **Approvals:** <what the user allowed, date>; <scope, batch, release>
 **Next step:** <one concrete action, with the file/command to start>
 **Evidence open:** <what was verified at which SHA; what is still missing, e.g. manual check>
-**Blockers / decisions:** <what waits for the user>
+**Blockers / decisions:** <what waits for the user; point to the task notes holding the options>
 **Notes:** <max 3 lines: facts the next run needs that are written nowhere else; re-justify each one at every rewrite, else drop>
 ```
 
@@ -28,6 +28,7 @@ Sections agree with each other, approvals are still valid, evidence names the SH
 ## 3. Session-end checklist
 1. `git status`: nothing unrelated, nothing forgotten. Commit code together with its task changes and the handoff, or state why not.
 2. Unfinished tasks: each has a concrete continuation point in its notes (open criterion, next action), not "still to check".
-3. Notable detours or high context cost: add `Learning:` to the task (only if it happened).
+3. Pending user decision: write the question and every option (a/b/c) verbatim into the task notes, and point to the task from `Blockers / decisions`. "User decides X" alone is not enough; the next session must not search the transcript for the wording.
+4. Notable detours or high context cost: add `Learning:` to the task (only if it happened).
 
 If a step did not fit or you deviated from it: `Learning: skill handoff: <what> -> <change>` in the task notes (`R-LEARNING`).
