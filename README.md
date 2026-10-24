@@ -6,7 +6,7 @@
 
 `[ you ]──▶[ STEM ]──▶[ more you ]`
 
-**Version 1.4.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Claude Code](https://img.shields.io/badge/Claude%20Code-tested-green) ![Codex · Copilot](https://img.shields.io/badge/Codex%20%C2%B7%20Copilot-adapters%2C%20untested-lightgrey)
+**Version 1.5.0** · ![License](https://img.shields.io/badge/license-MIT-green) ![Claude Code](https://img.shields.io/badge/Claude%20Code-tested-green) ![Codex · Copilot](https://img.shields.io/badge/Codex%20%C2%B7%20Copilot-adapters%2C%20untested-lightgrey)
 
 🇩🇪 **Deutsche Version: [README.de.md](README.de.md)**
 
